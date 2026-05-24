@@ -21,3 +21,26 @@ body {
 ::-webkit-scrollbar-track { background: #0a0f0d; }
 ::-webkit-scrollbar-thumb { background: #1a2e24; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #2a4e3a; }
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+
+/* Пауза при наведении */
+.marquee-container:hover .animate-marquee,
+.marquee-container:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
