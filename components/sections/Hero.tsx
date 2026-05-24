@@ -47,12 +47,13 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <button className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 rounded-xl text-lg font-semibold transition-all shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/40">
+          {/* КНОПКИ СДЕЛАНЫ ССЫЛКАМИ НА ФОРМУ #bom */}
+          <a href="#bom" className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 rounded-xl text-lg font-semibold transition-all shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/40 text-center">
             Получить КП
-          </button>
-          <button className="px-8 py-4 bg-white/5 hover:bg-emerald-900/20 border border-emerald-800/50 rounded-xl text-lg font-semibold backdrop-blur-md transition-all">
+          </a>
+          <a href="#bom" className="px-8 py-4 bg-white/5 hover:bg-emerald-900/20 border border-emerald-800/50 rounded-xl text-lg font-semibold backdrop-blur-md transition-all text-center">
             Загрузить BOM
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>
