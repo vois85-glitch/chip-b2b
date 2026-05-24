@@ -1,7 +1,5 @@
-'use client';
-
 export default function BrandsMarquee() {
-  // Массив брендов с их ФИРМЕННЫМИ ЦВЕТАМИ
+  // Массив брендов с их ФИРМЕННЫМИ ЦВЕТАМИ (как на картинке)
   const row1 = [
     { name: 'NXP', color: '#6EBE5B' },
     { name: 'ALTERA', color: '#0071C5' },
@@ -19,7 +17,7 @@ export default function BrandsMarquee() {
     { name: 'MICRON', color: '#00559A' },
     { name: 'VISHAY', color: '#E31937' },
     { name: 'ONSEMI', color: '#2E3192' },
-    { name: 'WÜRTH', color: '#F00014' },
+    { name: 'WÜRTH ELEKTRONIK', color: '#F00014' },
     { name: 'DIODES INC.', color: '#E4002B' },
     { name: 'FUJITSU', color: '#FF0000' },
     { name: 'TDK', color: '#E4002B' },
@@ -29,7 +27,7 @@ export default function BrandsMarquee() {
   const renderBrand = (brand: { name: string, color: string }, index: number) => (
     <div key={index} className="flex-shrink-0 mx-3 md:mx-5">
       <div 
-        className="brand-card flex items-center justify-center h-14 md:h-16 px-5 md:px-8 rounded-lg font-bold tracking-[0.2em] text-[11px] md:text-xs cursor-default whitespace-nowrap uppercase"
+        className="brand-card flex items-center justify-center h-14 md:h-16 px-5 md:px-8 rounded-lg font-extrabold tracking-[0.2em] text-[11px] md:text-xs cursor-default whitespace-nowrap uppercase"
         style={{ '--brand-color': brand.color } as React.CSSProperties}
       >
         {brand.name}

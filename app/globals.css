@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0a0f0d; /* Графит с зеленым оттенком */
-  --color-foreground: #f0fdf4; /* Легкий зеленоватый белый */
-  --color-card: #111a15;       /* Темно-зеленый для карточек */
-  --color-primary: #10b981;    /* Изумрудный (Emerald) */
+  --color-background: #0a0f0d;
+  --color-foreground: #f0fdf4;
+  --color-card: #111a15;       
+  --color-primary: #10b981;    
   --font-sans: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -16,11 +20,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Кастомный скроллбар */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #0a0f0d; }
 ::-webkit-scrollbar-thumb { background: #1a2e24; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #2a4e3a; }
+
+/* Анимации для бегущей строки (Карусели) */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -39,25 +44,24 @@ body {
   animation: marquee-reverse 40s linear infinite;
 }
 
-/* Пауза при наведении */
 .marquee-container:hover .animate-marquee,
 .marquee-container:hover .animate-marquee-reverse {
   animation-play-state: paused;
 }
+
+/* Стили для карточек брендов */
 .brand-card {
-  background-color: rgba(16, 185, 129, 0.03) !important; /* Едва заметный зеленый стеклянный фон */
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(16, 185, 129, 0.02) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
   transition: all 0.3s ease;
-  color: #6b7280 !important; /* Серый текст по умолчанию */
   backdrop-filter: blur(4px);
+  color: rgba(255, 255, 255, 0.35) !important;
 }
 
 .brand-card:hover {
-  color: var(--brand-color) !important; /* Текст красится в цвет бренда */
-  border-color: var(--brand-color) !important; /* Рамка красится в цвет бренда */
-  /* Неоновое свечение цветом бренда */
-  box-shadow: 0 0 20px color-mix(in srgb, var(--brand-color) 40%, transparent);
-  /* Легкая заливка фона цветом бренда */
+  color: var(--brand-color) !important;
+  border-color: var(--brand-color) !important;
+  box-shadow: 0 0 25px color-mix(in srgb, var(--brand-color) 40%, transparent);
   background-color: color-mix(in srgb, var(--brand-color) 10%, transparent) !important;
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
