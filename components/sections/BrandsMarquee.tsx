@@ -1,20 +1,38 @@
+'use client';
+
 export default function BrandsMarquee() {
-  // Все бренды с твоего списка
+  // Массив брендов с их ФИРМЕННЫМИ ЦВЕТАМИ
   const row1 = [
-    'NXP', 'ALTERA', 'XILINX', 'TEXAS INSTRUMENTS', 
-    'STMICROELECTRONICS', 'RENESAS', 'ANALOG DEVICES', 'MICROCHIP', 'INFINEON'
+    { name: 'NXP', color: '#6EBE5B' },
+    { name: 'ALTERA', color: '#0071C5' },
+    { name: 'XILINX', color: '#D81B60' },
+    { name: 'TEXAS INSTRUMENTS', color: '#CC0000' },
+    { name: 'STMICRO', color: '#0078D4' },
+    { name: 'RENESAS', color: '#3E93CF' },
+    { name: 'ANALOG DEVICES', color: '#0066B2' },
+    { name: 'MICROCHIP', color: '#2E7D32' },
+    { name: 'INFINEON', color: '#008C5E' },
   ];
 
   const row2 = [
-    'NORDIC', 'MICRON', 'VISHAY', 'ONSEMI', 
-    'WÜRTH ELEKTRONIK', 'DIODES INC.', 'FUJITSU', 'TDK', 'GIGADEVICE'
+    { name: 'NORDIC', color: '#00A9CE' },
+    { name: 'MICRON', color: '#00559A' },
+    { name: 'VISHAY', color: '#E31937' },
+    { name: 'ONSEMI', color: '#2E3192' },
+    { name: 'WÜRTH', color: '#F00014' },
+    { name: 'DIODES INC.', color: '#E4002B' },
+    { name: 'FUJITSU', color: '#FF0000' },
+    { name: 'TDK', color: '#E4002B' },
+    { name: 'GIGADEVICE', color: '#00A651' },
   ];
 
-  const renderBrand = (name: string) => (
-    <div key={name} className="flex-shrink-0 mx-4 md:mx-6">
-      {/* Стеклянный Техно-Бейдж */}
-      <div className="flex items-center justify-center h-14 md:h-16 px-5 md:px-8 border border-emerald-900/40 rounded-lg bg-emerald-950/10 backdrop-blur-sm text-gray-500 font-bold tracking-[0.15em] text-xs md:text-sm hover:text-emerald-400 hover:border-emerald-500/60 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 cursor-default select-none whitespace-nowrap">
-        {name}
+  const renderBrand = (brand: { name: string, color: string }, index: number) => (
+    <div key={index} className="flex-shrink-0 mx-3 md:mx-5">
+      <div 
+        className="brand-card flex items-center justify-center h-14 md:h-16 px-5 md:px-8 rounded-lg font-bold tracking-[0.2em] text-[11px] md:text-xs cursor-default whitespace-nowrap uppercase"
+        style={{ '--brand-color': brand.color } as React.CSSProperties}
+      >
+        {brand.name}
       </div>
     </div>
   );

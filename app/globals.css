@@ -44,3 +44,20 @@ body {
 .marquee-container:hover .animate-marquee-reverse {
   animation-play-state: paused;
 }
+.brand-card {
+  background-color: rgba(16, 185, 129, 0.03) !important; /* Едва заметный зеленый стеклянный фон */
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  transition: all 0.3s ease;
+  color: #6b7280 !important; /* Серый текст по умолчанию */
+  backdrop-filter: blur(4px);
+}
+
+.brand-card:hover {
+  color: var(--brand-color) !important; /* Текст красится в цвет бренда */
+  border-color: var(--brand-color) !important; /* Рамка красится в цвет бренда */
+  /* Неоновое свечение цветом бренда */
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brand-color) 40%, transparent);
+  /* Легкая заливка фона цветом бренда */
+  background-color: color-mix(in srgb, var(--brand-color) 10%, transparent) !important;
+  transform: scale(1.05);
+}

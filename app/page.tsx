@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
-import BrandsMarquee from '@/components/sections/BrandsMarquee'; // <-- Добавили
+import BrandsGrid from '@/components/sections/BrandsMarquee'; // Имя файла то же, но экспорт другой
 import Advantages from '@/components/sections/Advantages';
 import Catalog from '@/components/sections/Catalog';
 import Industries from '@/components/sections/Industries';
@@ -18,7 +18,7 @@ export default function Home() {
     <main className="relative">
       <Header />
       <Hero />
-      <BrandsMarquee /> {/* <-- Вставили сюда */}
+      <BrandsGrid /> {/* <-- Заменили */}
       <Advantages />
       <Catalog />
       <Industries />
