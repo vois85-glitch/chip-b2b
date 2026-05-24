@@ -1,9 +1,8 @@
 'use server'
 
 import { supabase } from '@/lib/supabase'
-import { redirect } from 'next/navigation'
 
-export async function submitRequest(formData: FormData) {
+export async function submitRequest(prevState: any, formData: FormData) {
   const companyName = formData.get('company_name') as string
   const inn = formData.get('inn') as string
   const email = formData.get('email') as string
@@ -18,7 +17,7 @@ export async function submitRequest(formData: FormData) {
 
   if (error) {
     console.error('Ошибка сохранения заявки:', error)
-    return
+    return { success: false, message: 'Произошла ошибка при отправке. Попробуйте позже.' }
   }
 
   // 2. Отправляем уведомление в Telegram
@@ -38,16 +37,13 @@ export async function submitRequest(formData: FormData) {
       await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text,
-          parse_mode: 'Markdown'
-        })
+        body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' })
       })
     } catch (tgError) {
       console.error('Ошибка отправки в Telegram:', tgError)
     }
   }
 
-  redirect('/?success=true')
+  // Возвращаем успех (без перезагрузки страницы!)
+  return { success: true, message: '✓ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.' }
 }

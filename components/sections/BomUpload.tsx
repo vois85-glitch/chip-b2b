@@ -1,23 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useActionState } from 'react';
 import { motion } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
 import { submitRequest } from '@/app/actions/request-action';
 
 export default function BomUpload() {
-  const searchParams = useSearchParams();
   const [fileName, setFileName] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  // Проверяем, вернулись ли мы после успешной отправки
-  useEffect(() => {
-    if (searchParams.get('success') === 'true') {
-      setIsSuccess(true);
-      const timer = setTimeout(() => setIsSuccess(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [searchParams]);
+  
+  // useActionState магия: следит за состоянием формы (отправка/результат)
+  const [state, formAction, isPending] = useActionState(submitRequest, { success: false, message: '' });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -27,7 +19,6 @@ export default function BomUpload() {
 
   return (
     <section id="bom" className="py-24 px-4 bg-[#050807] relative overflow-hidden">
-      {/* Декоративное свечение */}
       <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-emerald-600 rounded-full blur-[200px] opacity-10 pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">
@@ -36,24 +27,26 @@ export default function BomUpload() {
           <p className="text-gray-400 text-lg">Загрузите ваш BOM-лист (Excel/CSV) или опишите необходимые компоненты</p>
         </div>
 
-        {/* Уведомление об успехе */}
-        {isSuccess && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8 bg-green-900/30 border border-green-500/50 text-green-300 px-6 py-4 rounded-xl text-center text-lg font-semibold backdrop-blur-md"
-          >
-            ✓ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
-          </motion.div>
-        )}
-
         <motion.form 
-          action={submitRequest}
+          action={formAction}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="bg-emerald-950/10 backdrop-blur-xl border border-emerald-900/30 rounded-3xl p-8 md:p-12 shadow-2xl"
         >
+          {/* Уведомление об успехе ИЛИ ошибке */}
+          {state.message && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className={`mb-8 px-6 py-4 rounded-xl text-center text-lg font-semibold backdrop-blur-md ${
+                state.success ? 'bg-green-900/30 border border-green-500/50 text-green-300' : 'bg-red-900/30 border border-red-500/50 text-red-300'
+              }`}
+            >
+              {state.message}
+            </motion.div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">Компания</label>
@@ -106,7 +99,6 @@ export default function BomUpload() {
             />
           </div>
 
-          {/* Скрытое поле для имени файла */}
           <input type="hidden" name="bom_file_name" value={fileName} />
 
           <div className="mb-8">
@@ -127,9 +119,12 @@ export default function BomUpload() {
 
           <button 
             type="submit" 
-            className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 rounded-xl text-lg font-semibold transition-all shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/40"
+            disabled={isPending}
+            className={`w-full py-4 rounded-xl text-lg font-semibold transition-all shadow-lg duration-300 ${
+              isPending ? 'bg-emerald-800 cursor-wait' : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/25 hover:shadow-emerald-600/40'
+            }`}
           >
-            Получить предложение
+            {isPending ? 'Отправка...' : 'Получить предложение'}
           </button>
         </motion.form>
       </div>
