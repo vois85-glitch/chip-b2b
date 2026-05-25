@@ -1,12 +1,14 @@
 import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import BrandsMarquee from '@/components/sections/BrandsMarquee';
-import StatsBar from '@/components/sections/StatsBar'; // Новое!
+import StatsBar from '@/components/sections/StatsBar';
 import ComponentSearch from '@/components/sections/ComponentSearch';
+import PopularCategories from '@/components/sections/PopularCategories'; // Новое!
 import Advantages from '@/components/sections/Advantages';
-import QualityControl from '@/components/sections/QualityControl'; // Новое!
+import QualityControl from '@/components/sections/QualityControl';
 import HardCases from '@/components/sections/HardCases';
-import Testimonials from '@/components/sections/Testimonials'; // Новое!
+import LogisticsDetails from '@/components/sections/LogisticsDetails'; // Новое!
+import Testimonials from '@/components/sections/Testimonials';
 import PriceList from '@/components/sections/PriceList';
 import BomUpload from '@/components/sections/BomUpload';
 import Industries from '@/components/sections/Industries';
@@ -24,12 +26,14 @@ export default function Home() {
       <Header />
       <Hero />
       <BrandsMarquee />
-      <StatsBar />          {/* Цифры сразу после брендов */}
+      <StatsBar />
       <ComponentSearch />
+      <PopularCategories />     {/* Каталог направлений */}
       <Advantages />
-      <QualityControl />    {/* Контроль качества */}
+      <QualityControl />
       <HardCases />
-      <Testimonials />      {/* Отзывы перед формой */}
+      <LogisticsDetails />      {/* Логистика и ВЭД */}
+      <Testimonials />
       <PriceList />
       <BomUpload />
       <Industries />

@@ -13,9 +13,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Функция для прокрутки наверх при клике на логотип
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Если мы уже на главной странице, просто скроллим наверх
     if (window.location.pathname === '/') {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -25,7 +23,9 @@ export default function Header() {
   return (
     <motion.header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/80 backdrop-blur-xl border-b border-emerald-900/50 shadow-2xl' : 'bg-transparent'
+        scrolled 
+          ? 'bg-[#050807]/95 backdrop-blur-xl shadow-2xl shadow-black/50' // Плотный темный фон с тенью (без белых полосок!)
+          : 'bg-transparent' // Прозрачный на самом верху
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -33,9 +33,8 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        {/* --- КЛИКАБЕЛЬНЫЙ ЛОГОТИП С ПРОКРУТКОЙ ВВЕРХ --- */}
+        {/* Логотип */}
         <Link href="/" onClick={handleLogoClick} className="flex items-center gap-3 group cursor-pointer">
-          {/* Иконка микросхемы (SVG) */}
           <div className="w-9 h-9 text-emerald-500 group-hover:text-emerald-400 transition-colors">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
@@ -50,7 +49,6 @@ export default function Header() {
               <line x1="1" y1="14" x2="4" y2="14"></line>
             </svg>
           </div>
-          {/* Текст логотипа */}
           <span className="text-2xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
             Chip<span className="text-emerald-500 group-hover:text-emerald-400 transition-colors">Net</span>
           </span>
