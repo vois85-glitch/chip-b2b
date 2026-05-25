@@ -1,12 +1,13 @@
-import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import BrandsMarquee from '@/components/sections/BrandsMarquee';
-import StatsBar from '@/components/sections/StatsBar'; // Новое!
+import StatsBar from '@/components/sections/StatsBar';
 import ComponentSearch from '@/components/sections/ComponentSearch';
+import PopularCategories from '@/components/sections/PopularCategories';
 import Advantages from '@/components/sections/Advantages';
-import QualityControl from '@/components/sections/QualityControl'; // Новое!
+import QualityControl from '@/components/sections/QualityControl';
 import HardCases from '@/components/sections/HardCases';
-import Testimonials from '@/components/sections/Testimonials'; // Новое!
+import LogisticsDetails from '@/components/sections/LogisticsDetails';
+import Testimonials from '@/components/sections/Testimonials';
 import PriceList from '@/components/sections/PriceList';
 import BomUpload from '@/components/sections/BomUpload';
 import Industries from '@/components/sections/Industries';
@@ -15,21 +16,20 @@ import FAQ from '@/components/sections/FAQ';
 import AboutCompany from '@/components/sections/AboutCompany';
 import Contacts from '@/components/sections/Contacts';
 import SeoText from '@/components/sections/SeoText';
-import Footer from '@/components/layout/Footer';
-import FloatingCta from '@/components/layout/FloatingCta';
 
 export default function Home() {
   return (
     <main className="relative">
-      <Header />
       <Hero />
       <BrandsMarquee />
-      <StatsBar />          {/* Цифры сразу после брендов */}
+      <StatsBar />
       <ComponentSearch />
+      <PopularCategories />
       <Advantages />
-      <QualityControl />    {/* Контроль качества */}
+      <QualityControl />
       <HardCases />
-      <Testimonials />      {/* Отзывы перед формой */}
+      <LogisticsDetails />
+      <Testimonials />
       <PriceList />
       <BomUpload />
       <Industries />
@@ -38,8 +38,6 @@ export default function Home() {
       <AboutCompany />
       <Contacts />
       <SeoText />
-      <Footer />
-      <FloatingCta />
     </main>
   );
 }
