@@ -1,8 +1,8 @@
 import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import BrandsMarquee from '@/components/sections/BrandsMarquee';
+import ComponentSearch from '@/components/sections/ComponentSearch'; // Наш новый поиск!
 import Advantages from '@/components/sections/Advantages';
-import Catalog from '@/components/sections/Catalog';
 import HardCases from '@/components/sections/HardCases';
 import PriceList from '@/components/sections/PriceList';
 import BomUpload from '@/components/sections/BomUpload';
@@ -21,8 +21,8 @@ export default function Home() {
       <Header />
       <Hero />
       <BrandsMarquee />
+      <ComponentSearch /> {/* Заменили каталог на умный поиск */}
       <Advantages />
-      <Catalog />
       <HardCases />
       <PriceList />
       <BomUpload />
