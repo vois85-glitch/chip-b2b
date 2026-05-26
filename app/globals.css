@@ -17,7 +17,7 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: antialiased;
 }
 
 ::-webkit-scrollbar { width: 8px; }
@@ -25,43 +25,32 @@ body {
 ::-webkit-scrollbar-thumb { background: #1a2e24; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #2a4e3a; }
 
-/* Анимации для бегущей строки (Карусели) */
-@keyframes marquee {
+/* === Карусель брендов — белые карточки === */
+@keyframes brands-marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
 }
 
-@keyframes marquee-reverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
+.animate-brands-marquee {
+  animation: brands-marquee 35s linear infinite;
 }
 
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
-
-.animate-marquee-reverse {
-  animation: marquee-reverse 40s linear infinite;
-}
-
-.marquee-container:hover .animate-marquee,
-.marquee-container:hover .animate-marquee-reverse {
+.marquee-container-new:hover .animate-brands-marquee {
   animation-play-state: paused;
 }
 
-/* Стили для карточек брендов */
-.brand-card {
-  background-color: rgba(16, 185, 129, 0.02) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+.brand-card-new {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
-  color: rgba(255, 255, 255, 0.35) !important;
+  text-decoration: none;
 }
 
-.brand-card:hover {
-  color: var(--brand-color) !important;
-  border-color: var(--brand-color) !important;
-  box-shadow: 0 0 25px color-mix(in srgb, var(--brand-color) 40%, transparent);
-  background-color: color-mix(in srgb, var(--brand-color) 10%, transparent) !important;
-  transform: scale(1.08);
+.brand-card-new:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
+
+.brand-card-new:hover span {
+  opacity: 1 !important;
+}
+
