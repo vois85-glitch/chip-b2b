@@ -1,11 +1,15 @@
-import { MetadataRoute } from 'next'
- 
+import { MetadataRoute } from 'next';
+
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
-    sitemap: 'https://chip-net.ru/sitemap.xml',
-  }
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/', '/_next/'],
+      },
+    ],
+    sitemap: 'https://www.chip-net.ru/sitemap.xml',
+    host: 'https://www.chip-net.ru',
+  };
 }

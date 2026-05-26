@@ -4,14 +4,34 @@ import "./globals.css";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import FloatingCta from '@/components/layout/FloatingCta';
-import Script from 'next/script'; // <-- Добавили импорт Script
+import JsonLd from '@/components/seo/JsonLd';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "ChipNet — Поставка оригинальных электронных компонентов | B2B",
+  metadataBase: new URL('https://www.chip-net.ru'),
+  title: {
+    default: "ChipNet — Поставка оригинальных электронных компонентов | B2B",
+    template: "%s | ChipNet",
+  },
   description: "Оптовые поставки микросхем, FPGA, микроконтроллеров и разъемов для промышленности и ВПК. Импортозамещение, подбор аналогов, доставка от 6 дней. ООО Деловой Партнёр, Белгород.",
   keywords: ["электронные компоненты", "микросхемы", "поставка чипов", "B2B электроника", "аналоги санкционных компонентов", "FPGA", "микроконтроллеры оптом", "импортозамещение"],
+  alternates: {
+    canonical: "https://www.chip-net.ru",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    url: "https://www.chip-net.ru",
+    siteName: "ChipNet",
+    title: "ChipNet — Поставка оригинальных электронных компонентов",
+    description: "Оптовые поставки микросхем, FPGA, микроконтроллеров для промышленности и ВПК. Импортозамещение, подбор аналогов.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -23,11 +43,12 @@ export default function RootLayout({
     <html lang="ru" className="dark">
       <body className={inter.className}>
         <Header />
-        <div className="pt-20"> 
+        <div className="pt-20">
           {children}
         </div>
         <Footer />
         <FloatingCta />
+        <JsonLd />
 
         {/* Яндекс.Метрика */}
         <Script id="yandex-metrika" strategy="afterInteractive">
