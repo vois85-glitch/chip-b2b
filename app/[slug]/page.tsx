@@ -139,18 +139,18 @@ export default async function SlugPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
         />
       )}
-      <main className="min-h-screen bg-background text-[#121212]">
+      <main className="min-h-screen bg-background text-[#121212] dark:text-white">
         <section className="pt-32 pb-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <nav className="text-sm text-[#757575] mb-6 flex items-center gap-2">
+            <nav className="text-sm text-[#757575] dark:text-[#7a8a84] mb-6 flex items-center gap-2">
               <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
               <span className="text-gray-600">/</span>
-              <span className="text-[#666]">{seo.h1}</span>
+              <span className="text-[#666] dark:text-[#8a9a94]">{seo.h1}</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
               {seo.h1}
             </h1>
-            <p className="text-lg text-[#666] max-w-3xl mb-8">
+            <p className="text-lg text-[#666] dark:text-[#8a9a94] max-w-3xl mb-8">
               {seo.description}
             </p>
           </div>
@@ -167,20 +167,20 @@ export default async function SlugPage({ params }: Props) {
                 {seo.type === 'category' ? 'Компоненты в категории' : `Компоненты ${seo.h1.split(' ').slice(-1)[0]}`}
                 <span className="text-primary ml-2">({components.length})</span>
               </h2>
-              <div className="overflow-x-auto rounded-xl border border-[#e8e8e8]">
+              <div className="overflow-x-auto rounded-xl border border-[#e8e8e8] dark:border-[#2a3530]">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-[#fafafa] border-b border-[#e8e8e8]">
-                      <th className="text-left py-4 px-4 text-[#666] font-medium">SKU</th>
-                      <th className="text-left py-4 px-4 text-[#666] font-medium">Наименование</th>
-                      <th className="text-left py-4 px-4 text-[#666] font-medium">Бренд</th>
-                      <th className="text-left py-4 px-4 text-[#666] font-medium">Статус</th>
-                      <th className="text-left py-4 px-4 text-[#666] font-medium">Аналоги</th>
+                    <tr className="bg-[#fafafa] border-b border-[#e8e8e8] dark:border-[#2a3530]">
+                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">SKU</th>
+                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Наименование</th>
+                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Бренд</th>
+                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Статус</th>
+                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Аналоги</th>
                     </tr>
                   </thead>
                   <tbody>
                     {components.map((comp) => (
-                      <tr key={comp.sku} className="border-b border-[#e8e8e8]/50 hover:bg-[#f3f3f3] transition-colors">
+                      <tr key={comp.sku} className="border-b border-[#e8e8e8] dark:border-[#2a3530]/50 hover:bg-[#f3f3f3] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] transition-colors">
                         <td className="py-3 px-4">
                           <Link
                             href={`/component/${comp.sku}`}
@@ -189,20 +189,20 @@ export default async function SlugPage({ params }: Props) {
                             {comp.sku}
                           </Link>
                         </td>
-                        <td className="py-3 px-4 text-[#333] max-w-xs truncate">
+                        <td className="py-3 px-4 text-[#333] dark:text-[#c4d0ca] max-w-xs truncate">
                           {comp.name}
                         </td>
-                        <td className="py-3 px-4 text-[#666]">
+                        <td className="py-3 px-4 text-[#666] dark:text-[#8a9a94]">
                           {comp.brand}
                         </td>
                         <td className="py-3 px-4">
                           {comp.status === 'EOL' ? (
                             <span className="px-2 py-1 rounded-full bg-red-50 text-danger text-xs">EOL</span>
                           ) : (
-                            <span className="px-2 py-1 rounded-full bg-section-alt text-primary text-xs">В производстве</span>
+                            <span className="px-2 py-1 rounded-full bg-section-alt dark:bg-[#1e2a25] text-primary text-xs">В производстве</span>
                           )}
                         </td>
-                        <td className="py-3 px-4 text-[#757575] text-xs max-w-xs truncate">
+                        <td className="py-3 px-4 text-[#757575] dark:text-[#7a8a84] text-xs max-w-xs truncate">
                           {comp.analogs && comp.analogs.length > 0
                             ? comp.analogs.join(', ')
                             : '—'}
@@ -218,7 +218,7 @@ export default async function SlugPage({ params }: Props) {
         <section className="px-4 pb-16">
           <div className="max-w-4xl mx-auto">
             <div className="prose prose-invert prose-emerald max-w-none">
-              <p className="text-[#333] leading-relaxed text-lg">
+              <p className="text-[#333] dark:text-[#c4d0ca] leading-relaxed text-lg">
                 {seo.text}
               </p>
             </div>
@@ -229,12 +229,12 @@ export default async function SlugPage({ params }: Props) {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Нужна консультация по {seo.type === 'category' ? 'категории' : 'бренду'}?
             </h2>
-            <p className="text-[#666] mb-8 max-w-xl mx-auto">
+            <p className="text-[#666] dark:text-[#8a9a94] mb-8 max-w-xl mx-auto">
               Отправьте заявку — подберём компоненты, найдём аналоги и рассчитаем сроки поставки.
             </p>
             <Link
               href="/#bom"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-emerald-500 text-[#121212] font-medium px-8 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-emerald-500 text-[#121212] dark:text-white font-medium px-8 py-3 rounded-lg transition-colors"
             >
               Отправить заявку
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>

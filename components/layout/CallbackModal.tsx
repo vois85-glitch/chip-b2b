@@ -190,7 +190,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Имя *"
                       required
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
                   <div>
@@ -200,7 +200,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       onChange={handlePhoneChange}
                       placeholder="Телефон *"
                       required
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
                   <div>
@@ -209,7 +209,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="E-Mail"
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
                   <div>
@@ -218,7 +218,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       placeholder="Компания"
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
 

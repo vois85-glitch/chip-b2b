@@ -204,23 +204,23 @@ export default function ImportKomponentovPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
-      <main className="min-h-screen bg-background text-[#121212]">
+      <main className="min-h-screen bg-background text-[#121212] dark:text-white">
         {/* Hero Section */}
         <section className="pt-32 pb-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <nav className="text-sm text-[#757575] mb-6 flex items-center gap-2">
+            <nav className="text-sm text-[#757575] dark:text-[#7a8a84] mb-6 flex items-center gap-2">
               <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
               <span className="text-gray-600">/</span>
-              <span className="text-[#666]">Импорт компонентов</span>
+              <span className="text-[#666] dark:text-[#8a9a94]">Импорт компонентов</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
               Импорт электронных компонентов
             </h1>
-            <p className="text-lg text-[#666] max-w-3xl mb-4">
+            <p className="text-lg text-[#666] dark:text-[#8a9a94] max-w-3xl mb-4">
               Организуем полный цикл импорта электронных компонентов из Китая, Гонконга, Тайваня, Южной Кореи и Европы.
               Таможенное оформление, логистика, проверка оригинальности — от заявки до доставки на ваш склад.
             </p>
-            <p className="text-base text-[#757575] max-w-3xl">
+            <p className="text-base text-[#757575] dark:text-[#7a8a84] max-w-3xl">
               Срочная авиадоставка от 6 рабочих дней. Работаем с B2B-клиентами: промышленные предприятия, оборонный комплекс, разработчики электроники.
             </p>
           </div>
@@ -237,20 +237,20 @@ export default function ImportKomponentovPage() {
         <section className="px-4 pb-20">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">Как работает импорт компонентов</h2>
-            <p className="text-[#666] mb-12 max-w-2xl">
+            <p className="text-[#666] dark:text-[#8a9a94] mb-12 max-w-2xl">
               От вашей заявки до получения компонентов на складе — шесть чётких этапов с полным контролем на каждом.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {importSteps.map((item) => (
                 <div
                   key={item.step}
-                  className="relative bg-white rounded-2xl border border-[#e8e8e8] p-6 hover:border-primary/30 hover:shadow-lg transition-all group"
+                  className="relative bg-white dark:bg-[#0f1210] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 hover:border-primary/30 hover:shadow-lg transition-all group"
                 >
                   <span className="text-5xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors absolute top-4 right-4">
                     {item.step}
                   </span>
-                  <h3 className="text-lg font-semibold mb-3 text-[#121212]">{item.title}</h3>
-                  <p className="text-[#666] text-sm leading-relaxed">{item.description}</p>
+                  <h3 className="text-lg font-semibold mb-3 text-[#121212] dark:text-white">{item.title}</h3>
+                  <p className="text-[#666] dark:text-[#8a9a94] text-sm leading-relaxed">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -261,18 +261,18 @@ export default function ImportKomponentovPage() {
         <section className="px-4 pb-20 bg-section-accent/30">
           <div className="max-w-7xl mx-auto py-20">
             <h2 className="text-3xl font-bold mb-4">Что мы импортируем</h2>
-            <p className="text-[#666] mb-12 max-w-2xl">
+            <p className="text-[#666] dark:text-[#8a9a94] mb-12 max-w-2xl">
               Полный ассортимент электронных компонентов для промышленности и оборонного комплекса — от пассивных элементов до сложных систем-на-кристалле.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {importCategories.map((cat) => (
                 <div
                   key={cat.title}
-                  className="bg-white rounded-2xl border border-[#e8e8e8] p-6 hover:border-primary/30 hover:shadow-lg transition-all"
+                  className="bg-white dark:bg-[#0f1210] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 hover:border-primary/30 hover:shadow-lg transition-all"
                 >
-                  <h3 className="text-lg font-semibold mb-2 text-[#121212]">{cat.title}</h3>
+                  <h3 className="text-lg font-semibold mb-2 text-[#121212] dark:text-white">{cat.title}</h3>
                   <p className="text-primary text-sm font-medium mb-3">{cat.items}</p>
-                  <p className="text-[#666] text-sm leading-relaxed">{cat.description}</p>
+                  <p className="text-[#666] dark:text-[#8a9a94] text-sm leading-relaxed">{cat.description}</p>
                 </div>
               ))}
             </div>
@@ -283,7 +283,7 @@ export default function ImportKomponentovPage() {
         <section className="px-4 pb-20">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">Преимущества работы с ChipNet</h2>
-            <p className="text-[#666] mb-12 max-w-2xl">
+            <p className="text-[#666] dark:text-[#8a9a94] mb-12 max-w-2xl">
               Комплексный подход к импорту электронных компонентов — от поиска и проверки до доставки и документооборота.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -292,8 +292,8 @@ export default function ImportKomponentovPage() {
                   key={adv.title}
                   className="bg-gradient-to-br from-primary/5 to-primary-dark/5 rounded-2xl border border-primary/10 p-6 hover:border-primary/30 transition-all"
                 >
-                  <h3 className="text-lg font-semibold mb-3 text-[#121212]">{adv.title}</h3>
-                  <p className="text-[#666] text-sm leading-relaxed">{adv.description}</p>
+                  <h3 className="text-lg font-semibold mb-3 text-[#121212] dark:text-white">{adv.title}</h3>
+                  <p className="text-[#666] dark:text-[#8a9a94] text-sm leading-relaxed">{adv.description}</p>
                 </div>
               ))}
             </div>
@@ -308,12 +308,12 @@ export default function ImportKomponentovPage() {
               {faqItems.map((item, index) => (
                 <details
                   key={index}
-                  className="group bg-white rounded-2xl border border-[#e8e8e8] overflow-hidden"
+                  className="group bg-white dark:bg-[#0f1210] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] overflow-hidden"
                 >
                   <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-[#fafafa] transition-colors">
-                    <span className="font-semibold text-[#121212] pr-4">{item.question}</span>
+                    <span className="font-semibold text-[#121212] dark:text-white pr-4">{item.question}</span>
                     <svg
-                      className="w-5 h-5 text-[#757575] group-open:rotate-180 transition-transform shrink-0"
+                      className="w-5 h-5 text-[#757575] dark:text-[#7a8a84] group-open:rotate-180 transition-transform shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -321,7 +321,7 @@ export default function ImportKomponentovPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
-                  <div className="px-6 pb-6 text-[#666] leading-relaxed">
+                  <div className="px-6 pb-6 text-[#666] dark:text-[#8a9a94] leading-relaxed">
                     {item.answer}
                   </div>
                 </details>
@@ -336,13 +336,13 @@ export default function ImportKomponentovPage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Нужен импорт электронных компонентов?
             </h2>
-            <p className="text-[#666] mb-8 max-w-xl mx-auto">
+            <p className="text-[#666] dark:text-[#8a9a94] mb-8 max-w-xl mx-auto">
               Отправьте заявку или BOM-лист — подберём компоненты, рассчитаем сроки и стоимость поставки, организуем полный цикл импорта.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/#bom"
-                className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-emerald-500 text-[#121212] font-medium px-8 py-3 rounded-lg transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-emerald-500 text-[#121212] dark:text-white font-medium px-8 py-3 rounded-lg transition-colors"
               >
                 Отправить заявку
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>

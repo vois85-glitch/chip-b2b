@@ -1,44 +1,48 @@
-import Link from 'next/link';
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
 
 const catalogCategories = [
-  { name: 'Микросхемы', slug: 'mikroshemy' },
-  { name: 'Микроконтроллеры', slug: 'arm-kontrollery' },
-  { name: 'ПЛИС (FPGA)', slug: 'fpga' },
-  { name: 'Транзисторы', slug: 'tranzistory' },
-  { name: 'MOSFET', slug: 'mosfet' },
-  { name: 'Диоды', slug: 'diody' },
-  { name: 'Конденсаторы', slug: 'kondensatory' },
-  { name: 'Резисторы', slug: 'rezistory' },
-  { name: 'АЦП / ЦАП', slug: 'adc-dac' },
-  { name: 'Стабилизаторы', slug: 'stabilizatory' },
-  { name: 'Операционные усилители', slug: 'operatsionnye-usiliteli' },
-  { name: 'Разъёмы', slug: 'razemy' },
-  { name: 'Датчики', slug: 'datchiki' },
-  { name: 'Оптоэлектроника', slug: 'optoelektronika' },
-  { name: 'Питание', slug: 'pitaniya' },
-  { name: 'Телекоммуникации', slug: 'telekommunikatsii' },
-  { name: 'Память', slug: 'pamyat' },
-  { name: 'Логика', slug: 'logika' },
-  { name: 'Реле', slug: 'rele' },
-  { name: 'Интерфейсы', slug: 'interfeysy' },
-  { name: 'Модули и платы', slug: 'moduli-i-platy' },
-  { name: 'Переключатели', slug: 'pereklyuchateli' },
-  { name: 'Кварцы и резонаторы', slug: 'kvartsy-i-rezonatory' },
-  { name: 'Предохранители', slug: 'predokhraniteli' },
-  { name: 'Индуктивности', slug: 'induktivnosti' },
-  { name: 'Кабели и провода', slug: 'kabeli-i-provoda' },
-  { name: 'Фильтры', slug: 'filtry' },
-  { name: 'Трансформаторы', slug: 'transformatory' },
-  { name: 'Электроавтоматика', slug: 'elektroavtomatika' },
-  { name: 'Монтаж и аксессуары', slug: 'montazh-i-aksessuary' },
+  { name: "Микросхемы", slug: "mikroshemy" },
+  { name: "Микроконтроллеры", slug: "arm-kontrollery" },
+  { name: "ПЛИС (FPGA)", slug: "fpga" },
+  { name: "Транзисторы", slug: "tranzistory" },
+  { name: "MOSFET", slug: "mosfet" },
+  { name: "Диоды", slug: "diody" },
+  { name: "Конденсаторы", slug: "kondensatory" },
+  { name: "Резисторы", slug: "rezistory" },
+  { name: "АЦП / ЦАП", slug: "adc-dac" },
+  { name: "Стабилизаторы", slug: "stabilizatory" },
+  { name: "Операционные усилители", slug: "operatsionnye-usiliteli" },
+  { name: "Разъёмы", slug: "razemy" },
+  { name: "Датчики", slug: "datchiki" },
+  { name: "Оптоэлектроника", slug: "optoelektronika" },
+  { name: "Питание", slug: "pitaniya" },
+  { name: "Телекоммуникации", slug: "telekommunikatsii" },
+  { name: "Память", slug: "pamyat" },
+  { name: "Логика", slug: "logika" },
+  { name: "Реле", slug: "rele" },
+  { name: "Интерфейсы", slug: "interfeysy" },
+  { name: "Модули и платы", slug: "moduli-i-platy" },
+  { name: "Переключатели", slug: "pereklyuchateli" },
+  { name: "Кварцы и резонаторы", slug: "kvartsy-i-rezonatory" },
+  { name: "Предохранители", slug: "predokhraniteli" },
+  { name: "Индуктивности", slug: "induktivnosti" },
+  { name: "Кабели и провода", slug: "kabeli-i-provoda" },
+  { name: "Фильтры", slug: "filtry" },
+  { name: "Трансформаторы", slug: "transformatory" },
+  { name: "Электроавтоматика", slug: "elektroavtomatika" },
+  { name: "Монтаж и аксессуары", slug: "montazh-i-aksessuary" },
 ];
 
 export default function Footer() {
+  const [catalogOpen, setCatalogOpen] = useState(false);
+
   return (
-    <footer className="py-8 px-4 bg-section-accent dark:bg-[#0a0f0d] border-t border-[#bbd3ba] dark:border-[#1e2a25] dark:border-[#1e2a25]">
+    <footer className="py-8 px-4 bg-section-accent dark:bg-[#0a0f0d] border-t border-[#bbd3ba] dark:border-[#1e2a25]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-          
           {/* Колонка 1: Логотип */}
           <div>
             <Link href="/" className="flex items-center gap-3 group w-fit">
@@ -87,15 +91,31 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Каталог — категории текстовыми ссылками */}
+        {/* Каталог — на мобильных сворачивается под кнопку */}
         <div className="mb-6">
-          <h4 className="font-semibold mb-3 text-[#121212]">Каталог</h4>
-          <nav className="flex flex-wrap gap-x-4 gap-y-1.5">
+          {/* Кнопка-заголовок на мобильных, обычный заголовок на десктопе */}
+          <button
+            onClick={() => setCatalogOpen(!catalogOpen)}
+            className="md:hidden w-full flex items-center justify-between font-semibold mb-3 text-[#121212] dark:text-white cursor-pointer"
+          >
+            <span>Каталог</span>
+            <svg
+              className={`w-4 h-4 text-[#666] dark:text-[#8a9a94] transition-transform duration-200 ${catalogOpen ? "rotate-180" : ""}`}
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <h4 className="hidden md:block font-semibold mb-3 text-[#121212] dark:text-white">Каталог</h4>
+
+          {/* Список категорий — скрыт на мобилке пока не нажата кнопка */}
+          <nav className={`flex flex-wrap gap-x-4 gap-y-1.5 ${catalogOpen ? "block" : "hidden"} md:flex`}>
             {catalogCategories.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/${cat.slug}`}
-                className="text-sm text-[#666] hover:text-primary transition-colors"
+                className="text-sm text-[#666] dark:text-[#8a9a94] hover:text-primary transition-colors"
               >
                 {cat.name}
               </Link>
@@ -104,12 +124,12 @@ export default function Footer() {
         </div>
 
         {/* Юридическая строка */}
-        <div className="border-t border-[#bbd3ba] dark:border-[#1e2a25] pt-6 text-xs text-[#757575] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
+        <div className="border-t border-[#bbd3ba] dark:border-[#1e2a25] pt-6 text-xs text-[#757575] dark:text-[#6a7a74] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
           <div>
             © {new Date().getFullYear()} ООО «Деловой Партнёр». Все права защищены. ИНН 3123341983, ОГРН 1143123005838
           </div>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-[#333]">Политика конфиденциальности</a>
+            <a href="#" className="hover:text-[#333] dark:hover:text-white">Политика конфиденциальности</a>
           </div>
         </div>
       </div>

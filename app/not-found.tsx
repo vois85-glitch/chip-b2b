@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-background text-[#121212] flex items-center justify-center">
+    <main className="min-h-screen bg-background text-[#121212] dark:text-white flex items-center justify-center">
       <div className="text-center px-4 py-20">
         <h1 className="text-8xl font-bold text-primary mb-4">404</h1>
         <h2 className="text-2xl font-semibold mb-4">Страница не найдена</h2>
-        <p className="text-[#666] mb-8 max-w-md mx-auto">
+        <p className="text-[#666] dark:text-[#8a9a94] mb-8 max-w-md mx-auto">
           Запрашиваемая страница не существует или была перемещена. Попробуйте найти нужный компонент в каталоге.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

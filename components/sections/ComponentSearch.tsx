@@ -24,7 +24,7 @@ export default function ComponentSearch() {
   };
 
   return (
-    <section id="search" className="py-6 px-4 bg-white relative overflow-hidden">
+    <section id="search" className="py-6 px-4 bg-white dark:bg-[#0f1210] relative overflow-hidden">
       <div className="max-w-3xl mx-auto relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

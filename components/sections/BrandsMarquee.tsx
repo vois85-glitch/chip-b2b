@@ -39,7 +39,7 @@ export default function BrandsMarquee() {
   );
 
   return (
-    <section className="py-6 md:py-8 bg-white overflow-hidden marquee-container-new">
+    <section className="py-6 md:py-8 bg-white dark:bg-[#1a1f1c] overflow-hidden marquee-container-new">
       <div className="text-center mb-4">
         <h2 className="text-lg md:text-xl font-bold text-[#121212] dark:text-white tracking-wide">
           Официальные поставки от мировых производителей
