@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1a15] via-[#0d2818] to-[#071510] pt-16">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0c1f1e] via-[#0f2e2b] to-[#091b1a] pt-16">
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[180px]" />
@@ -109,12 +109,12 @@ export default function Hero() {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 50vw"
               />
               {/* Gradient overlays */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0a1a15] via-transparent to-transparent opacity-40 lg:opacity-60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a15] via-transparent to-transparent opacity-20 lg:opacity-30" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0c1f1e] via-transparent to-transparent opacity-40 lg:opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c1f1e] via-transparent to-transparent opacity-20 lg:opacity-30" />
             </div>
             
             {/* Floating badge — bottom left */}
-            <div className="absolute -bottom-3 -left-2 md:-bottom-4 md:-left-4 bg-[#0d2818]/90 backdrop-blur-md border border-[#02a391]/30 rounded-lg md:rounded-xl px-3 py-2 md:px-4 md:py-3 shadow-xl">
+            <div className="absolute -bottom-3 -left-2 md:-bottom-4 md:-left-4 bg-[#0f2e2b]/90 backdrop-blur-md border border-[#02a391]/30 rounded-lg md:rounded-xl px-3 py-2 md:px-4 md:py-3 shadow-xl">
               <div className="flex items-center gap-2 md:gap-3">
                 <div className="w-8 h-8 md:w-10 md:h-10 bg-[#02a391]/20 rounded-lg flex items-center justify-center shrink-0">
                   <svg className="w-4 h-4 md:w-5 md:h-5 text-[#02a391]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
@@ -127,7 +127,7 @@ export default function Hero() {
             </div>
 
             {/* Top-right floating badge */}
-            <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 bg-[#0d2818]/90 backdrop-blur-md border border-[#02a391]/30 rounded-lg md:rounded-xl px-2.5 py-2 md:px-4 md:py-2.5 shadow-xl">
+            <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 bg-[#0f2e2b]/90 backdrop-blur-md border border-[#02a391]/30 rounded-lg md:rounded-xl px-2.5 py-2 md:px-4 md:py-2.5 shadow-xl">
               <div className="flex items-center gap-1.5 md:gap-2">
                 <div className="w-7 h-7 md:w-8 md:h-8 bg-[#02a391]/20 rounded-lg flex items-center justify-center shrink-0">
                   <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#02a391]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
