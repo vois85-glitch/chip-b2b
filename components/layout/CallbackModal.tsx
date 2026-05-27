@@ -130,7 +130,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
 
           {/* Modal */}
           <motion.div
-            className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md bg-white dark:bg-[#1a1f1c] rounded-2xl shadow-2xl overflow-hidden"
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -140,7 +140,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
             <div className="bg-gradient-to-r from-[#02a391] to-[#04c4a5] px-6 pt-6 pb-5 text-white relative">
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white dark:bg-[#1a1f1c]/20 hover:bg-white dark:bg-[#1a1f1c]/30 transition-colors"
                 aria-label="Закрыть"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -154,11 +154,11 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
             {/* Body */}
             <div className="px-6 py-5">
               {/* Info badge */}
-              <div className="flex items-center gap-2 mb-5 px-3 py-2 bg-[#f5f5f5] rounded-lg">
+              <div className="flex items-center gap-2 mb-5 px-3 py-2 bg-[#f5f5f5] dark:bg-[#1a1f1c] rounded-lg">
                 <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                <span className="text-xs text-[#666]">Работаем только с юридическими лицами</span>
+                <span className="text-xs text-[#666] dark:text-[#8a9a94]">Работаем только с юридическими лицами</span>
               </div>
 
               {success ? (
@@ -172,8 +172,8 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-bold text-[#121212] mb-2">Заявка отправлена!</h3>
-                  <p className="text-sm text-[#666]">Мы перезвоним вам в ближайшее время</p>
+                  <h3 className="text-lg font-bold text-[#121212] dark:text-white mb-2">Заявка отправлена!</h3>
+                  <p className="text-sm text-[#666] dark:text-[#8a9a94]">Мы перезвоним вам в ближайшее время</p>
                   <button
                     onClick={onClose}
                     className="mt-5 px-6 py-2.5 bg-[#02a391] hover:bg-[#028a7a] text-white rounded-xl text-sm font-semibold transition-colors"
@@ -190,7 +190,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Имя *"
                       required
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] rounded-xl text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
                   <div>
@@ -200,7 +200,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       onChange={handlePhoneChange}
                       placeholder="Телефон *"
                       required
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] rounded-xl text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
                   <div>
@@ -209,7 +209,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="E-Mail"
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] rounded-xl text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
                   <div>
@@ -218,7 +218,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       placeholder="Компания"
-                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] rounded-xl text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
+                      className="w-full px-4 py-3 bg-[#f8f8f8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-[#02a391] focus:ring-1 focus:ring-[#02a391]/20 transition-colors"
                     />
                   </div>
 

@@ -17,11 +17,11 @@ const categories = [
 
 export default function PopularCategories() {
   return (
-    <section className="py-6 px-4 bg-section">
+    <section className="py-6 px-4 bg-section dark:bg-[#161b18]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Каталог направлений</h2>
-          <p className="text-[#666] text-sm">Выберите категорию или откройте полный каталог</p>
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212] dark:text-white">Каталог направлений</h2>
+          <p className="text-[#666] dark:text-[#8a9a94] text-sm">Выберите категорию или откройте полный каталог</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
@@ -29,11 +29,11 @@ export default function PopularCategories() {
             <Link
               key={cat.href}
               href={cat.href}
-              className="group block bg-white border border-[#e8e8e8] rounded-lg p-3 hover:bg-section-alt hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md"
+              className="group block bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg p-3 hover:bg-section-alt hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <div className="text-2xl mb-1">{cat.icon}</div>
-              <h3 className="text-sm font-bold text-[#121212] group-hover:text-primary transition-colors">{cat.title}</h3>
-              <p className="text-[#757575] text-xs leading-snug">{cat.desc}</p>
+              <h3 className="text-sm font-bold text-[#121212] dark:text-white group-hover:text-primary transition-colors">{cat.title}</h3>
+              <p className="text-[#757575] dark:text-[#7a8a84] text-xs leading-snug">{cat.desc}</p>
             </Link>
           ))}
         </div>

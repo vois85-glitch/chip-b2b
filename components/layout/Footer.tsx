@@ -35,7 +35,7 @@ const catalogCategories = [
 
 export default function Footer() {
   return (
-    <footer className="py-8 px-4 bg-section-accent border-t border-[#bbd3ba]">
+    <footer className="py-8 px-4 bg-section-accent dark:bg-[#0a0f0d] border-t border-[#bbd3ba] dark:border-[#1e2a25] dark:border-[#1e2a25]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           
@@ -56,19 +56,19 @@ export default function Footer() {
                   <line x1="1" y1="14" x2="4" y2="14"></line>
                 </svg>
               </div>
-              <span className="text-xl font-bold tracking-tight text-[#121212] group-hover:text-primary transition-colors">
+              <span className="text-xl font-bold tracking-tight text-[#121212] dark:text-white group-hover:text-primary transition-colors">
                 Chip<span className="text-primary group-hover:text-primary-dark transition-colors">Net</span>
               </span>
             </Link>
-            <p className="text-sm text-[#666] leading-relaxed mt-4 ml-1">
+            <p className="text-sm text-[#666] dark:text-[#8a9a94] leading-relaxed mt-4 ml-1">
               Поставка оригинальных электронных компонентов и промышленного оборудования для ВПК и производства.
             </p>
           </div>
 
           {/* Колонка 2: Навигация */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#121212]">Навигация</h4>
-            <div className="flex flex-col gap-2 text-sm text-[#666]">
+            <h4 className="font-semibold mb-4 text-[#121212] dark:text-white">Навигация</h4>
+            <div className="flex flex-col gap-2 text-sm text-[#666] dark:text-[#8a9a94]">
               <a href="#search" className="hover:text-primary transition-colors">Поиск компонентов</a>
               <a href="#bom" className="hover:text-primary transition-colors">Загрузить BOM</a>
               <a href="#about" className="hover:text-primary transition-colors">О компании</a>
@@ -78,8 +78,8 @@ export default function Footer() {
 
           {/* Колонка 3: Контакты */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#121212]">Контакты</h4>
-            <div className="flex flex-col gap-2 text-sm text-[#666]">
+            <h4 className="font-semibold mb-4 text-[#121212] dark:text-white">Контакты</h4>
+            <div className="flex flex-col gap-2 text-sm text-[#666] dark:text-[#8a9a94]">
               <a href="tel:+79103219191" className="hover:text-primary transition-colors">+7 (910) 321-91-91</a>
               <a href="mailto:info@chip-net.ru" className="hover:text-primary transition-colors">info@chip-net.ru</a>
               <span>г. Белгород, ул. Шаландина, 4 к3 оф8</span>
@@ -104,7 +104,7 @@ export default function Footer() {
         </div>
 
         {/* Юридическая строка */}
-        <div className="border-t border-[#bbd3ba] pt-6 text-xs text-[#757575] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
+        <div className="border-t border-[#bbd3ba] dark:border-[#1e2a25] pt-6 text-xs text-[#757575] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
           <div>
             © {new Date().getFullYear()} ООО «Деловой Партнёр». Все права защищены. ИНН 3123341983, ОГРН 1143123005838
           </div>

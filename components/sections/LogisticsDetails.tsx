@@ -23,11 +23,11 @@ const details = [
 
 export default function LogisticsDetails() {
   return (
-    <section className="py-6 px-4 bg-white">
+    <section className="py-6 px-4 bg-white dark:bg-[#0f1210]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Импорт и логистика без рисков</h2>
-          <p className="text-[#666] text-sm max-w-2xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212] dark:text-white">Импорт и логистика без рисков</h2>
+          <p className="text-[#666] dark:text-[#8a9a94] text-sm max-w-2xl mx-auto">
             Поставка электронных компонентов — сложный процесс ВЭД, где мы берем все риски на себя.
           </p>
         </div>
@@ -40,10 +40,10 @@ export default function LogisticsDetails() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white border border-[#e8e8e8] rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow"
             >
               <h3 className="text-base font-bold mb-1 text-primary">{item.title}</h3>
-              <p className="text-[#666] text-xs leading-relaxed">{item.text}</p>
+              <p className="text-[#666] dark:text-[#8a9a94] text-xs leading-relaxed">{item.text}</p>
             </motion.div>
           ))}
         </div>

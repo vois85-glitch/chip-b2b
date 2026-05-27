@@ -26,10 +26,10 @@ export default function AboutCompany() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#121212]">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#121212] dark:text-white">
             О <span className="text-primary">компании</span>
           </h2>
-          <p className="text-[#666] text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[#666] dark:text-[#8a9a94] text-lg max-w-2xl mx-auto leading-relaxed">
             ChipNet — надёжный поставщик электронных компонентов для российского промышленного производства и оборонно-промышленного комплекса
           </p>
         </motion.div>
@@ -42,7 +42,7 @@ export default function AboutCompany() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-20"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-[#121212] mb-8 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-[#121212] dark:text-white mb-8 text-center">
             Основные задачи компании
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -51,7 +51,7 @@ export default function AboutCompany() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white border border-[#e8e8e8] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -71,7 +71,7 @@ export default function AboutCompany() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white border border-[#e8e8e8] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -95,7 +95,7 @@ export default function AboutCompany() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-[#121212] mb-10 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-[#121212] dark:text-white mb-10 text-center">
             Наши преимущества
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -106,12 +106,12 @@ export default function AboutCompany() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="flex items-center gap-4 bg-white border border-[#e8e8e8] rounded-xl p-5 shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
+                className="flex items-center gap-4 bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl p-5 shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-xl shrink-0">
                   {adv.icon}
                 </div>
-                <span className="text-[#333] font-medium text-[15px] leading-snug">
+                <span className="text-[#333] dark:text-[#c4d0ca] font-medium text-[15px] leading-snug">
                   {adv.text}
                 </span>
               </motion.div>
