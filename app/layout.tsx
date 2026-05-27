@@ -70,9 +70,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" suppressHydrationWarning>
+    <html lang="ru">
       <body className={inter.className}>
-        <ThemeProvider>
           <Header />
           {children}
           <Footer />
@@ -101,7 +100,6 @@ export default function RootLayout({
               />
             </div>
           </noscript>
-        </ThemeProvider>
       </body>
     </html>
   );
