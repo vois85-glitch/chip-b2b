@@ -3,7 +3,6 @@ import BrandsMarquee from '@/components/sections/BrandsMarquee';
 import ComponentSearch from '@/components/sections/ComponentSearch';
 import PopularCategories from '@/components/sections/PopularCategories';
 import AboutCompany from '@/components/sections/AboutCompany';
-import QualityControl from '@/components/sections/QualityControl';
 import HardCases from '@/components/sections/HardCases';
 import LogisticsDetails from '@/components/sections/LogisticsDetails';
 import BomUpload from '@/components/sections/BomUpload';
@@ -70,7 +69,6 @@ export default function Home() {
       <ComponentSearch />
       <PopularCategories />
       <AboutCompany />
-      <QualityControl />
       <HardCases />
       <LogisticsDetails />
       <BomUpload />
