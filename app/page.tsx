@@ -8,7 +8,6 @@ import LogisticsDetails from '@/components/sections/LogisticsDetails';
 import BomUpload from '@/components/sections/BomUpload';
 import HowWeWork from '@/components/sections/HowWeWork';
 import FAQ from '@/components/sections/FAQ';
-import BottomCatalog from '@/components/sections/BottomCatalog';
 import Contacts from '@/components/sections/Contacts';
 
 const faqLd = {
@@ -75,7 +74,6 @@ export default function Home() {
       <BomUpload />
       <HowWeWork />
       <FAQ />
-      <BottomCatalog />
       <Contacts />
     </main>
   );

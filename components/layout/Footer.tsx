@@ -1,5 +1,38 @@
 import Link from 'next/link';
 
+const catalogCategories = [
+  { name: 'Микросхемы', slug: 'mikroshemy' },
+  { name: 'Микроконтроллеры', slug: 'arm-kontrollery' },
+  { name: 'ПЛИС (FPGA)', slug: 'fpga' },
+  { name: 'Транзисторы', slug: 'tranzistory' },
+  { name: 'MOSFET', slug: 'mosfet' },
+  { name: 'Диоды', slug: 'diody' },
+  { name: 'Конденсаторы', slug: 'kondensatory' },
+  { name: 'Резисторы', slug: 'rezistory' },
+  { name: 'АЦП / ЦАП', slug: 'adc-dac' },
+  { name: 'Стабилизаторы', slug: 'stabilizatory' },
+  { name: 'Операционные усилители', slug: 'operatsionnye-usiliteli' },
+  { name: 'Разъёмы', slug: 'razemy' },
+  { name: 'Датчики', slug: 'datchiki' },
+  { name: 'Оптоэлектроника', slug: 'optoelektronika' },
+  { name: 'Питание', slug: 'pitaniya' },
+  { name: 'Телекоммуникации', slug: 'telekommunikatsii' },
+  { name: 'Память', slug: 'pamyat' },
+  { name: 'Логика', slug: 'logika' },
+  { name: 'Реле', slug: 'rele' },
+  { name: 'Интерфейсы', slug: 'interfeysy' },
+  { name: 'Модули и платы', slug: 'moduli-i-platy' },
+  { name: 'Переключатели', slug: 'pereklyuchateli' },
+  { name: 'Кварцы и резонаторы', slug: 'kvartsy-i-rezonatory' },
+  { name: 'Предохранители', slug: 'predokhraniteli' },
+  { name: 'Индуктивности', slug: 'induktivnosti' },
+  { name: 'Кабели и провода', slug: 'kabeli-i-provoda' },
+  { name: 'Фильтры', slug: 'filtry' },
+  { name: 'Трансформаторы', slug: 'transformatory' },
+  { name: 'Электроавтоматика', slug: 'elektroavtomatika' },
+  { name: 'Монтаж и аксессуары', slug: 'montazh-i-aksessuary' },
+];
+
 export default function Footer() {
   return (
     <footer className="py-8 px-4 bg-section-accent border-t border-[#bbd3ba]">
@@ -52,6 +85,22 @@ export default function Footer() {
               <span>г. Белгород, ул. Шаландина, 4 к3 оф8</span>
             </div>
           </div>
+        </div>
+
+        {/* Каталог — категории текстовыми ссылками */}
+        <div className="mb-6">
+          <h4 className="font-semibold mb-3 text-[#121212]">Каталог</h4>
+          <nav className="flex flex-wrap gap-x-4 gap-y-1.5">
+            {catalogCategories.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/${cat.slug}`}
+                className="text-sm text-[#666] hover:text-primary transition-colors"
+              >
+                {cat.name}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Юридическая строка */}
