@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 const brands = [
   { name: 'NXP', logo: '/brands/nxp.svg', href: '/nxp' },
@@ -27,93 +27,129 @@ const brands = [
 
 export default function BrandsMarquee() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const animationRef = useRef<number | null>(null);
-  const speedRef = useRef(0.6); // px per frame
 
-  // Auto-scroll animation
+  // Physics state (refs to avoid re-renders)
+  const velocityRef = useRef(0.6);          // current velocity (px/frame)
+  const targetVelocityRef = useRef(0.6);    // auto-scroll speed
+  const isDraggingRef = useRef(false);
+  const isHoveringRef = useRef(false);
+  const lastXRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const lastScrollLeftRef = useRef(0);
+  const momentumVelocityRef = useRef(0);     // velocity from flick
+
+  const FRICTION = 0.96;    // deceleration per frame
+  const MIN_VEL = 0.3;      // minimum velocity before snapping back to auto
+  const AUTO_SPEED = 0.6;   // auto-scroll speed
+
+  // Main animation loop
   const animate = useCallback(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el) { requestAnimationFrame(animate); return; }
 
-    if (!isPaused && !isDragging) {
-      el.scrollLeft += speedRef.current;
-      // Seamless loop: when we've scrolled past the first set, reset
-      const halfWidth = el.scrollWidth / 3;
-      if (el.scrollLeft >= halfWidth) {
-        el.scrollLeft -= halfWidth;
+    const thirdWidth = el.scrollWidth / 3;
+
+    if (isDraggingRef.current) {
+      // While dragging: track velocity for momentum
+      const now = performance.now();
+      const dt = now - lastTimeRef.current;
+      if (dt > 0) {
+        const currentVel = (el.scrollLeft - lastScrollLeftRef.current) / dt * 16; // normalize to ~60fps
+        // Smooth velocity tracking (weighted average)
+        momentumVelocityRef.current = momentumVelocityRef.current * 0.6 + currentVel * 0.4;
       }
+      lastTimeRef.current = now;
+      lastScrollLeftRef.current = el.scrollLeft;
+
+    } else if (Math.abs(momentumVelocityRef.current) > 0.1) {
+      // Momentum phase: decelerate gradually
+      el.scrollLeft += momentumVelocityRef.current;
+      momentumVelocityRef.current *= FRICTION;
+
+      // Seamless loop
+      if (el.scrollLeft >= thirdWidth * 2) el.scrollLeft -= thirdWidth;
+      if (el.scrollLeft < 0) el.scrollLeft += thirdWidth;
+
+      // When momentum dies, transition to auto-scroll
+      if (Math.abs(momentumVelocityRef.current) < MIN_VEL) {
+        momentumVelocityRef.current = 0;
+        // Resume auto-scroll in the natural direction
+        velocityRef.current = isHoveringRef.current ? 0 : AUTO_SPEED;
+      }
+
+    } else if (!isHoveringRef.current) {
+      // Auto-scroll phase
+      el.scrollLeft += AUTO_SPEED;
+      if (el.scrollLeft >= thirdWidth) el.scrollLeft -= thirdWidth;
     }
 
-    animationRef.current = requestAnimationFrame(animate);
-  }, [isPaused, isDragging]);
+    requestAnimationFrame(animate);
+  }, []);
 
   useEffect(() => {
-    animationRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
+    const id = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(id);
   }, [animate]);
 
-  // Drag handlers
-  const onMouseDown = (e: React.MouseEvent) => {
+  // --- Pointer / Touch handlers ---
+
+  const handlePointerDown = (clientX: number) => {
     const el = scrollRef.current;
     if (!el) return;
-    setIsDragging(true);
-    setStartX(e.pageX - el.offsetLeft);
-    setScrollLeft(el.scrollLeft);
+    isDraggingRef.current = true;
+    momentumVelocityRef.current = 0;
+    lastXRef.current = clientX;
+    lastTimeRef.current = performance.now();
+    lastScrollLeftRef.current = el.scrollLeft;
+    el.style.cursor = 'grabbing';
   };
 
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    e.preventDefault();
+  const handlePointerMove = (clientX: number) => {
+    if (!isDraggingRef.current) return;
     const el = scrollRef.current;
     if (!el) return;
-    const x = e.pageX - el.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    el.scrollLeft = scrollLeft - walk;
+    const dx = clientX - lastXRef.current;
+    el.scrollLeft -= dx;
+    lastXRef.current = clientX;
+
+    // Track velocity
+    const now = performance.now();
+    const dt = now - lastTimeRef.current;
+    if (dt > 0) {
+      const instantVel = -dx / dt * 16;
+      momentumVelocityRef.current = momentumVelocityRef.current * 0.5 + instantVel * 0.5;
+    }
+    lastTimeRef.current = now;
+    lastScrollLeftRef.current = el.scrollLeft;
   };
 
-  const onMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // Touch handlers
-  const onTouchStart = (e: React.TouchEvent) => {
+  const handlePointerUp = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
     const el = scrollRef.current;
-    if (!el) return;
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX - el.offsetLeft);
-    setScrollLeft(el.scrollLeft);
+    if (el) el.style.cursor = 'grab';
+    // momentumVelocityRef is already set — animation loop will handle deceleration
   };
 
-  const onTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const el = scrollRef.current;
-    if (!el) return;
-    const x = e.touches[0].pageX - el.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    el.scrollLeft = scrollLeft - walk;
-  };
+  // Mouse
+  const onMouseDown = (e: React.MouseEvent) => { e.preventDefault(); handlePointerDown(e.clientX); };
+  const onMouseMove = (e: React.MouseEvent) => { handlePointerMove(e.clientX); };
+  const onMouseUp = () => { handlePointerUp(); };
+  const onMouseEnter = () => { isHoveringRef.current = true; };
+  const onMouseLeave = () => { isHoveringRef.current = false; handlePointerUp(); };
 
-  const onTouchEnd = () => {
-    setIsDragging(false);
-  };
+  // Touch
+  const onTouchStart = (e: React.TouchEvent) => { handlePointerDown(e.touches[0].clientX); };
+  const onTouchMove = (e: React.TouchEvent) => { handlePointerMove(e.touches[0].clientX); };
+  const onTouchEnd = () => { handlePointerUp(); };
 
-  // Arrow navigation
-  const scrollByAmount = 320;
+  // Arrow navigation — gives a flick impulse
+  const scrollByAmount = 340;
   const scrollLeft_ = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollBy({ left: -scrollByAmount, behavior: 'smooth' });
+    momentumVelocityRef.current = -scrollByAmount / 16 * 0.8;
   };
   const scrollRight = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollBy({ left: scrollByAmount, behavior: 'smooth' });
+    momentumVelocityRef.current = scrollByAmount / 16 * 0.8;
   };
 
   const renderBrand = (brand: typeof brands[0], index: number) => (
@@ -173,10 +209,10 @@ export default function BrandsMarquee() {
         {/* Scrollable track */}
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+          className="flex overflow-x-auto scrollbar-hide cursor-grab"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => { setIsPaused(false); onMouseUp(); }}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
