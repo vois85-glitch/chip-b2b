@@ -17,17 +17,17 @@ export default function Hero() {
         }} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 md:py-20 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left: Text Content */}
-          <div className="text-center lg:text-left">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 md:py-16 lg:py-24">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
+          {/* Text Content */}
+          <div className="text-center lg:text-left order-1">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 border border-[#02a391]/30 rounded-full bg-[#02a391]/10 backdrop-blur-md text-sm text-[#02a391]"
+              className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 mb-4 md:mb-6 border border-[#02a391]/30 rounded-full bg-[#02a391]/10 backdrop-blur-md text-xs md:text-sm text-[#02a391]"
             >
-              <span className="w-2 h-2 bg-[#02a391] rounded-full animate-pulse" />
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#02a391] rounded-full animate-pulse" />
               Импортозамещение и санкционные компоненты
             </motion.div>
 
@@ -35,7 +35,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-3xl md:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-5 text-white"
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-3 md:mb-5 text-white"
             >
               Поставка оригинальных{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#02a391] to-[#04d4b0]">
@@ -48,7 +48,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-base md:text-lg text-[#94a3b8] max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed"
+              className="text-sm md:text-base lg:text-lg text-[#94a3b8] max-w-xl mx-auto lg:mx-0 mb-5 md:mb-8 leading-relaxed"
             >
               Гарантия оригинала. Постоплата для постоянных клиентов. 
               Подбор аналогов для unavailable позиций. Доставка из Европы и Азии.
@@ -58,13 +58,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-10"
+              className="flex flex-col sm:flex-row gap-2 md:gap-3 justify-center lg:justify-start mb-6 md:mb-10"
             >
-              <a href="#bom" className="group px-6 py-3 bg-gradient-to-r from-[#02a391] to-[#04c4a5] hover:from-[#02907f] hover:to-[#03b095] rounded-xl text-sm font-semibold transition-all shadow-lg shadow-[#02a391]/25 hover:shadow-[#02a391]/40 text-white text-center flex items-center justify-center gap-2">
+              <a href="#bom" className="group px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-[#02a391] to-[#04c4a5] hover:from-[#02907f] hover:to-[#03b095] rounded-xl text-sm font-semibold transition-all shadow-lg shadow-[#02a391]/25 hover:shadow-[#02a391]/40 text-white text-center flex items-center justify-center gap-2">
                 Получить КП за 2 часа
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
-              <a href="#bom" className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-sm font-semibold backdrop-blur-md transition-all text-white text-center">
+              <a href="#bom" className="px-5 py-2.5 md:px-6 md:py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-sm font-semibold backdrop-blur-md transition-all text-white text-center">
                 Загрузить BOM
               </a>
             </motion.div>
@@ -74,31 +74,31 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0"
+              className="grid grid-cols-3 gap-3 md:gap-4 max-w-xs sm:max-w-md mx-auto lg:mx-0"
             >
               <div className="text-center lg:text-left">
-                <div className="text-2xl md:text-3xl font-bold text-white">2600+</div>
-                <div className="text-xs md:text-sm text-[#64748b] mt-1">Компонентов</div>
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">2600+</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5 md:mt-1">Компонентов</div>
               </div>
-              <div className="text-center lg:text-left border-x border-white/10 px-4">
-                <div className="text-2xl md:text-3xl font-bold text-white">71</div>
-                <div className="text-xs md:text-sm text-[#64748b] mt-1">Бренд</div>
+              <div className="text-center lg:text-left border-x border-white/10 px-2 md:px-4">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">71</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5 md:mt-1">Бренд</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-2xl md:text-3xl font-bold text-white">6 дн.</div>
-                <div className="text-xs md:text-sm text-[#64748b] mt-1">Доставка</div>
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">6 дн.</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5 md:mt-1">Доставка</div>
               </div>
             </motion.div>
           </div>
 
-          {/* Right: Hero Image */}
+          {/* Hero Image — visible on ALL screens */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95, x: 30 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative hidden lg:block"
+            className="relative order-2 w-full max-w-lg md:max-w-xl mx-auto lg:max-w-none"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#02a391]/20 border border-[#02a391]/20">
+            <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-2xl shadow-[#02a391]/20 border border-[#02a391]/20">
               <Image
                 src="/hero-illustration.png"
                 alt="Электронные компоненты ChipNet — микросхемы, FPGA, микроконтроллеры"
@@ -106,34 +106,33 @@ export default function Hero() {
                 height={768}
                 className="w-full h-auto object-cover"
                 priority
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 50vw"
               />
-              {/* Gradient overlay on image edges */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0a1a15] via-transparent to-transparent opacity-60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a15] via-transparent to-transparent opacity-30" />
+              {/* Gradient overlays */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0a1a15] via-transparent to-transparent opacity-40 lg:opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a15] via-transparent to-transparent opacity-20 lg:opacity-30" />
             </div>
             
-            {/* Floating badge */}
-            <div className="absolute -bottom-4 -left-4 bg-[#0d2818]/90 backdrop-blur-md border border-[#02a391]/30 rounded-xl px-4 py-3 shadow-xl">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#02a391]/20 rounded-lg flex items-center justify-center">
-                  <svg className="w-5 h-5 text-[#02a391]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            {/* Floating badge — bottom left */}
+            <div className="absolute -bottom-3 -left-2 md:-bottom-4 md:-left-4 bg-[#0d2818]/90 backdrop-blur-md border border-[#02a391]/30 rounded-lg md:rounded-xl px-3 py-2 md:px-4 md:py-3 shadow-xl">
+              <div className="flex items-center gap-2 md:gap-3">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-[#02a391]/20 rounded-lg flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-[#02a391]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-white">100% оригинал</div>
-                  <div className="text-xs text-[#64748b]">Входной контроль СВП</div>
+                  <div className="text-xs md:text-sm font-semibold text-white">100% оригинал</div>
+                  <div className="text-[10px] md:text-xs text-[#64748b]">Входной контроль СВП</div>
                 </div>
               </div>
             </div>
 
             {/* Top-right floating badge */}
-            <div className="absolute -top-3 -right-3 bg-[#0d2818]/90 backdrop-blur-md border border-[#02a391]/30 rounded-xl px-4 py-2.5 shadow-xl">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-[#02a391]/20 rounded-lg flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[#02a391]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 bg-[#0d2818]/90 backdrop-blur-md border border-[#02a391]/30 rounded-lg md:rounded-xl px-2.5 py-2 md:px-4 md:py-2.5 shadow-xl">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <div className="w-7 h-7 md:w-8 md:h-8 bg-[#02a391]/20 rounded-lg flex items-center justify-center shrink-0">
+                  <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#02a391]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">КП за 2 часа</div>
-                </div>
+                <div className="text-xs md:text-sm font-semibold text-white whitespace-nowrap">КП за 2 часа</div>
               </div>
             </div>
           </motion.div>
