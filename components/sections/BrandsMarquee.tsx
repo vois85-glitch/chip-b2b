@@ -25,62 +25,58 @@ const brands = [
   { name: 'Fujitsu', logo: '/brands/fujitsu.svg', href: '/fujitsu' },
 ];
 
+const AUTO_SPEED = 0.5;    // auto-scroll speed (px/frame)
+const FRICTION = 0.955;    // momentum deceleration per frame
+const MERGE_RATE = 0.03;   // how fast momentum merges back to auto-scroll
+
 export default function BrandsMarquee() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Physics state (refs to avoid re-renders)
-  const velocityRef = useRef(0.6);          // current velocity (px/frame)
-  const targetVelocityRef = useRef(0.6);    // auto-scroll speed
+  // All physics in refs — no re-renders
   const isDraggingRef = useRef(false);
-  const isHoveringRef = useRef(false);
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
-  const lastScrollLeftRef = useRef(0);
-  const momentumVelocityRef = useRef(0);     // velocity from flick
-
-  const FRICTION = 0.96;    // deceleration per frame
-  const MIN_VEL = 0.3;      // minimum velocity before snapping back to auto
-  const AUTO_SPEED = 0.6;   // auto-scroll speed
+  const lastScrollRef = useRef(0);
+  const velocityRef = useRef(AUTO_SPEED); // current velocity — starts at auto speed
+  const initializedRef = useRef(false);
 
   // Main animation loop
   const animate = useCallback(() => {
     const el = scrollRef.current;
     if (!el) { requestAnimationFrame(animate); return; }
 
-    const thirdWidth = el.scrollWidth / 3;
+    // Initialize: start from middle set for seamless bidirectional loop
+    if (!initializedRef.current && el.scrollWidth > 0) {
+      el.scrollLeft = el.scrollWidth / 3;
+      initializedRef.current = true;
+    }
+
+    const oneSet = el.scrollWidth / 3;
 
     if (isDraggingRef.current) {
-      // While dragging: track velocity for momentum
-      const now = performance.now();
-      const dt = now - lastTimeRef.current;
-      if (dt > 0) {
-        const currentVel = (el.scrollLeft - lastScrollLeftRef.current) / dt * 16; // normalize to ~60fps
-        // Smooth velocity tracking (weighted average)
-        momentumVelocityRef.current = momentumVelocityRef.current * 0.6 + currentVel * 0.4;
-      }
-      lastTimeRef.current = now;
-      lastScrollLeftRef.current = el.scrollLeft;
+      // While dragging: just track velocity (set in move handler)
+      // Don't touch scrollLeft here — the move handler does it
+      lastScrollRef.current = el.scrollLeft;
 
-    } else if (Math.abs(momentumVelocityRef.current) > 0.1) {
-      // Momentum phase: decelerate gradually
-      el.scrollLeft += momentumVelocityRef.current;
-      momentumVelocityRef.current *= FRICTION;
+    } else {
+      // Apply current velocity
+      el.scrollLeft += velocityRef.current;
+
+      // If in momentum mode (velocity != AUTO_SPEED), decelerate
+      if (Math.abs(velocityRef.current - AUTO_SPEED) > 0.02) {
+        // Momentum deceleration
+        if (Math.abs(velocityRef.current) > AUTO_SPEED + 0.1) {
+          velocityRef.current *= FRICTION;
+        }
+        // Smoothly merge back toward auto-scroll speed
+        velocityRef.current += (AUTO_SPEED - velocityRef.current) * MERGE_RATE;
+      } else {
+        velocityRef.current = AUTO_SPEED;
+      }
 
       // Seamless loop
-      if (el.scrollLeft >= thirdWidth * 2) el.scrollLeft -= thirdWidth;
-      if (el.scrollLeft < 0) el.scrollLeft += thirdWidth;
-
-      // When momentum dies, transition to auto-scroll
-      if (Math.abs(momentumVelocityRef.current) < MIN_VEL) {
-        momentumVelocityRef.current = 0;
-        // Resume auto-scroll in the natural direction
-        velocityRef.current = isHoveringRef.current ? 0 : AUTO_SPEED;
-      }
-
-    } else if (!isHoveringRef.current) {
-      // Auto-scroll phase
-      el.scrollLeft += AUTO_SPEED;
-      if (el.scrollLeft >= thirdWidth) el.scrollLeft -= thirdWidth;
+      if (el.scrollLeft >= oneSet * 2) el.scrollLeft -= oneSet;
+      if (el.scrollLeft < 0) el.scrollLeft += oneSet;
     }
 
     requestAnimationFrame(animate);
@@ -97,10 +93,10 @@ export default function BrandsMarquee() {
     const el = scrollRef.current;
     if (!el) return;
     isDraggingRef.current = true;
-    momentumVelocityRef.current = 0;
     lastXRef.current = clientX;
     lastTimeRef.current = performance.now();
-    lastScrollLeftRef.current = el.scrollLeft;
+    lastScrollRef.current = el.scrollLeft;
+    velocityRef.current = 0; // stop while dragging
     el.style.cursor = 'grabbing';
   };
 
@@ -108,19 +104,21 @@ export default function BrandsMarquee() {
     if (!isDraggingRef.current) return;
     const el = scrollRef.current;
     if (!el) return;
+
     const dx = clientX - lastXRef.current;
     el.scrollLeft -= dx;
-    lastXRef.current = clientX;
 
-    // Track velocity
+    // Track velocity for momentum release
     const now = performance.now();
     const dt = now - lastTimeRef.current;
-    if (dt > 0) {
-      const instantVel = -dx / dt * 16;
-      momentumVelocityRef.current = momentumVelocityRef.current * 0.5 + instantVel * 0.5;
+    if (dt > 2) {
+      const instantVel = -dx / dt * 16; // normalize to ~60fps
+      velocityRef.current = velocityRef.current * 0.5 + instantVel * 0.5;
     }
+
+    lastXRef.current = clientX;
     lastTimeRef.current = now;
-    lastScrollLeftRef.current = el.scrollLeft;
+    lastScrollRef.current = el.scrollLeft;
   };
 
   const handlePointerUp = () => {
@@ -128,29 +126,23 @@ export default function BrandsMarquee() {
     isDraggingRef.current = false;
     const el = scrollRef.current;
     if (el) el.style.cursor = 'grab';
-    // momentumVelocityRef is already set — animation loop will handle deceleration
+    // velocityRef already has flick velocity — animation loop decelerates it
   };
 
-  // Mouse
+  // Mouse events
   const onMouseDown = (e: React.MouseEvent) => { e.preventDefault(); handlePointerDown(e.clientX); };
   const onMouseMove = (e: React.MouseEvent) => { handlePointerMove(e.clientX); };
   const onMouseUp = () => { handlePointerUp(); };
-  const onMouseEnter = () => { isHoveringRef.current = true; };
-  const onMouseLeave = () => { isHoveringRef.current = false; handlePointerUp(); };
+  const onMouseLeave = () => { handlePointerUp(); };
 
-  // Touch
+  // Touch events
   const onTouchStart = (e: React.TouchEvent) => { handlePointerDown(e.touches[0].clientX); };
   const onTouchMove = (e: React.TouchEvent) => { handlePointerMove(e.touches[0].clientX); };
   const onTouchEnd = () => { handlePointerUp(); };
 
   // Arrow navigation — gives a flick impulse
-  const scrollByAmount = 340;
-  const scrollLeft_ = () => {
-    momentumVelocityRef.current = -scrollByAmount / 16 * 0.8;
-  };
-  const scrollRight = () => {
-    momentumVelocityRef.current = scrollByAmount / 16 * 0.8;
-  };
+  const scrollLeft_ = () => { velocityRef.current = -18; };
+  const scrollRight = () => { velocityRef.current = 18; };
 
   const renderBrand = (brand: typeof brands[0], index: number) => (
     <a
@@ -211,16 +203,15 @@ export default function BrandsMarquee() {
           ref={scrollRef}
           className="flex overflow-x-auto scrollbar-hide cursor-grab"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          {/* Triple the brands for seamless infinite loop */}
+          {/* Triple brands for seamless infinite loop */}
           {brands.map(renderBrand)}
           {brands.map(renderBrand)}
           {brands.map(renderBrand)}
