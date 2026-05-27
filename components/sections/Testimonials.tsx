@@ -26,7 +26,7 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[#121212]">Нам доверяют</h2>
-          <p className="text-[#666] text-lg">Отзывы инженеров и руководителей закупок</p>
+          <p className="text-[#555] text-lg">Отзывы инженеров и руководителей закупок</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">

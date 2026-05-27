@@ -5,7 +5,7 @@ export default function SeoText() {
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-[#121212]">
           Надежный поставщик электронных компонентов для промышленности
         </h2>
-        <div className="text-[#666] leading-relaxed space-y-3 text-sm md:text-base">
+        <div className="text-[#555] leading-relaxed space-y-3 text-sm md:text-base">
           <p>
             Компания <strong className="text-[#121212]">ООО «Деловой Партнёр» (ChipNet)</strong> — это прямой поставщик оригинальных электронных компонентов и промышленной автоматики. Мы специализируемся на обеспечении предприятий ВПК, НИИ и производств радиоэлектронной аппаратуры критически важными комплектующими.
           </p>

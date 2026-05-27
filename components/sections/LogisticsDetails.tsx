@@ -27,7 +27,7 @@ export default function LogisticsDetails() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Импорт и логистика без рисков</h2>
-          <p className="text-[#666] text-sm max-w-2xl mx-auto">
+          <p className="text-[#555] text-sm max-w-2xl mx-auto">
             Поставка электронных компонентов — сложный процесс ВЭД, где мы берем все риски на себя.
           </p>
         </div>
@@ -43,7 +43,7 @@ export default function LogisticsDetails() {
               className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow"
             >
               <h3 className="text-base font-bold mb-1 text-primary">{item.title}</h3>
-              <p className="text-[#666] text-xs leading-relaxed">{item.text}</p>
+              <p className="text-[#555] text-xs leading-relaxed">{item.text}</p>
             </motion.div>
           ))}
         </div>

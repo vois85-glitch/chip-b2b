@@ -34,7 +34,7 @@ export default function FAQ() {
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Частые вопросы</h2>
-          <p className="text-[#666] text-sm">Отвечаем на главные опасения инженеров и закупщиков</p>
+          <p className="text-[#555] text-sm">Отвечаем на главные опасения инженеров и закупщиков</p>
         </div>
 
         <div className="space-y-2">
@@ -64,7 +64,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="px-3 pb-3 text-[#666] text-sm leading-relaxed border-t border-[#e8e8e8] pt-3">
+                    <div className="px-3 pb-3 text-[#555] text-sm leading-relaxed border-t border-[#e8e8e8] pt-3">
                       {faq.a}
                     </div>
                   </motion.div>

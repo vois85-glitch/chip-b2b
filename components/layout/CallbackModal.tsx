@@ -158,7 +158,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                 <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                <span className="text-xs text-[#666]">Работаем только с юридическими лицами</span>
+                <span className="text-xs text-[#555]">Работаем только с юридическими лицами</span>
               </div>
 
               {success ? (
@@ -173,7 +173,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                     </svg>
                   </div>
                   <h3 className="text-lg font-bold text-[#121212] mb-2">Заявка отправлена!</h3>
-                  <p className="text-sm text-[#666]">Мы перезвоним вам в ближайшее время</p>
+                  <p className="text-sm text-[#555]">Мы перезвоним вам в ближайшее время</p>
                   <button
                     onClick={onClose}
                     className="mt-5 px-6 py-2.5 bg-[#02a391] hover:bg-[#028a7a] text-white rounded-xl text-sm font-semibold transition-colors"

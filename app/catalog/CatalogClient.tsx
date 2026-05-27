@@ -126,7 +126,7 @@ export default function CatalogClient({
               className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex justify-between items-center ${
                 currentCategory === cat
                   ? 'bg-section-alt text-primary font-semibold'
-                  : 'text-[#666] hover:text-[#121212] hover:bg-[#eaf0e8]
+                  : 'text-[#666] hover:text-[#121212] hover:bg-[#eaf0e8]'
               }`}
             >
               <span className="truncate">{cat}</span>
@@ -161,7 +161,7 @@ export default function CatalogClient({
               className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex justify-between items-center ${
                 currentBrand === br
                   ? 'bg-section-alt text-primary font-semibold'
-                  : 'text-[#666] hover:text-[#121212] hover:bg-[#eaf0e8]
+                  : 'text-[#666] hover:text-[#121212] hover:bg-[#eaf0e8]'
               }`}
             >
               <span className="truncate">{br}</span>
@@ -211,7 +211,7 @@ export default function CatalogClient({
               className={`relative px-3 sm:px-4 py-3 sm:py-3.5 border rounded-xl font-semibold transition-colors text-sm sm:text-base ${
                 showFilters
                   ? 'border-emerald-500/50 bg-emerald-900/20 text-primary'
-                  : 'border-[#e8e8e8] bg-[#f0f4ee] text-[#666] hover:text-[#121212]
+                  : 'border-[#e8e8e8] bg-[#f0f4ee] text-[#666] hover:text-[#121212]'
               }`}
             >
               <span className="hidden sm:inline">Фильтры</span>
@@ -343,7 +343,7 @@ export default function CatalogClient({
                     href={`/catalog?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), page: String(pageNum) }).toString()}`}
                     className={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-colors ${
                       pageNum === currentPage
-                        ? 'bg-primary text-[#121212]
+                        ? 'bg-primary text-[#121212]'
                         : 'bg-[#f0f4ee] border border-[#e8e8e8] text-[#666] hover:text-[#121212] hover:border-emerald-600/50'
                     }`}
                   >

@@ -58,73 +58,94 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Главная — высший приоритет
   entries.push({
     url: BASE_URL,
-    lastModified: '2026-05-27',
+    lastModified: '2026-05-28',
     changeFrequency: 'weekly',
     priority: 1.0,
   });
 
-  // Каталог
-  entries.push({
-    url: `${BASE_URL}/catalog`,
-    lastModified: '2026-05-27',
-    changeFrequency: 'daily',
-    priority: 0.9,
-  });
+  // 2. SEO-хаб страницы
+  const hubPages = [
+    { path: '/catalog', priority: 0.9, changefreq: 'daily' },
+    { path: '/brands', priority: 0.9, changefreq: 'weekly' },
+    { path: '/analogs', priority: 0.8, changefreq: 'weekly' },
+    { path: '/obsolete', priority: 0.8, changefreq: 'weekly' },
+    { path: '/datasheets', priority: 0.8, changefreq: 'weekly' },
+    { path: '/bom', priority: 0.8, changefreq: 'monthly' },
+    { path: '/industries', priority: 0.7, changefreq: 'monthly' },
+    { path: '/knowledge-base', priority: 0.7, changefreq: 'weekly' },
+    { path: '/blog', priority: 0.7, changefreq: 'weekly' },
+    { path: '/importozameshchenie', priority: 0.8, changefreq: 'weekly' },
+    { path: '/podbor-analogov', priority: 0.8, changefreq: 'weekly' },
+    { path: '/proverka-komponentov', priority: 0.7, changefreq: 'monthly' },
+    { path: '/komplektaciya-proizvodstv', priority: 0.7, changefreq: 'monthly' },
+    { path: '/elektronnye-komponenty', priority: 0.7, changefreq: 'monthly' },
+    { path: '/igbt', priority: 0.7, changefreq: 'weekly' },
+  ];
 
-  // 2. SEO-страницы (категории, бренды, информация)
+  for (const hub of hubPages) {
+    entries.push({
+      url: `${BASE_URL}${hub.path}`,
+      lastModified: '2026-05-28',
+      changeFrequency: hub.changefreq as 'daily' | 'weekly' | 'monthly',
+      priority: hub.priority,
+    });
+  }
+
+  // 3. SEO-страницы (категории, бренды, информация)
   for (const slug of Object.keys(seoPages)) {
     const page = seoPages[slug];
     entries.push({
       url: `${BASE_URL}/${slug}`,
-      lastModified: '2026-05-27',
+      lastModified: '2026-05-28',
       changeFrequency: page.type === 'category' ? 'weekly' : 'monthly',
       priority: page.type === 'category' ? 0.8 : page.type === 'brand' ? 0.7 : 0.6,
     });
   }
 
-  // 3. Динамические брендовые страницы
+  // 4. Динамические брендовые страницы
   const brandSlugs = await getAllBrandSlugs();
   for (const slug of brandSlugs) {
     entries.push({
       url: `${BASE_URL}/brand/${slug}`,
-      lastModified: '2026-05-27',
+      lastModified: '2026-05-28',
       changeFrequency: 'weekly',
       priority: 0.7,
     });
   }
 
-  // 4. Страницы компонентов из Supabase (пагинация!)
+  // 5. Страницы компонентов из Supabase
   try {
     const skus = await getAllComponentSkus();
     for (const sku of skus) {
       entries.push({
         url: `${BASE_URL}/component/${sku}`,
-        lastModified: '2026-05-27',
+        lastModified: '2026-05-28',
         changeFrequency: 'monthly',
         priority: 0.5,
+      });
+      // Datasheet pages for each component
+      entries.push({
+        url: `${BASE_URL}/datasheet/${sku}`,
+        lastModified: '2026-05-28',
+        changeFrequency: 'monthly',
+        priority: 0.4,
       });
     }
   } catch (error) {
     console.error('Sitemap: ошибка загрузки компонентов:', error);
   }
 
-  // 5. Гео-страницы
+  // 6. Гео-страницы
   for (const slug of Object.keys(geoCities)) {
     entries.push({
       url: `${BASE_URL}/geo/${slug}`,
-      lastModified: '2026-05-27',
+      lastModified: '2026-05-28',
       changeFrequency: 'monthly',
       priority: 0.6,
     });
   }
 
-  // 6. Блог
-  entries.push({
-    url: `${BASE_URL}/blog`,
-    lastModified: '2026-05-27',
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  });
+  // 7. Блог
   for (const post of blogPosts) {
     entries.push({
       url: `${BASE_URL}/blog/${post.slug}`,

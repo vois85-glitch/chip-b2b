@@ -4,7 +4,7 @@ export default function Contacts() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Контакты</h2>
-          <p className="text-[#666] text-sm">Свяжитесь с нами для обсуждения вашего проекта</p>
+          <p className="text-[#555] text-sm">Свяжитесь с нами для обсуждения вашего проекта</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -13,7 +13,7 @@ export default function Contacts() {
               <div className="w-10 h-10 bg-section-alt rounded-lg flex items-center justify-center text-xl shrink-0">📞</div>
               <div>
                 <h3 className="text-sm font-semibold text-[#121212]">Телефон</h3>
-                <a href="tel:+79103219191" className="text-[#666] text-sm hover:text-primary transition-colors">+7 (910) 321-91-91</a>
+                <a href="tel:+79103219191" className="text-[#555] text-sm hover:text-primary transition-colors">+7 (910) 321-91-91</a>
               </div>
             </div>
 
@@ -29,7 +29,7 @@ export default function Contacts() {
               <div className="w-10 h-10 bg-section-alt rounded-lg flex items-center justify-center text-xl shrink-0">📍</div>
               <div>
                 <h3 className="text-sm font-semibold text-[#121212]">Офис</h3>
-                <p className="text-[#666] text-sm">308033, г. Белгород, ул. Шаландина, д. 4, к. 3, оф. 8</p>
+                <p className="text-[#555] text-sm">308033, г. Белгород, ул. Шаландина, д. 4, к. 3, оф. 8</p>
               </div>
             </div>
             
@@ -37,7 +37,7 @@ export default function Contacts() {
               <div className="w-10 h-10 bg-section-alt rounded-lg flex items-center justify-center text-xl shrink-0">⏱️</div>
               <div>
                 <h3 className="text-sm font-semibold text-[#121212]">Режим работы</h3>
-                <p className="text-[#666] text-sm">Пн-Пт: 9:00 - 18:00 (МСК)</p>
+                <p className="text-[#555] text-sm">Пн-Пт: 9:00 - 18:00 (МСК)</p>
               </div>
             </div>
           </div>
@@ -56,10 +56,10 @@ export default function Contacts() {
         <div className="mt-4 bg-section-alt border border-[#bbd3ba] rounded-xl p-4">
           <h3 className="text-sm font-bold mb-3 text-primary">Реквизиты компании</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 text-[#333] text-xs">
-            <p><span className="text-[#757575]">Наименование:</span> ООО «Деловой Партнёр»</p>
-            <p><span className="text-[#757575]">ИНН / КПП:</span> 3123341983 / 312301001</p>
-            <p><span className="text-[#757575]">ОГРН:</span> 1143123005838</p>
-            <p><span className="text-[#757575]">Адрес:</span> 308033, г. Белгород, ул. Шаландина, д. 4, к. 3, оф. 8</p>
+            <p><span className="text-[#555]">Наименование:</span> ООО «Деловой Партнёр»</p>
+            <p><span className="text-[#555]">ИНН / КПП:</span> 3123341983 / 312301001</p>
+            <p><span className="text-[#555]">ОГРН:</span> 1143123005838</p>
+            <p><span className="text-[#555]">Адрес:</span> 308033, г. Белгород, ул. Шаландина, д. 4, к. 3, оф. 8</p>
           </div>
         </div>
 

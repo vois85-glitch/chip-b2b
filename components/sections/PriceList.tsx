@@ -12,7 +12,7 @@ export default function PriceList() {
           viewport={{ once: true }}
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#121212]">Нет времени искать?</h2>
-          <p className="text-[#666] text-lg mb-6 max-w-2xl mx-auto">
+          <p className="text-[#555] text-lg mb-6 max-w-2xl mx-auto">
             Отправьте нам список нужных компонентов (BOM-лист), и мы сами найдем лучшие цены, проверим наличие на складах и выставим коммерческое предложение.
           </p>
           
@@ -20,17 +20,17 @@ export default function PriceList() {
             <div className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
               <div className="text-3xl mb-3">📄</div>
               <h3 className="font-semibold text-lg mb-2 text-[#121212]">Загрузите BOM</h3>
-              <p className="text-[#666] text-sm">Excel, CSV или PDF — примем в любом удобном для вас формате</p>
+              <p className="text-[#555] text-sm">Excel, CSV или PDF — примем в любом удобном для вас формате</p>
             </div>
             <div className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
               <div className="text-3xl mb-3">🔍</div>
               <h3 className="font-semibold text-lg mb-2 text-[#121212]">Мы ищем и проверяем</h3>
-              <p className="text-[#666] text-sm">Подберем оригиналы или аналоги, проверим в лаборатории СВП</p>
+              <p className="text-[#555] text-sm">Подберем оригиналы или аналоги, проверим в лаборатории СВП</p>
             </div>
             <div className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
               <div className="text-3xl mb-3">💰</div>
               <h3 className="font-semibold text-lg mb-2 text-[#121212]">Получите КП</h3>
-              <p className="text-[#666] text-sm">Коммерческое предложение с актуальными ценами и сроками поставки</p>
+              <p className="text-[#555] text-sm">Коммерческое предложение с актуальными ценами и сроками поставки</p>
             </div>
           </div>
 

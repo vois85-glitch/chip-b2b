@@ -21,7 +21,7 @@ export default function BomUpload() {
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Запрос коммерческого предложения</h2>
-          <p className="text-[#666] text-sm">Загрузите BOM-лист или опишите необходимые компоненты</p>
+          <p className="text-[#555] text-sm">Загрузите BOM-лист или опишите необходимые компоненты</p>
         </div>
 
         <motion.form 
@@ -103,7 +103,7 @@ export default function BomUpload() {
               <label className="flex flex-col items-center justify-center w-full h-20 border-2 border-dashed border-[#cbcbcb] rounded-xl cursor-pointer hover:bg-section-alt hover:border-primary/50 transition-all">
                 <div className="flex flex-col items-center justify-center py-2">
                   <svg className="w-6 h-6 mb-1 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                  <p className="text-xs text-[#666]">
+                  <p className="text-xs text-[#555]">
                     {fileName ? <span className="font-semibold text-primary">{fileName}</span> : <span>Перетащите файл или <span className="text-primary underline">выберите</span></span>}
                   </p>
                 </div>

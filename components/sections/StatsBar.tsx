@@ -24,7 +24,7 @@ export default function StatsBar() {
               className="text-center"
             >
               <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
-              <div className="text-[#666] text-sm md:text-base uppercase tracking-wider">{stat.label}</div>
+              <div className="text-[#555] text-sm md:text-base uppercase tracking-wider">{stat.label}</div>
             </motion.div>
           ))}
         </div>

@@ -13,20 +13,34 @@ const inter = Inter({ subsets: ["latin", "cyrillic"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.chip-net.ru"),
   title: {
-    default: "ChipNet — Поставка оригинальных электронных компонентов | B2B",
+    default: "ChipNet — Поставка оригинальных электронных компонентов | B2B Поставщик",
     template: "%s | ChipNet",
   },
   description:
-    "Оптовые поставки микросхем, FPGA, микроконтроллеров и разъемов для промышленности и ВПК. Импортозамещение, подбор аналогов, доставка от 6 дней. ООО Деловой Партнёр, Белгород.",
+    "ChipNet — поставщик оригинальных электронных компонентов для промышленности и ВПК. Микросхемы, FPGA, микроконтроллеры, аналоги санкционных компонентов, BOM-комплектация. Проверка в лаборатории СВП. Доставка от 6 дней. ООО Деловой Партнёр, Белгород.",
   keywords: [
     "электронные компоненты",
     "микросхемы",
     "поставка чипов",
     "B2B электроника",
     "аналоги санкционных компонентов",
-    "FPGA",
+    "FPGA ПЛИС",
     "микроконтроллеры оптом",
     "импортозамещение",
+    "подбор аналогов",
+    "BOM комплектация",
+    "электронные компоненты оптом",
+    "поставка микросхем",
+    "купить микросхемы оптом",
+    "аналоги STM32",
+    "аналоги Xilinx",
+    "импортозамещение электроники",
+    "hard-to-find components",
+    "obsolete components",
+    "кросс-референс",
+    "проверка оригинальности микросхем",
+    "лаборатория СВП",
+    "комплектация производств",
   ],
   alternates: {
     canonical: "https://www.chip-net.ru",
@@ -38,13 +52,13 @@ export const metadata: Metadata = {
     siteName: "ChipNet",
     title: "ChipNet — Поставка оригинальных электронных компонентов",
     description:
-      "Оптовые поставки микросхем, FPGA, микроконтроллеров для промышленности и ВПК. Импортозамещение, подбор аналогов.",
+      "Поставщик оригинальных электронных компонентов для промышленности и ВПК. Микросхемы, FPGA, микроконтроллеры, подбор аналогов, BOM-комплектация. Проверка в лаборатории СВП.",
     images: [
       {
         url: "/og-image.png",
         width: 1344,
         height: 768,
-        alt: "ChipNet — Поставка электронных компонентов",
+        alt: "ChipNet — Поставка электронных компонентов для промышленности и ВПК",
       },
     ],
   },
@@ -55,11 +69,19 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   verification: {
     google: "JQOXPdz4QFDJ_b7ZXnrbDeu9hBvJHCXnbfF2kOBVpZE",
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || "",
   },
+  category: "Electronics Components B2B",
 };
 
 const YM_ID = 109105382;

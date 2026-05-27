@@ -32,7 +32,7 @@ export default function ComponentSearch() {
           viewport={{ once: true }}
         >
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Поиск компонентов</h2>
-          <p className="text-[#666] text-sm mb-4">Введите артикул — проверим наличие, подберем аналог или организуем поставку</p>
+          <p className="text-[#555] text-sm mb-4">Введите артикул — проверим наличие, подберем аналог или организуем поставку</p>
           
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2">
             <input 

@@ -21,7 +21,7 @@ export default function PopularCategories() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Каталог направлений</h2>
-          <p className="text-[#666] text-sm">Выберите категорию или откройте полный каталог</p>
+          <p className="text-[#555] text-sm">Выберите категорию или откройте полный каталог</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">

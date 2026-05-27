@@ -15,7 +15,7 @@ export default function QualityControl() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Собственная лаборатория СВП</h2>
-          <p className="text-[#666] text-sm max-w-2xl mx-auto">
+          <p className="text-[#555] text-sm max-w-2xl mx-auto">
             Защищаем ваше производство от контрафакта. Каждый компонент проходит входной контроль.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function QualityControl() {
                 {item.step}
               </div>
               <h3 className="text-base font-bold mb-1 text-[#121212] relative z-10">{item.title}</h3>
-              <p className="text-[#666] text-xs relative z-10">{item.desc}</p>
+              <p className="text-[#555] text-xs relative z-10">{item.desc}</p>
             </motion.div>
           ))}
         </div>

@@ -58,7 +58,7 @@ export default function BottomCatalog() {
           <h2 className="text-base md:text-lg font-bold text-[#121212] mb-3">
             Аналоги санкционных компонентов
           </h2>
-          <p className="text-[#888] text-xs mb-4">
+          <p className="text-[#555] text-xs mb-4">
             Подбираем функциональные аналоги снятых с производства и санкционных компонентов с полным кросс-референсом параметров
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-[#555]">
@@ -67,7 +67,7 @@ export default function BottomCatalog() {
                 <span className="font-mono text-[#333]">{item.original}</span>
                 <span className="mx-1 text-[#02a391]">&rarr;</span>
                 <span className="font-mono text-[#02a391]">{item.analog}</span>
-                <span className="text-[#aaa] text-xs ml-0.5">({item.brand})</span>
+                <span className="text-[#555] text-xs ml-0.5">({item.brand})</span>
               </span>
             ))}
           </div>
@@ -78,7 +78,7 @@ export default function BottomCatalog() {
           <h2 className="text-base md:text-lg font-bold text-[#121212] mb-3">
             Каталог электронных компонентов
           </h2>
-          <p className="text-[#888] text-xs mb-4">
+          <p className="text-[#555] text-xs mb-4">
             30 категорий, 2600+ позиций, 71 бренд
           </p>
           <nav className="flex flex-wrap gap-x-4 gap-y-1.5">

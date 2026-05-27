@@ -16,7 +16,7 @@ export default function HowWeWork() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Как мы работаем</h2>
-          <p className="text-[#666] text-xs">Прозрачный процесс от заявки до поставки</p>
+          <p className="text-[#555] text-xs">Прозрачный процесс от заявки до поставки</p>
         </div>
 
         <div className="grid grid-cols-5 gap-2 relative">
@@ -36,7 +36,7 @@ export default function HowWeWork() {
               </div>
               <div className="text-primary font-bold text-xs mb-0.5">Шаг {item.step}</div>
               <h3 className="text-sm font-bold mb-0.5 text-[#121212]">{item.title}</h3>
-              <p className="text-[#666] text-[10px] leading-snug">{item.desc}</p>
+              <p className="text-[#555] text-[10px] leading-snug">{item.desc}</p>
             </motion.div>
           ))}
         </div>

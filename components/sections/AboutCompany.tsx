@@ -29,7 +29,7 @@ export default function AboutCompany() {
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#121212]">
             О <span className="text-primary">компании</span>
           </h2>
-          <p className="text-[#666] text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[#555] text-lg max-w-2xl mx-auto leading-relaxed">
             ChipNet — надёжный поставщик электронных компонентов для российского промышленного производства и оборонно-промышленного комплекса
           </p>
         </motion.div>

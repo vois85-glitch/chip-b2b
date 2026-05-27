@@ -26,7 +26,7 @@ export default function HardCases() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Решаем нестандартные задачи</h2>
-          <p className="text-[#666] text-sm">Где другие отказывают — мы находим решение</p>
+          <p className="text-[#555] text-sm">Где другие отказывают — мы находим решение</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -47,13 +47,13 @@ export default function HardCases() {
                   <span className="text-danger shrink-0">&#9888;</span> 
                   <span>Проблема:</span> 
                 </h3>
-                <p className="text-[#666] text-xs mb-3 ml-5">{c.problem}</p>
+                <p className="text-[#555] text-xs mb-3 ml-5">{c.problem}</p>
                 
                 <h3 className="text-sm font-bold mb-1 text-[#333] flex items-start gap-1">
                   <span className="text-primary shrink-0">&#10003;</span> 
                   <span>Решение ChipNet:</span>
                 </h3>
-                <p className="text-[#666] text-xs ml-5">{c.solution}</p>
+                <p className="text-[#555] text-xs ml-5">{c.solution}</p>
               </div>
             </motion.div>
           ))}

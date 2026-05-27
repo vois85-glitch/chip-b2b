@@ -6,13 +6,30 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Yandex",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
-        crawlDelay: 5,
+        disallow: [
+          "/api/",
+          "/_next/",
+          "/compare/",
+        ],
+        crawlDelay: 3,
+      },
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: [
+          "/api/",
+          "/_next/",
+          "/compare/",
+        ],
       },
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: [
+          "/api/",
+          "/_next/",
+          "/compare/",
+        ],
         crawlDelay: 1,
       },
     ],
@@ -20,4 +37,3 @@ export default function robots(): MetadataRoute.Robots {
     host: "https://www.chip-net.ru",
   };
 }
-
