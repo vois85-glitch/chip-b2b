@@ -72,7 +72,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className={inter.className}>
         <Header />
-        <div className="pt-20">
+        <div className="pt-28">
           {children}
         </div>
         <Footer />
