@@ -53,7 +53,7 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* === Верхняя панель: контакты === */}
+      {/* === Верхняя панель: контакты (белая) === */}
       <div className={`transition-all duration-300 ${
         scrolled ? 'bg-white/95 backdrop-blur-xl' : 'bg-white'
       }`}>
@@ -91,19 +91,26 @@ export default function Header() {
           </div>
 
           {/* Контакты */}
-          <div className="hidden md:flex items-center gap-5">
-            <a href="tel:+79103219191" className="flex items-center gap-2 text-sm text-[#333] hover:text-primary transition-colors">
-              <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="hidden md:flex items-center gap-4">
+            <a href="tel:+79103219191" className="flex items-center gap-1.5 text-sm text-[#333] hover:text-primary transition-colors">
+              <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               <span className="font-medium">+7-910-321-91-91</span>
             </a>
-            <a href="mailto:info@chip-net.ru" className="flex items-center gap-2 text-sm text-[#333] hover:text-primary transition-colors">
-              <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <a href="mailto:info@chip-net.ru" className="flex items-center gap-1.5 text-sm text-[#333] hover:text-primary transition-colors">
+              <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               info@chip-net.ru
             </a>
+            <div className="flex items-center gap-1.5 text-xs text-[#666]">
+              <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              г. Белгород
+            </div>
           </div>
 
           {/* Кнопка + бургер */}
@@ -111,8 +118,6 @@ export default function Header() {
             <Link href="/catalog" className="hidden sm:inline-flex bg-primary hover:bg-primary-dark text-white px-5 py-2 rounded-full text-sm font-semibold transition-all hover:shadow-lg hover:shadow-primary/25">
               Обратный звонок
             </Link>
-
-            {/* Мобильный бургер */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 rounded-lg hover:bg-[#f3f3f3] transition-colors"
@@ -157,7 +162,7 @@ export default function Header() {
             <svg className="w-3.5 h-3.5 text-[#02a391] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Поставка по всей России от 6 дней
+            Поставляем по всей России от 6 дней
           </div>
         </nav>
       </div>
@@ -173,7 +178,6 @@ export default function Header() {
             className="md:hidden bg-white border-t border-[#e8e8e8]"
           >
             <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-              {/* Контакты в мобильном меню */}
               <div className="flex flex-col gap-2 pb-3 mb-3 border-b border-[#e8e8e8]">
                 <a href="tel:+79103219191" className="flex items-center gap-2 text-sm text-[#333]">
                   <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -187,6 +191,13 @@ export default function Header() {
                   </svg>
                   info@chip-net.ru
                 </a>
+                <div className="flex items-center gap-2 text-sm text-[#666]">
+                  <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  г. Белгород, ул. Шаландина, д. 4, оф. 8
+                </div>
               </div>
               {navLinks.map((link) => (
                 link.hash && isHome ? (

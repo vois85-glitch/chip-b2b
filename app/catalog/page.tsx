@@ -122,7 +122,7 @@ export default async function CatalogPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
         />
       )}
-      <section className="pt-28 pb-8 px-4">
+      <section className="pt-[108px] pb-8 px-4">
         <div className="max-w-7xl mx-auto">
           <nav className="text-sm text-[#757575] mb-4 flex items-center gap-2">
             <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
