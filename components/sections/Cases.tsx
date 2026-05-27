@@ -33,7 +33,7 @@ export default function Cases() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {cases.map((c, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -46,16 +46,16 @@ export default function Cases() {
               </span>
               <div className="mb-6 flex-grow">
                 <h3 className="text-lg font-bold mb-2 text-gray-300 flex items-start gap-2">
-                  <span className="text-red-500 text-xl mt-0.5">⚠️</span> 
-                  <span>Проблема:</span> 
+                  <svg className="w-5 h-5 text-red-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                  <span>Проблема:</span>
                 </h3>
-                <p className="text-gray-400 text-sm mb-6 ml-8">{c.problem}</p>
-                
+                <p className="text-gray-400 text-sm mb-6 ml-7">{c.problem}</p>
+
                 <h3 className="text-lg font-bold mb-2 text-gray-300 flex items-start gap-2">
-                  <span className="text-emerald-500 text-xl mt-0.5">✅</span> 
+                  <svg className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                   <span>Решение ChipNet:</span>
                 </h3>
-                <p className="text-gray-400 text-sm ml-8">{c.solution}</p>
+                <p className="text-gray-400 text-sm ml-7">{c.solution}</p>
               </div>
             </motion.div>
           ))}

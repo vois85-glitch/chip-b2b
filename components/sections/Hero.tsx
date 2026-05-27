@@ -100,7 +100,7 @@ export default function Hero() {
           >
             <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-2xl shadow-[#02a391]/20 border border-[#02a391]/20">
               <Image
-                src="/hero-illustration.png"
+                src="/hero-photo.jpeg"
                 alt="Электронные компоненты ChipNet — микросхемы, FPGA, микроконтроллеры"
                 width={1344}
                 height={768}
