@@ -25,132 +25,142 @@ const brands = [
   { name: 'Fujitsu', logo: '/brands/fujitsu.svg', href: '/fujitsu' },
 ];
 
-const AUTO_SPEED = 0.5;    // auto-scroll speed (px/frame)
-const FRICTION = 0.955;    // momentum deceleration per frame
-const MERGE_RATE = 0.03;   // how fast momentum merges back to auto-scroll
+const AUTO_SPEED = 0.5;
+const FRICTION = 0.955;
+const MERGE_RATE = 0.03;
+const BRAND_WIDTH = 160; // px per brand item
 
 export default function BrandsMarquee() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  // All physics in refs — no re-renders
+  // Position & physics via refs — zero re-renders
+  const posRef = useRef(0);                  // current X position (translateX)
+  const velocityRef = useRef(AUTO_SPEED);     // current velocity
   const isDraggingRef = useRef(false);
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
-  const lastScrollRef = useRef(0);
-  const velocityRef = useRef(AUTO_SPEED); // current velocity — starts at auto speed
-  const initializedRef = useRef(false);
+  const oneSetWidthRef = useRef(0);
+  const rafRef = useRef<number>(0);
+
+  const setTransform = useCallback(() => {
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+    }
+  }, []);
 
   // Main animation loop
   const animate = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) { requestAnimationFrame(animate); return; }
+    if (!isDraggingRef.current) {
+      // Apply velocity
+      posRef.current += velocityRef.current;
 
-    // Initialize: start from middle set for seamless bidirectional loop
-    if (!initializedRef.current && el.scrollWidth > 0) {
-      el.scrollLeft = el.scrollWidth / 3;
-      initializedRef.current = true;
-    }
-
-    const oneSet = el.scrollWidth / 3;
-
-    if (isDraggingRef.current) {
-      // While dragging: just track velocity (set in move handler)
-      // Don't touch scrollLeft here — the move handler does it
-      lastScrollRef.current = el.scrollLeft;
-
-    } else {
-      // Apply current velocity
-      el.scrollLeft += velocityRef.current;
-
-      // If in momentum mode (velocity != AUTO_SPEED), decelerate
+      // Momentum → auto merge
       if (Math.abs(velocityRef.current - AUTO_SPEED) > 0.02) {
-        // Momentum deceleration
         if (Math.abs(velocityRef.current) > AUTO_SPEED + 0.1) {
           velocityRef.current *= FRICTION;
         }
-        // Smoothly merge back toward auto-scroll speed
         velocityRef.current += (AUTO_SPEED - velocityRef.current) * MERGE_RATE;
       } else {
         velocityRef.current = AUTO_SPEED;
       }
 
-      // Seamless loop
-      if (el.scrollLeft >= oneSet * 2) el.scrollLeft -= oneSet;
-      if (el.scrollLeft < 0) el.scrollLeft += oneSet;
+      // Seamless loop: wrap around one set width
+      const w = oneSetWidthRef.current;
+      if (w > 0) {
+        if (posRef.current >= w * 2) posRef.current -= w;
+        if (posRef.current < 0) posRef.current += w;
+      }
+
+      setTransform();
     }
 
-    requestAnimationFrame(animate);
-  }, []);
+    rafRef.current = requestAnimationFrame(animate);
+  }, [setTransform]);
 
   useEffect(() => {
-    const id = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(id);
-  }, [animate]);
+    // Calculate one-set width after mount
+    if (trackRef.current) {
+      oneSetWidthRef.current = brands.length * BRAND_WIDTH;
+      // Start from middle set
+      posRef.current = oneSetWidthRef.current;
+      setTransform();
+    }
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [animate, setTransform]);
 
-  // --- Pointer / Touch handlers ---
+  // --- Pointer handlers ---
 
   const handlePointerDown = (clientX: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
     isDraggingRef.current = true;
     lastXRef.current = clientX;
     lastTimeRef.current = performance.now();
-    lastScrollRef.current = el.scrollLeft;
-    velocityRef.current = 0; // stop while dragging
-    el.style.cursor = 'grabbing';
+    velocityRef.current = 0;
   };
 
   const handlePointerMove = (clientX: number) => {
     if (!isDraggingRef.current) return;
-    const el = scrollRef.current;
-    if (!el) return;
-
     const dx = clientX - lastXRef.current;
-    el.scrollLeft -= dx;
+    posRef.current -= dx;
 
-    // Track velocity for momentum release
+    // Track velocity
     const now = performance.now();
     const dt = now - lastTimeRef.current;
     if (dt > 2) {
-      const instantVel = -dx / dt * 16; // normalize to ~60fps
+      const instantVel = dx / dt * 16;
       velocityRef.current = velocityRef.current * 0.5 + instantVel * 0.5;
     }
 
+    // Seamless loop during drag too
+    const w = oneSetWidthRef.current;
+    if (w > 0) {
+      if (posRef.current >= w * 2) posRef.current -= w;
+      if (posRef.current < 0) posRef.current += w;
+    }
+
+    setTransform();
     lastXRef.current = clientX;
     lastTimeRef.current = now;
-    lastScrollRef.current = el.scrollLeft;
   };
 
   const handlePointerUp = () => {
     if (!isDraggingRef.current) return;
     isDraggingRef.current = false;
-    const el = scrollRef.current;
-    if (el) el.style.cursor = 'grab';
-    // velocityRef already has flick velocity — animation loop decelerates it
+    // velocity already captured — animation loop takes over
   };
 
-  // Mouse events
+  // Mouse
   const onMouseDown = (e: React.MouseEvent) => { e.preventDefault(); handlePointerDown(e.clientX); };
   const onMouseMove = (e: React.MouseEvent) => { handlePointerMove(e.clientX); };
   const onMouseUp = () => { handlePointerUp(); };
   const onMouseLeave = () => { handlePointerUp(); };
 
-  // Touch events
+  // Touch — preventDefault to kill native scroll
   const onTouchStart = (e: React.TouchEvent) => { handlePointerDown(e.touches[0].clientX); };
-  const onTouchMove = (e: React.TouchEvent) => { handlePointerMove(e.touches[0].clientX); };
+  const onTouchMove = (e: React.TouchEvent) => { e.preventDefault(); handlePointerMove(e.touches[0].clientX); };
   const onTouchEnd = () => { handlePointerUp(); };
 
-  // Arrow navigation — gives a flick impulse
+  // Arrows — flick impulse
   const scrollLeft_ = () => { velocityRef.current = -18; };
   const scrollRight = () => { velocityRef.current = 18; };
+
+  // Also need to add non-passive touch listener for preventDefault
+  useEffect(() => {
+    const el = trackRef.current?.parentElement;
+    if (!el) return;
+    const handler = (e: TouchEvent) => {
+      if (isDraggingRef.current) e.preventDefault();
+    };
+    el.addEventListener('touchmove', handler, { passive: false });
+    return () => el.removeEventListener('touchmove', handler);
+  }, []);
 
   const renderBrand = (brand: typeof brands[0], index: number) => (
     <a
       key={index}
       href={brand.href}
       className="brand-logo-item flex-shrink-0 flex items-center justify-center cursor-pointer group select-none"
-      style={{ width: '160px', height: '56px' }}
-      draggable={false}
+      style={{ width: `${BRAND_WIDTH}px`, height: '56px' }}
     >
       <img
         src={brand.logo}
@@ -171,7 +181,7 @@ export default function BrandsMarquee() {
         <p className="text-[#666] text-xs mt-1">Более 50 брендов в каталоге</p>
       </div>
 
-      <div className="relative group/carousel">
+      <div className="relative group/carousel" style={{ touchAction: 'pan-y' }}>
         {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#f0f4ee] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#f0f4ee] to-transparent z-10 pointer-events-none" />
@@ -198,23 +208,23 @@ export default function BrandsMarquee() {
           </svg>
         </button>
 
-        {/* Scrollable track */}
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto scrollbar-hide cursor-grab"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        >
-          {/* Triple brands for seamless infinite loop */}
-          {brands.map(renderBrand)}
-          {brands.map(renderBrand)}
-          {brands.map(renderBrand)}
+        {/* Track — no native scroll, pure transform */}
+        <div className="overflow-hidden">
+          <div
+            ref={trackRef}
+            className="flex cursor-grab active:cursor-grabbing will-change-transform"
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseLeave}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
+            {brands.map(renderBrand)}
+            {brands.map(renderBrand)}
+            {brands.map(renderBrand)}
+          </div>
         </div>
       </div>
     </section>
