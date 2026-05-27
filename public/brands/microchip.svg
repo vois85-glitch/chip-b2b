@@ -1,10 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70">
-  <rect x="10" y="15" width="30" height="40" rx="3" fill="#2E7D32"/>
-  <line x1="10" y1="25" x2="5" y2="25" stroke="#2E7D32" stroke-width="2"/>
-  <line x1="10" y1="35" x2="5" y2="35" stroke="#2E7D32" stroke-width="2"/>
-  <line x1="10" y1="45" x2="5" y2="45" stroke="#2E7D32" stroke-width="2"/>
-  <line x1="40" y1="25" x2="45" y2="25" stroke="#2E7D32" stroke-width="2"/>
-  <line x1="40" y1="35" x2="45" y2="35" stroke="#2E7D32" stroke-width="2"/>
-  <line x1="40" y1="45" x2="45" y2="45" stroke="#2E7D32" stroke-width="2"/>
-  <text x="150" y="44" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="20" fill="#2E7D32" letter-spacing="2">MICROCHIP</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 70" width="260" height="70">
+  <path d="M6 18 C6 18, 22 4, 32 18 C32 18, 22 34, 6 18 Z" fill="#CC0000"/>
+  <path d="M6 48 C6 48, 22 34, 32 48 C32 48, 22 64, 6 48 Z" fill="#CC0000" opacity="0.6"/>
+  <text x="40" y="46" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="28" fill="#1A1A2E">Microchip</text>
 </svg>

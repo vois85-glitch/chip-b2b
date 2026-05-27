@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70">
-  <rect x="5" y="10" width="50" height="50" rx="6" fill="#F00014"/>
-  <text x="30" y="44" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="24" fill="white">WE</text>
-  <text x="165" y="32" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="600" font-size="12" fill="#F00014" letter-spacing="2">WÜRTH</text>
-  <text x="165" y="52" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="600" font-size="12" fill="#F00014" letter-spacing="2">ELEKTRONIK</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70">
+  <text x="0" y="44" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="32" fill="#E3001B">WE</text>
+  <text x="54" y="30" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="400" font-size="12" fill="#1A1A2E">Würth Elektronik</text>
+  <line x1="0" y1="52" x2="150" y2="52" stroke="#E3001B" stroke-width="2"/>
 </svg>

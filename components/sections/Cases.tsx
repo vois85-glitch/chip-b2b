@@ -22,16 +22,16 @@ const cases = [
 
 export default function Cases() {
   return (
-    <section className="py-24 px-4 bg-black relative overflow-hidden">
+    <section className="py-12 px-4 bg-black relative overflow-hidden">
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-600 rounded-full blur-[200px] opacity-5 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Решенные кейсы</h2>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Решенные кейсы</h2>
           <p className="text-gray-400 text-lg">Как мы спасаем производства и экономим время инженеров</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {cases.map((c, index) => (
             <motion.div 
               key={index}
@@ -39,7 +39,7 @@ export default function Cases() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="bg-[#0a0f0d] border border-emerald-900/30 rounded-2xl p-8 flex flex-col"
+              className="bg-[#0a0f0d] border border-emerald-900/30 rounded-xl p-5 flex flex-col"
             >
               <span className="text-xs font-semibold text-emerald-400 bg-emerald-900/20 px-3 py-1 rounded-full self-start mb-6">
                 {c.tag}

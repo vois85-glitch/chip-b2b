@@ -1,14 +1,14 @@
 const BASE_URL = 'https://www.chip-net.ru';
 
 export default function JsonLd() {
-  // Organization schema
   const organizationLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'ChipNet (ООО Деловой Партнёр)',
     alternateName: ['ChipNet', 'ООО Деловой Партнёр', 'Деловой Партнёр'],
     url: BASE_URL,
-    logo: `${BASE_URL}/favicon.ico`,
+    logo: `${BASE_URL}/logo.png`,
+    image: `${BASE_URL}/og-image.png`,
     description: 'Поставка оригинальных электронных компонентов и промышленного оборудования для ВПК и производства.',
     address: {
       '@type': 'PostalAddress',
@@ -19,8 +19,8 @@ export default function JsonLd() {
       addressCountry: 'RU',
     },
     telephone: '+7-910-321-91-91',
-    email: 'vois85@yandex.ru',
-    priceRange: '$$',
+    email: 'info@chip-net.ru',
+    priceRange: '20421',
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -30,7 +30,6 @@ export default function JsonLd() {
     sameAs: [],
   };
 
-  // WebSite schema + SearchAction (поиск по артикулу)
   const websiteLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -40,7 +39,7 @@ export default function JsonLd() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${BASE_URL}/?q={search_term_string}`,
+        urlTemplate: `${BASE_URL}/catalog?search={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
@@ -59,3 +58,4 @@ export default function JsonLd() {
     </>
   );
 }
+

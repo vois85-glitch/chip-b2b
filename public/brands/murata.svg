@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70">
-  <circle cx="35" cy="35" r="26" fill="#C8102E"/>
-  <text x="35" y="44" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="28" fill="white">m</text>
-  <text x="130" y="42" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="600" font-size="20" fill="#C8102E" letter-spacing="2">MURATA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 70" width="220" height="70">
+  <circle cx="28" cy="35" r="20" fill="none" stroke="#CC0000" stroke-width="4"/>
+  <text x="16" y="43" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="22" fill="#CC0000">m</text>
+  <text x="56" y="44" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="28" fill="#CC0000">Murata</text>
 </svg>

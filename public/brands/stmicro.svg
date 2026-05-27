@@ -1,11 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 70">
-  <defs>
-    <linearGradient id="st-g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0078D4"/>
-      <stop offset="100%" stop-color="#005A9E"/>
-    </linearGradient>
-  </defs>
-  <text x="20" y="52" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="48" fill="url(#st-g)">ST</text>
-  <text x="90" y="30" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="10" fill="#0078D4" letter-spacing="1">STMICRO</text>
-  <text x="90" y="48" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="10" fill="#0078D4" letter-spacing="1">ELECTRONICS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 70" width="220" height="70">
+  <text x="0" y="52" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="54" fill="#003C71">ST</text>
+  <text x="72" y="28" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="12" fill="#003C71" letter-spacing="0.5">life.augmented</text>
 </svg>

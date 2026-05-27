@@ -15,10 +15,10 @@ const categories = [
 
 export default function Catalog() {
   return (
-    <section id="catalog" className="py-24 px-4 bg-black">
+    <section id="catalog" className="py-12 px-4 bg-black">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Каталог компонентов</h2>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Каталог компонентов</h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Поставляем оригинальную продукцию от ведущих мировых производителей с полной документацией
           </p>
@@ -32,7 +32,7 @@ export default function Catalog() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="group relative bg-emerald-950/10 backdrop-blur-md border border-emerald-900/30 rounded-2xl p-6 hover:bg-emerald-900/20 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer"
+              className="group relative bg-emerald-950/10 backdrop-blur-md border border-emerald-900/30 rounded-xl p-4 hover:bg-emerald-900/20 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer"
             >
               <div className="text-4xl mb-4">{cat.icon}</div>
               <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-emerald-400 transition-colors">

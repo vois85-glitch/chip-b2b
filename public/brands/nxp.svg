@@ -1,10 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70">
-  <defs>
-    <linearGradient id="nxp-g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7BC043"/>
-      <stop offset="100%" stop-color="#5BA029"/>
-    </linearGradient>
-  </defs>
-  <rect width="200" height="70" rx="10" fill="url(#nxp-g)"/>
-  <text x="100" y="46" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="34" fill="white" letter-spacing="6">NXP</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70" width="200" height="70">
+  <text x="4" y="52" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="50" fill="#FFC107" letter-spacing="2">N</text>
+  <text x="44" y="52" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="50" fill="#6DB33F" letter-spacing="2">X</text>
+  <text x="84" y="52" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="50" fill="#E87722" letter-spacing="2">P</text>
 </svg>

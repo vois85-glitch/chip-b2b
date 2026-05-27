@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="60" viewBox="0 0 160 60">
+  <!-- ST bold letters -->
+  <text x="10" y="36" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="34" fill="#003366" letter-spacing="-1">ST</text>
+  <!-- life.augmented tagline -->
+  <text x="10" y="52" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#003366" letter-spacing="0.5">life.augmented</text>
+</svg>

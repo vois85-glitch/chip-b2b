@@ -8,7 +8,6 @@ import { submitRequest } from '@/app/actions/request-action';
 export default function BomUpload() {
   const [fileName, setFileName] = useState('');
   
-  // useActionState магия: следит за состоянием формы (отправка/результат)
   const [state, formAction, isPending] = useActionState(submitRequest, { success: false, message: '' });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,13 +17,11 @@ export default function BomUpload() {
   };
 
   return (
-    <section id="bom" className="py-24 px-4 bg-[#050807] relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-emerald-600 rounded-full blur-[200px] opacity-10 pointer-events-none" />
-
+    <section id="bom" className="py-6 px-4 bg-section-alt relative overflow-hidden">
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Запрос коммерческого предложения</h2>
-          <p className="text-gray-400 text-lg">Загрузите ваш BOM-лист (Excel/CSV) или опишите необходимые компоненты</p>
+        <div className="text-center mb-6">
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Запрос коммерческого предложения</h2>
+          <p className="text-[#666] text-sm">Загрузите BOM-лист или опишите необходимые компоненты</p>
         </div>
 
         <motion.form 
@@ -32,85 +29,83 @@ export default function BomUpload() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-emerald-950/10 backdrop-blur-xl border border-emerald-900/30 rounded-3xl p-8 md:p-12 shadow-2xl"
+          className="bg-white border border-[#e8e8e8] rounded-xl p-4 md:p-6 shadow-lg"
         >
-          {/* Уведомление об успехе ИЛИ ошибке */}
           {state.message && (
             <motion.div 
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
-              className={`mb-8 px-6 py-4 rounded-xl text-center text-lg font-semibold backdrop-blur-md ${
-                state.success ? 'bg-green-900/30 border border-green-500/50 text-green-300' : 'bg-red-900/30 border border-red-500/50 text-red-300'
+              className={`mb-4 px-4 py-3 rounded-lg text-center text-sm font-semibold ${
+                state.success ? 'bg-section-alt border border-primary/30 text-primary' : 'bg-red-50 border border-danger/30 text-danger'
               }`}
             >
               {state.message}
             </motion.div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Компания</label>
+              <label className="block text-xs font-medium text-[#333] mb-1">Компания</label>
               <input 
                 type="text" 
                 name="company_name"
                 required
-                className="w-full bg-black/40 border border-emerald-900/50 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="ООО Инжиниринг"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">ИНН</label>
+              <label className="block text-xs font-medium text-[#333] mb-1">ИНН</label>
               <input 
                 type="text" 
                 name="inn"
                 required
-                className="w-full bg-black/40 border border-emerald-900/50 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="7712345678"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+              <label className="block text-xs font-medium text-[#333] mb-1">Email</label>
               <input 
                 type="email" 
                 name="email"
                 required
-                className="w-full bg-black/40 border border-emerald-900/50 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="info@company.ru"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Телефон</label>
+              <label className="block text-xs font-medium text-[#333] mb-1">Телефон</label>
               <input 
                 type="tel" 
                 name="phone"
-                className="w-full bg-black/40 border border-emerald-900/50 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="+7 (999) 123-45-67"
               />
             </div>
           </div>
 
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Список компонентов или комментарий</label>
+          <div className="mb-3">
+            <label className="block text-xs font-medium text-[#333] mb-1">Список компонентов или комментарий</label>
             <textarea 
               name="message"
-              rows={4}
-              className="w-full bg-black/40 border border-emerald-900/50 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+              rows={3}
+              className="w-full bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors resize-none"
               placeholder="STM32F103C8T6 - 500 шт, LM7805CT - 200 шт..."
             />
           </div>
 
           <input type="hidden" name="bom_file_name" value={fileName} />
 
-          <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Прикрепить BOM-лист (Excel, CSV, PDF)</label>
+          <div className="mb-4">
+            <label className="block text-xs font-medium text-[#333] mb-1">Прикрепить BOM-лист</label>
             <div className="flex items-center justify-center w-full">
-              <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-emerald-800/50 rounded-2xl cursor-pointer hover:bg-emerald-900/10 hover:border-emerald-500/50 transition-all">
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg className="w-8 h-8 mb-3 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                  <p className="mb-1 text-sm text-gray-400">
-                    {fileName ? <span className="font-semibold text-emerald-400">{fileName}</span> : <span>Перетащите файл сюда или <span className="text-emerald-400 underline">выберите</span></span>}
+              <label className="flex flex-col items-center justify-center w-full h-20 border-2 border-dashed border-[#cbcbcb] rounded-xl cursor-pointer hover:bg-section-alt hover:border-primary/50 transition-all">
+                <div className="flex flex-col items-center justify-center py-2">
+                  <svg className="w-6 h-6 mb-1 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                  <p className="text-xs text-[#666]">
+                    {fileName ? <span className="font-semibold text-primary">{fileName}</span> : <span>Перетащите файл или <span className="text-primary underline">выберите</span></span>}
                   </p>
-                  <p className="text-xs text-gray-500">XLSX, CSV, PDF (MAX. 10MB)</p>
                 </div>
                 <input type="file" className="hidden" accept=".xlsx,.csv,.pdf,.xls" onChange={handleFileChange} />
               </label>
@@ -120,8 +115,8 @@ export default function BomUpload() {
           <button 
             type="submit" 
             disabled={isPending}
-            className={`w-full py-4 rounded-xl text-lg font-semibold transition-all shadow-lg duration-300 ${
-              isPending ? 'bg-emerald-800 cursor-wait' : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/25 hover:shadow-emerald-600/40'
+            className={`w-full py-2.5 rounded-lg text-sm font-semibold transition-all shadow-lg duration-300 text-white ${
+              isPending ? 'bg-primary/60 cursor-wait' : 'bg-primary hover:bg-primary-dark shadow-primary/25 hover:shadow-primary/40'
             }`}
           >
             {isPending ? 'Отправка...' : 'Получить предложение'}

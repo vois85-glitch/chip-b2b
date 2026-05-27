@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 70">
-  <circle cx="38" cy="35" r="28" fill="#008C5E"/>
-  <path d="M28 22 C28 22, 38 18, 48 22 C48 22, 42 30, 28 30 Z" fill="white" opacity="0.9"/>
-  <path d="M28 32 C28 32, 38 28, 48 32 C48 32, 42 40, 28 40 Z" fill="white" opacity="0.6"/>
-  <path d="M28 42 C28 42, 38 38, 48 42 C48 42, 42 50, 28 50 Z" fill="white" opacity="0.3"/>
-  <text x="155" y="42" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="300" font-size="22" fill="#008C5E" letter-spacing="2">infineon</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70">
+  <circle cx="32" cy="35" r="26" fill="#E31937"/>
+  <path d="M23 18 C23 18, 32 14, 42 18 C42 18, 38 27, 23 27 Z" fill="white" opacity="0.95"/>
+  <path d="M23 30 C23 30, 32 26, 42 30 C42 30, 38 39, 23 39 Z" fill="white" opacity="0.65"/>
+  <path d="M23 42 C23 42, 32 38, 42 42 C42 42, 38 51, 23 51 Z" fill="white" opacity="0.35"/>
+  <text x="70" y="44" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="28" fill="#E31937" letter-spacing="1">Infineon</text>
 </svg>

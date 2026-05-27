@@ -2,11 +2,9 @@ import { Metadata } from 'next';
 import { geoCities } from '@/lib/geo-data';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import FloatingCta from '@/components/layout/FloatingCta';
 
 const BASE_URL = 'https://www.chip-net.ru';
+export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -95,21 +93,20 @@ export default async function GeoPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
-      <main className="min-h-screen bg-[#050807] text-white">
-        <Header />
+      <main className="min-h-screen bg-background text-[#121212]">
 
         {/* Hero */}
         <section className="pt-32 pb-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <nav className="text-sm text-gray-500 mb-6 flex items-center gap-2">
-              <Link href="/" className="hover:text-emerald-400 transition-colors">Главная</Link>
-              <span className="text-gray-600">/</span>
-              <span className="text-gray-400">{geo.name}</span>
+            <nav className="text-sm text-[#757575] mb-6 flex items-center gap-2">
+              <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
+              <span className="text-[#898989]">/</span>
+              <span className="text-[#666]">{geo.name}</span>
             </nav>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
               {geo.h1}
             </h1>
-            <p className="text-lg text-gray-400 max-w-3xl mb-8">
+            <p className="text-lg text-[#666] max-w-3xl mb-8">
               {geo.description}
             </p>
           </div>
@@ -118,8 +115,8 @@ export default async function GeoPage({ params }: Props) {
         {/* SEO text */}
         <section className="px-4 pb-12">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-900/40 rounded-xl border border-gray-800 p-6 md:p-8">
-              <p className="text-gray-300 leading-relaxed text-base">
+            <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] p-6 md:p-8">
+              <p className="text-[#333] leading-relaxed text-base">
                 {geo.text}
               </p>
             </div>
@@ -130,16 +127,16 @@ export default async function GeoPage({ params }: Props) {
         <section className="px-4 pb-16">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8">
-              Категории компонентов в <span className="text-emerald-400">{geo.name}</span>
+              Категории компонентов в <span className="text-primary">{geo.name}</span>
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {categories.map((cat) => (
                 <Link
                   key={cat.slug}
                   href={`/${cat.slug}`}
-                  className="bg-gray-900/40 hover:bg-gray-800/60 border border-gray-800 hover:border-emerald-800/50 rounded-lg p-4 text-center transition-all"
+                  className="bg-gray-900/40 hover:bg-gray-800/60 border border-[#e8e8e8] hover:border-[#cbcbcb] rounded-lg p-4 text-center transition-all"
                 >
-                  <span className="text-gray-300 text-sm font-medium">{cat.name}</span>
+                  <span className="text-[#333] text-sm font-medium">{cat.name}</span>
                 </Link>
               ))}
             </div>
@@ -151,17 +148,17 @@ export default async function GeoPage({ params }: Props) {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8">Почему выбирают ChipNet в {geo.name}</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gray-900/40 rounded-xl border border-gray-800 p-6">
-                <div className="text-emerald-400 text-3xl font-bold mb-2">204+</div>
-                <div className="text-gray-400 text-sm">Позиций в каталоге</div>
+              <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] p-6">
+                <div className="text-primary text-3xl font-bold mb-2">204+</div>
+                <div className="text-[#666] text-sm">Позиций в каталоге</div>
               </div>
-              <div className="bg-gray-900/40 rounded-xl border border-gray-800 p-6">
-                <div className="text-emerald-400 text-3xl font-bold mb-2">СВП</div>
-                <div className="text-gray-400 text-sm">Проверка оригинальности</div>
+              <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] p-6">
+                <div className="text-primary text-3xl font-bold mb-2">СВП</div>
+                <div className="text-[#666] text-sm">Проверка оригинальности</div>
               </div>
-              <div className="bg-gray-900/40 rounded-xl border border-gray-800 p-6">
-                <div className="text-emerald-400 text-3xl font-bold mb-2">1-4</div>
-                <div className="text-gray-400 text-sm">Дня доставка</div>
+              <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] p-6">
+                <div className="text-primary text-3xl font-bold mb-2">1-4</div>
+                <div className="text-[#666] text-sm">Дня доставка</div>
               </div>
             </div>
           </div>
@@ -173,12 +170,12 @@ export default async function GeoPage({ params }: Props) {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Нужна поставка компонентов в {geo.name}?
             </h2>
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            <p className="text-[#666] mb-8 max-w-xl mx-auto">
               Отправьте заявку — подберём компоненты, найдём аналоги и рассчитаем сроки доставки в {geo.region}.
             </p>
             <Link
               href="/#bom"
-              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-8 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-[#121212] font-medium px-8 py-3 rounded-lg transition-colors"
             >
               Отправить заявку
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -197,7 +194,7 @@ export default async function GeoPage({ params }: Props) {
                   <Link
                     key={c.slug}
                     href={`/geo/${c.slug}`}
-                    className="text-gray-400 hover:text-emerald-400 text-sm transition-colors py-1"
+                    className="text-[#666] hover:text-primary text-sm transition-colors py-1"
                   >
                     {c.name}
                   </Link>
@@ -205,9 +202,6 @@ export default async function GeoPage({ params }: Props) {
             </div>
           </div>
         </section>
-
-        <Footer />
-        <FloatingCta />
       </main>
     </>
   );

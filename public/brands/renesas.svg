@@ -1,11 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70">
-  <defs>
-    <linearGradient id="ren-g" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#6B3FA0"/>
-      <stop offset="100%" stop-color="#3E93CF"/>
-    </linearGradient>
-  </defs>
-  <circle cx="30" cy="35" r="18" fill="none" stroke="url(#ren-g)" stroke-width="3"/>
-  <path d="M24 28 L36 35 L24 42 Z" fill="url(#ren-g)"/>
-  <text x="145" y="42" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="600" font-size="22" fill="#3E93CF" letter-spacing="2">RENESAS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" width="240" height="70">
+  <text x="0" y="46" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="32" fill="#003B71" letter-spacing="1">Renesas</text>
 </svg>

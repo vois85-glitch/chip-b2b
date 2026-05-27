@@ -5,34 +5,34 @@ import { motion } from 'framer-motion';
 const details = [
   {
     title: 'Таможенное оформление (ВЭД)',
-    text: 'Берем на себя все хлопоты по растаможке. Ввоз по кодам ЕТН ВЭД, оформление сертификатов соответствия и отказных писем. Клиент получает груз на складе в РФ со всеми документами.'
+    text: 'Берем на себя растаможку, оформление сертификатов и отказных писем. Клиент получает груз со всеми документами.'
   },
   {
     title: 'Сложные схемы оплаты',
-    text: 'Работаем с контрагентами из ОАЭ, Турции, Китая и Тайваня. Принимаем рубли и валюту. Для постоянных клиентов — постоплата по договору.'
+    text: 'Работаем с контрагентами из ОАЭ, Турции, Китая и Тайваня. Принимаем рубли и валюту. Постоплата для постоянных клиентов.'
   },
   {
     title: 'Защита от санкций',
-    text: 'Вносим компоненты в импортозамещающие перечни Минпромторга. Подбираем полные аналоги (cross-reference) по электрическим параметрам и корпусам для отсутствующих позиций.'
+    text: 'Вносим компоненты в перечни Минпромторга. Подбираем полные аналоги (cross-reference) по параметрам и корпусам.'
   },
   {
     title: 'Страхование груза',
-    text: 'Все отправления застрахованы. В случае потери или повреждения на таможне или в пути — компенсация 100% стоимости партии.'
+    text: 'Все отправления застрахованы. Компенсация 100% стоимости партии при потере или повреждении.'
   },
 ];
 
 export default function LogisticsDetails() {
   return (
-    <section className="py-24 px-4 bg-black">
+    <section className="py-6 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Импорт и логистика без рисков</h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Поставка электронных компонентов — это не просто покупка. Это сложный процесс ВЭД, где мы берем все риски на себя.
+        <div className="text-center mb-4">
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Импорт и логистика без рисков</h2>
+          <p className="text-[#666] text-sm max-w-2xl mx-auto">
+            Поставка электронных компонентов — сложный процесс ВЭД, где мы берем все риски на себя.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {details.map((item, index) => (
             <motion.div 
               key={index}
@@ -40,10 +40,10 @@ export default function LogisticsDetails() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-[#0a0f0d] border border-emerald-900/30 rounded-2xl p-8"
+              className="bg-white border border-[#e8e8e8] rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="text-xl font-bold mb-4 text-emerald-400">{item.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{item.text}</p>
+              <h3 className="text-base font-bold mb-1 text-primary">{item.title}</h3>
+              <p className="text-[#666] text-xs leading-relaxed">{item.text}</p>
             </motion.div>
           ))}
         </div>

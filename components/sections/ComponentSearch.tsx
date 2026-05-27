@@ -9,11 +9,9 @@ export default function ComponentSearch() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Перенаправляем на форму заявки и подставляем артикул в поле сообщения
       const bomSection = document.getElementById('bom');
       if (bomSection) {
         bomSection.scrollIntoView({ behavior: 'smooth' });
-        // Ищем поле "Список компонентов" и вставляем туда артикул
         setTimeout(() => {
           const textarea = document.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
           if (textarea) {
@@ -26,39 +24,37 @@ export default function ComponentSearch() {
   };
 
   return (
-        <section id="search" className="py-24 px-4 bg-black relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-600 rounded-full blur-[200px] opacity-10 pointer-events-none" />
-      
+    <section id="search" className="py-6 px-4 bg-white relative overflow-hidden">
       <div className="max-w-3xl mx-auto relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Поиск компонентов</h2>
-          <p className="text-gray-400 text-lg mb-10">Введите артикул (part number), и мы проверим наличие, подберем аналог или организуем поставку под заказ</p>
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Поиск компонентов</h2>
+          <p className="text-[#666] text-sm mb-4">Введите артикул — проверим наличие, подберем аналог или организуем поставку</p>
           
-          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4">
+          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2">
             <input 
               type="text" 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Например: STM32F103C8T6 или LM7805"
-              className="flex-grow bg-black/40 border border-emerald-900/50 rounded-xl px-6 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition-colors text-lg"
+              className="flex-grow bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-4 py-2.5 text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors text-base"
             />
             <button 
               type="submit" 
-              className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 rounded-xl text-lg font-semibold transition-all shadow-lg shadow-emerald-600/25 whitespace-nowrap"
+              className="px-6 py-2.5 bg-primary hover:bg-primary-dark rounded-lg text-sm font-semibold transition-all shadow-lg shadow-primary/25 whitespace-nowrap text-white"
             >
               Найти / Запросить
             </button>
           </form>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm text-gray-500">
+          <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs text-[#757575]">
             <span>Часто ищут:</span>
-            <button onClick={() => setSearchQuery('XC3S200A')} className="hover:text-emerald-400 transition-colors">XC3S200A (FPGA)</button>
-            <button onClick={() => setSearchQuery('SN74HC595N')} className="hover:text-emerald-400 transition-colors">SN74HC595N</button>
-            <button onClick={() => setSearchQuery('ATMEGA328P')} className="hover:text-emerald-400 transition-colors">ATMEGA328P</button>
+            <button onClick={() => setSearchQuery('XC3S200A')} className="hover:text-primary transition-colors">XC3S200A</button>
+            <button onClick={() => setSearchQuery('SN74HC595N')} className="hover:text-primary transition-colors">SN74HC595N</button>
+            <button onClick={() => setSearchQuery('ATMEGA328P')} className="hover:text-primary transition-colors">ATMEGA328P</button>
           </div>
         </motion.div>
       </div>
