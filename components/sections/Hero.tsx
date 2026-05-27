@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0c1f1e] via-[#0f2e2b] to-[#091b1a] pt-[108px]">
+    <section className="relative bg-[#0c1f1e] overflow-hidden pt-[108px] mt-0" style={{ backgroundImage: 'linear-gradient(to bottom right, #0c1f1e, #0f2e2b, #091b1a)' }}>
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[180px]" />

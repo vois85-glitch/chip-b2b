@@ -72,9 +72,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className={inter.className}>
         <Header />
-        <div>
-          {children}
-        </div>
+        {children}
         <Footer />
         <FloatingCta />
         <JsonLd />

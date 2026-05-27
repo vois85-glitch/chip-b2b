@@ -34,16 +34,16 @@ export default function FloatingCta() {
         </svg>
       </motion.a>
 
-      {/* Кнопка наверх — левая сторона, по центру высоты */}
+      {/* Кнопка наверх — внизу по центру */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
             onClick={scrollToTop}
-            className="fixed left-4 md:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 md:w-13 md:h-13 rounded-full flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/15 hover:bg-white/20 hover:border-[#02a391]/40 transition-all group shadow-lg cursor-pointer"
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-11 h-11 md:w-13 md:h-13 rounded-full flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/15 hover:bg-white/20 hover:border-[#02a391]/40 transition-all group shadow-lg cursor-pointer"
             title="Наверх"
           >
             <svg className="w-4 h-4 md:w-5 md:h-5 text-[#02a391] group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
