@@ -17,15 +17,15 @@ export default function Hero() {
         }} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 md:py-16 lg:py-24">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 pt-4 pb-8 md:pt-6 md:pb-12 lg:pt-8 lg:pb-16">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-5 md:gap-6 lg:gap-10 items-center">
           {/* Text Content */}
           <div className="text-center lg:text-left order-1">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 mb-4 md:mb-6 border border-[#02a391]/30 rounded-full bg-[#02a391]/10 backdrop-blur-md text-xs md:text-sm text-[#02a391]"
+              className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 mb-3 md:mb-4 border border-[#02a391]/30 rounded-full bg-[#02a391]/10 backdrop-blur-md text-xs md:text-sm text-[#02a391]"
             >
               <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#02a391] rounded-full animate-pulse" />
               Импортозамещение и санкционные компоненты
@@ -35,7 +35,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-2xl sm:text-3xl md:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-3 md:mb-5 text-white"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.8rem] font-bold tracking-tight leading-[1.1] mb-2 md:mb-3 text-white"
             >
               Поставка оригинальных{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#02a391] to-[#04d4b0]">
@@ -48,7 +48,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-sm md:text-base lg:text-lg text-[#94a3b8] max-w-xl mx-auto lg:mx-0 mb-5 md:mb-8 leading-relaxed"
+              className="text-sm md:text-base text-[#94a3b8] max-w-xl mx-auto lg:mx-0 mb-4 md:mb-6 leading-relaxed"
             >
               Гарантия оригинала. Постоплата для постоянных клиентов. 
               Подбор аналогов для unavailable позиций. Доставка из Европы и Азии.
@@ -58,13 +58,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-col sm:flex-row gap-2 md:gap-3 justify-center lg:justify-start mb-6 md:mb-10"
+              className="flex flex-col sm:flex-row gap-2 md:gap-3 justify-center lg:justify-start mb-4 md:mb-6"
             >
-              <a href="#bom" className="group px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-[#02a391] to-[#04c4a5] hover:from-[#02907f] hover:to-[#03b095] rounded-xl text-sm font-semibold transition-all shadow-lg shadow-[#02a391]/25 hover:shadow-[#02a391]/40 text-white text-center flex items-center justify-center gap-2">
+              <a href="#bom" className="group px-5 py-2 md:px-6 md:py-2.5 bg-gradient-to-r from-[#02a391] to-[#04c4a5] hover:from-[#02907f] hover:to-[#03b095] rounded-xl text-sm font-semibold transition-all shadow-lg shadow-[#02a391]/25 hover:shadow-[#02a391]/40 text-white text-center flex items-center justify-center gap-2">
                 Получить КП за 2 часа
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
-              <a href="#bom" className="px-5 py-2.5 md:px-6 md:py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-sm font-semibold backdrop-blur-md transition-all text-white text-center">
+              <a href="#bom" className="px-5 py-2 md:px-6 md:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-sm font-semibold backdrop-blur-md transition-all text-white text-center">
                 Загрузить BOM
               </a>
             </motion.div>
@@ -78,15 +78,15 @@ export default function Hero() {
             >
               <div className="text-center lg:text-left">
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">2600+</div>
-                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5 md:mt-1">Компонентов</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5">Компонентов</div>
               </div>
               <div className="text-center lg:text-left border-x border-white/10 px-2 md:px-4">
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">71</div>
-                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5 md:mt-1">Бренд</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5">Бренд</div>
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">6 дн.</div>
-                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5 md:mt-1">Доставка</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-[#64748b] mt-0.5">Доставка</div>
               </div>
             </motion.div>
           </div>
