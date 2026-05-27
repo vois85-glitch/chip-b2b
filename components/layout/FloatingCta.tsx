@@ -34,22 +34,22 @@ export default function FloatingCta() {
         </svg>
       </motion.a>
 
-      {/* Кнопка наверх */}
+      {/* Кнопка наверх — левая сторона, по центру высоты */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.8 }}
-            transition={{ duration: 0.25 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
             onClick={scrollToTop}
-            className="fixed bottom-24 md:bottom-28 right-8 z-50 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white/25 hover:border-[#02a391]/40 transition-all group shadow-lg"
+            className="fixed left-4 md:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 md:w-13 md:h-13 rounded-full flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/15 hover:bg-white/20 hover:border-[#02a391]/40 transition-all group shadow-lg cursor-pointer"
             title="Наверх"
           >
-            <svg className="w-5 h-5 md:w-6 md:h-6 text-[#02a391] group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <svg className="w-4 h-4 md:w-5 md:h-5 text-[#02a391] group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
             </svg>
-            <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#02a391]/60 absolute top-2 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#02a391]/50 absolute top-2 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
             </svg>
           </motion.button>
