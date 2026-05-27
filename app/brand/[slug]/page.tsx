@@ -238,23 +238,23 @@ export default async function BrandPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
       />
-      <main className="min-h-screen bg-background text-[#121212] dark:text-white">
+      <main className="min-h-screen bg-background text-[#121212]">
         <section className="pt-32 pb-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <nav className="text-sm text-[#757575] dark:text-[#7a8a84] mb-6 flex items-center gap-2">
+            <nav className="text-sm text-[#757575] mb-6 flex items-center gap-2">
               <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
               <span className="text-[#cbcbcb]">/</span>
               <Link href="/catalog" className="hover:text-primary transition-colors">Каталог</Link>
               <span className="text-[#cbcbcb]">/</span>
-              <span className="text-[#666] dark:text-[#8a9a94]">{brandName}</span>
+              <span className="text-[#666]">{brandName}</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
               Компоненты {brandName}
             </h1>
-            <p className="text-lg text-[#666] dark:text-[#8a9a94] max-w-3xl mb-4">
+            <p className="text-lg text-[#666] max-w-3xl mb-4">
               Поставка оригинальных электронных компонентов производства {brandName}. Проверка оригинальности в лаборатории СВП, подбор аналогов, доставка от 6 дней.
             </p>
-            <p className="text-sm text-[#757575] dark:text-[#7a8a84]">
+            <p className="text-sm text-[#757575]">
               {totalCount} позиций в каталоге
             </p>
           </div>
@@ -275,7 +275,7 @@ export default async function BrandPage({ params }: Props) {
                   <Link
                     key={cat}
                     href={`/catalog?brand=${encodeURIComponent(brandName)}&category=${encodeURIComponent(cat)}`}
-                    className="px-3 py-1.5 bg-section-alt dark:bg-[#1e2a25] border border-[#cbcbcb] rounded-lg text-sm text-[#333] dark:text-[#c4d0ca] hover:text-primary transition-colors"
+                    className="px-3 py-1.5 bg-section-alt border border-[#cbcbcb] rounded-lg text-sm text-[#333] hover:text-primary transition-colors"
                   >
                     {cat}
                   </Link>
@@ -292,20 +292,20 @@ export default async function BrandPage({ params }: Props) {
                 Компоненты {brandName}
                 <span className="text-primary ml-2">({totalCount})</span>
               </h2>
-              <div className="overflow-x-auto rounded-xl border border-[#e8e8e8] dark:border-[#2a3530]">
+              <div className="overflow-x-auto rounded-xl border border-[#e8e8e8]">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-[#eaf0e8] border-b border-[#e8e8e8] dark:border-[#2a3530]">
-                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">SKU</th>
-                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Наименование</th>
-                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Категория</th>
-                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Статус</th>
-                      <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Аналоги</th>
+                    <tr className="bg-[#eaf0e8] border-b border-[#e8e8e8]">
+                      <th className="text-left py-4 px-4 text-[#666] font-medium">SKU</th>
+                      <th className="text-left py-4 px-4 text-[#666] font-medium">Наименование</th>
+                      <th className="text-left py-4 px-4 text-[#666] font-medium">Категория</th>
+                      <th className="text-left py-4 px-4 text-[#666] font-medium">Статус</th>
+                      <th className="text-left py-4 px-4 text-[#666] font-medium">Аналоги</th>
                     </tr>
                   </thead>
                   <tbody>
                     {components.map((comp) => (
-                      <tr key={comp.sku} className="border-b border-[#e8e8e8] dark:border-[#2a3530]/50 hover:bg-[#eaf0e8] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] transition-colors">
+                      <tr key={comp.sku} className="border-b border-[#e8e8e8] hover:bg-[#eaf0e8] transition-colors">
                         <td className="py-3 px-4">
                           <Link
                             href={`/component/${comp.sku}`}
@@ -314,8 +314,8 @@ export default async function BrandPage({ params }: Props) {
                             {comp.sku}
                           </Link>
                         </td>
-                        <td className="py-3 px-4 text-[#333] dark:text-[#c4d0ca] max-w-xs truncate">{comp.name}</td>
-                        <td className="py-3 px-4 text-[#666] dark:text-[#8a9a94]">
+                        <td className="py-3 px-4 text-[#333] max-w-xs truncate">{comp.name}</td>
+                        <td className="py-3 px-4 text-[#666]">
                           <Link href={`/catalog?category=${encodeURIComponent(comp.category)}`} className="hover:text-primary transition-colors">
                             {comp.category}
                           </Link>
@@ -324,10 +324,10 @@ export default async function BrandPage({ params }: Props) {
                           {comp.status === 'EOL' ? (
                             <span className="px-2 py-1 rounded-full bg-red-50 text-danger text-xs">EOL</span>
                           ) : (
-                            <span className="px-2 py-1 rounded-full bg-section-alt dark:bg-[#1e2a25] text-primary text-xs">В производстве</span>
+                            <span className="px-2 py-1 rounded-full bg-section-alt text-primary text-xs">В производстве</span>
                           )}
                         </td>
-                        <td className="py-3 px-4 text-[#757575] dark:text-[#7a8a84] text-xs max-w-xs truncate">
+                        <td className="py-3 px-4 text-[#757575] text-xs max-w-xs truncate">
                           {comp.analogs && comp.analogs.length > 0 ? comp.analogs.join(', ') : '—'}
                         </td>
                       </tr>
@@ -342,7 +342,7 @@ export default async function BrandPage({ params }: Props) {
         <section className="px-4 pb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-4">О компании {brandName}</h2>
-            <p className="text-[#333] dark:text-[#c4d0ca] leading-relaxed text-base">
+            <p className="text-[#333] leading-relaxed text-base">
               {brandName} — один из ведущих производителей электронных компонентов, продукция которого широко применяется в промышленной электронике, системах связи, automotive и оборонном комплексе. ООО «Деловой Партнёр» (ChipNet) осуществляет прямые поставки оригинальных компонентов {brandName} с полным пакетом сопроводительной документации. Каждый компонент проходит входной контроль в аккредитованной лаборатории СВП, включая рентгеновский контроль, декэпсуляцию и электрические тесты. Для компонентов, снятых с производства, подбираем кросс-референсы с гарантией электрической совместимости.
             </p>
           </div>
@@ -353,12 +353,12 @@ export default async function BrandPage({ params }: Props) {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Нужна поставка компонентов {brandName}?
             </h2>
-            <p className="text-[#666] dark:text-[#8a9a94] mb-8 max-w-xl mx-auto">
+            <p className="text-[#666] mb-8 max-w-xl mx-auto">
               Отправьте заявку — проверим наличие, подберём аналоги и выставим КП.
             </p>
             <Link
               href="/#bom"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-[#121212] dark:text-white font-medium px-8 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-[#121212] font-medium px-8 py-3 rounded-lg transition-colors"
             >
               Отправить заявку
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>

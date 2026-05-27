@@ -23,19 +23,19 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-background text-[#121212] dark:text-white">
+    <main className="min-h-screen bg-background text-[#121212]">
 
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <nav className="text-sm text-[#757575] dark:text-[#7a8a84] mb-6 flex items-center gap-2">
+          <nav className="text-sm text-[#757575] mb-6 flex items-center gap-2">
             <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
             <span className="text-[#898989]">/</span>
-            <span className="text-[#666] dark:text-[#8a9a94]">Блог</span>
+            <span className="text-[#666]">Блог</span>
           </nav>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
             Блог ChipNet
           </h1>
-          <p className="text-lg text-[#666] dark:text-[#8a9a94] max-w-2xl mb-12">
+          <p className="text-lg text-[#666] max-w-2xl mb-12">
             Делимся экспертизой в поставках электронных компонентов, импортозамещении и проверке оригинальности.
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="block bg-[#e0e8de] hover:bg-[#dce6da] border border-[#e8e8e8] dark:border-[#2a3530] hover:border-emerald-800/40 rounded-xl p-6 md:p-8 transition-all group"
+              className="block bg-[#e0e8de] hover:bg-[#dce6da] border border-[#e8e8e8] hover:border-emerald-800/40 rounded-xl p-6 md:p-8 transition-all group"
             >
               <div className="flex items-center gap-3 mb-3">
                 <span className="px-2 py-1 rounded-full bg-emerald-900/40 text-primary text-xs">
@@ -58,7 +58,7 @@ export default function BlogPage() {
               <h2 className="text-xl font-semibold group-hover:text-primary transition-colors mb-2">
                 {post.title}
               </h2>
-              <p className="text-[#666] dark:text-[#8a9a94] text-sm line-clamp-2">
+              <p className="text-[#666] text-sm line-clamp-2">
                 {post.description}
               </p>
             </Link>

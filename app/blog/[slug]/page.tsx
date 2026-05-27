@@ -85,16 +85,16 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <main className="min-h-screen bg-background text-[#121212] dark:text-white">
+      <main className="min-h-screen bg-background text-[#121212]">
 
         <article className="pt-32 pb-16 px-4">
           <div className="max-w-3xl mx-auto">
-            <nav className="text-sm text-[#757575] dark:text-[#7a8a84] mb-6 flex items-center gap-2">
+            <nav className="text-sm text-[#757575] mb-6 flex items-center gap-2">
               <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
               <span className="text-[#898989]">/</span>
               <Link href="/blog" className="hover:text-primary transition-colors">Блог</Link>
               <span className="text-[#898989]">/</span>
-              <span className="text-[#666] dark:text-[#8a9a94] truncate max-w-xs">{post.title}</span>
+              <span className="text-[#666] truncate max-w-xs">{post.title}</span>
             </nav>
 
             <div className="flex items-center gap-3 mb-6">
@@ -109,12 +109,12 @@ export default async function BlogPostPage({ params }: Props) {
             </h1>
 
             <div className="prose prose-invert prose-emerald max-w-none">
-              <p className="text-[#333] dark:text-[#c4d0ca] leading-relaxed text-base">
+              <p className="text-[#333] leading-relaxed text-base">
                 {post.text}
               </p>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-[#e8e8e8] dark:border-[#2a3530]">
+            <div className="mt-12 pt-8 border-t border-[#e8e8e8]">
               <Link
                 href="/blog"
                 className="text-primary hover:text-primary-dark text-sm transition-colors"

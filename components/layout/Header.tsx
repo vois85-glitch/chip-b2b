@@ -52,7 +52,7 @@ export default function Header() {
     <>
       <motion.header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "shadow-lg shadow-black/5 dark:shadow-black/30" : ""
+          scrolled ? "shadow-lg shadow-black/5" : ""
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -88,17 +88,17 @@ export default function Header() {
                 </svg>
               </div>
               <div className="leading-tight">
-                <span className="text-xl font-bold tracking-tight text-[#121212] dark:text-white">
+                <span className="text-xl font-bold tracking-tight text-[#121212]">
                   Chip<span className="text-primary">Net</span>
                 </span>
-                <div className="text-[10px] text-[#999] dark:text-[#7a8a84] tracking-wide">
+                <div className="text-[10px] text-[#999] tracking-wide">
                   ЭЛЕКТРОННЫЕ КОМПОНЕНТЫ
                 </div>
               </div>
             </Link>
 
             {/* Бейдж */}
-            <div className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1 bg-[#eaf0e8] dark:bg-[#1e2a25] rounded-full text-xs text-[#666] dark:text-[#8a9a94]">
+            <div className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1 bg-[#eaf0e8] rounded-full text-xs text-[#666]">
               <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
@@ -107,19 +107,19 @@ export default function Header() {
 
             {/* Контакты */}
             <div className="hidden md:flex items-center gap-4">
-              <a href="tel:+79103219191" className="flex items-center gap-1.5 text-sm text-[#333] dark:text-[#c4d0ca] hover:text-primary transition-colors">
+              <a href="tel:+79103219191" className="flex items-center gap-1.5 text-sm text-[#333] hover:text-primary transition-colors">
                 <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <span className="font-medium">+7-910-321-91-91</span>
               </a>
-              <a href="mailto:info@chip-net.ru" className="flex items-center gap-1.5 text-sm text-[#333] dark:text-[#c4d0ca] hover:text-primary transition-colors">
+              <a href="mailto:info@chip-net.ru" className="flex items-center gap-1.5 text-sm text-[#333] hover:text-primary transition-colors">
                 <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 info@chip-net.ru
               </a>
-              <div className="flex items-center gap-1.5 text-xs text-[#666] dark:text-[#8a9a94]">
+              <div className="flex items-center gap-1.5 text-xs text-[#666]">
                 <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -138,19 +138,19 @@ export default function Header() {
               </button>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 rounded-lg hover:bg-[#eaf0e8] dark:hover:bg-[#1e2a25] transition-colors"
+                className="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 rounded-lg hover:bg-[#eaf0e8] transition-colors"
                 aria-label="Меню"
               >
-                <span className={`block w-5 h-0.5 bg-[#333] dark:bg-[#c4d0ca] transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-                <span className={`block w-5 h-0.5 bg-[#333] dark:bg-[#c4d0ca] transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
-                <span className={`block w-5 h-0.5 bg-[#333] dark:bg-[#c4d0ca] transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+                <span className={`block w-5 h-0.5 bg-[#333] transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
+                <span className={`block w-5 h-0.5 bg-[#333] transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
+                <span className={`block w-5 h-0.5 bg-[#333] transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
               </button>
             </div>
           </div>
         </div>
 
         {/* === Нижняя панель: навигация (тёмная) === */}
-        <div className="bg-[#1e2a25] dark:bg-[#0a0f0d]">
+        <div className="bg-[#1e2a25]">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-11 flex items-center justify-between">
             <div className="hidden md:flex items-center gap-6">
               {navLinks.map((link) =>
@@ -193,23 +193,23 @@ export default function Header() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden bg-[#f0f4ee] border-t border-[#e8e8e8] dark:border-[#2a3530]"
+              className="md:hidden bg-[#f0f4ee] border-t border-[#e8e8e8]"
             >
               <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-                <div className="flex flex-col gap-2 pb-3 mb-3 border-b border-[#e8e8e8] dark:border-[#2a3530]">
-                  <a href="tel:+79103219191" className="flex items-center gap-2 text-sm text-[#333] dark:text-[#c4d0ca]">
+                <div className="flex flex-col gap-2 pb-3 mb-3 border-b border-[#e8e8e8]">
+                  <a href="tel:+79103219191" className="flex items-center gap-2 text-sm text-[#333]">
                     <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                     +7-910-321-91-91
                   </a>
-                  <a href="mailto:info@chip-net.ru" className="flex items-center gap-2 text-sm text-[#333] dark:text-[#c4d0ca]">
+                  <a href="mailto:info@chip-net.ru" className="flex items-center gap-2 text-sm text-[#333]">
                     <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     info@chip-net.ru
                   </a>
-                  <div className="flex items-center gap-2 text-sm text-[#666] dark:text-[#8a9a94]">
+                  <div className="flex items-center gap-2 text-sm text-[#666]">
                     <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -222,7 +222,7 @@ export default function Header() {
                     <button
                       key={link.label}
                       onClick={() => scrollToSection(link.sectionId!)}
-                      className="w-full text-left px-4 py-3 rounded-lg text-[#333] dark:text-[#c4d0ca] hover:text-primary hover:bg-[#eaf0e8] dark:hover:bg-[#1e2a25] transition-colors text-sm font-medium"
+                      className="w-full text-left px-4 py-3 rounded-lg text-[#333] hover:text-primary hover:bg-[#eaf0e8] transition-colors text-sm font-medium"
                     >
                       {link.label}
                     </button>
@@ -231,7 +231,7 @@ export default function Header() {
                       key={link.label}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="px-4 py-3 rounded-lg text-[#333] dark:text-[#c4d0ca] hover:text-primary hover:bg-[#eaf0e8] dark:hover:bg-[#1e2a25] transition-colors text-sm font-medium"
+                      className="px-4 py-3 rounded-lg text-[#333] hover:text-primary hover:bg-[#eaf0e8] transition-colors text-sm font-medium"
                     >
                       {link.label}
                     </Link>

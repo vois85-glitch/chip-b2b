@@ -169,9 +169,9 @@ export default async function ComponentPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <div className="min-h-screen bg-background text-[#121212] dark:text-white">
+      <div className="min-h-screen bg-background text-[#121212]">
         <div className="max-w-7xl mx-auto px-4 py-24">
-          <div className="text-sm text-[#757575] dark:text-[#7a8a84] mb-8 flex items-center gap-2 flex-wrap">
+          <div className="text-sm text-[#757575] mb-8 flex items-center gap-2 flex-wrap">
             <Link href="/" className="hover:text-primary transition-colors">Главная</Link>
             <span className="text-[#cbcbcb]">/</span>
             <Link href="/catalog" className="hover:text-primary transition-colors">Каталог</Link>
@@ -187,24 +187,24 @@ export default async function ComponentPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">{component.sku}</h1>
-              <p className="text-xl text-[#333] dark:text-[#c4d0ca] mb-8">{component.name}</p>
+              <p className="text-xl text-[#333] mb-8">{component.name}</p>
               <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8 ${
-                component.status === 'EOL' ? 'bg-red-50 text-danger border border-danger/30' : 'bg-section-alt dark:bg-[#1e2a25] text-primary border border-[#cbcbcb]'
+                component.status === 'EOL' ? 'bg-red-50 text-danger border border-danger/30' : 'bg-section-alt text-primary border border-[#cbcbcb]'
               }`}>
                 {component.status === 'EOL' ? 'Снят с производства (EOL)' : 'В производстве'}
               </div>
-              <div className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 mb-8">
+              <div className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-2xl p-8 mb-8">
                 <h2 className="text-xl font-bold mb-4 text-primary">Технические данные</h2>
-                <div className="grid grid-cols-2 gap-4 text-[#333] dark:text-[#c4d0ca]">
-                  <div><span className="text-[#757575] dark:text-[#7a8a84]">Бренд:</span> <strong>{component.brand}</strong></div>
-                  <div><span className="text-[#757575] dark:text-[#7a8a84]">Категория:</span> <strong>{component.category}</strong></div>
-                  <div className="col-span-2"><span className="text-[#757575] dark:text-[#7a8a84]">Описание:</span> <strong>{component.description}</strong></div>
+                <div className="grid grid-cols-2 gap-4 text-[#333]">
+                  <div><span className="text-[#757575]">Бренд:</span> <strong>{component.brand}</strong></div>
+                  <div><span className="text-[#757575]">Категория:</span> <strong>{component.category}</strong></div>
+                  <div className="col-span-2"><span className="text-[#757575]">Описание:</span> <strong>{component.description}</strong></div>
                 </div>
               </div>
               {component.analogs && component.analogs.length > 0 && (
-                <div className="bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8">
-                  <h2 className="text-xl font-bold mb-4 text-[#121212] dark:text-white">Аналоги и замены для {component.sku}</h2>
-                  <p className="text-[#666] dark:text-[#8a9a94] mb-4">
+                <div className="bg-[#eaf0e8] border border-[#e8e8e8] rounded-2xl p-8">
+                  <h2 className="text-xl font-bold mb-4 text-[#121212]">Аналоги и замены для {component.sku}</h2>
+                  <p className="text-[#666] mb-4">
                     {component.status === 'EOL'
                       ? 'Данный компонент снят с производства. Мы предлагаем следующие аналоги:'
                       : 'В случае недоступности, рекомендуем следующие кросс-референсы:'}
@@ -212,7 +212,7 @@ export default async function ComponentPage({ params }: Props) {
                   <div className="flex flex-wrap gap-3">
                     {component.analogs.map((analog: string) => (
                       <Link key={analog} href={`/component/${analog}`}
-                        className="px-4 py-2 bg-section-alt dark:bg-[#1e2a25] border border-[#cbcbcb] rounded-lg text-primary hover:bg-section-alt dark:bg-[#1e2a25] transition-colors font-semibold">
+                        className="px-4 py-2 bg-section-alt border border-[#cbcbcb] rounded-lg text-primary hover:bg-section-alt transition-colors font-semibold">
                         {analog}
                       </Link>
                     ))}
@@ -221,13 +221,13 @@ export default async function ComponentPage({ params }: Props) {
               )}
             </div>
             <div className="lg:col-span-1">
-              <div className="sticky top-24 bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8">
+              <div className="sticky top-24 bg-[#f0f4ee] border border-[#e8e8e8] rounded-2xl p-8">
                 <h2 className="text-2xl font-bold mb-4">Запросить КП на {component.sku}</h2>
-                <p className="text-[#666] dark:text-[#8a9a94] mb-6">Укажите нужный объем. Мы проверим наличие и выставим коммерческое предложение.</p>
+                <p className="text-[#666] mb-6">Укажите нужный объем. Мы проверим наличие и выставим коммерческое предложение.</p>
                 <a href="/#bom" className="block w-full text-center px-8 py-4 bg-primary hover:bg-primary-dark rounded-xl text-lg font-semibold transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 mb-4">
                   Отправить заявку
                 </a>
-                <p className="text-xs text-[#757575] dark:text-[#7a8a84] text-center">Гарантия оригинала. Контроль в лаборатории СВП.</p>
+                <p className="text-xs text-[#757575] text-center">Гарантия оригинала. Контроль в лаборатории СВП.</p>
               </div>
             </div>
           </div>

@@ -30,11 +30,11 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-6 px-4 bg-[#f0f4ee] dark:bg-[#f0f4ee]">
+    <section className="py-6 px-4 bg-[#f0f4ee]">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212] dark:text-white">Частые вопросы</h2>
-          <p className="text-[#666] dark:text-[#8a9a94] text-sm">Отвечаем на главные опасения инженеров и закупщиков</p>
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Частые вопросы</h2>
+          <p className="text-[#666] text-sm">Отвечаем на главные опасения инженеров и закупщиков</p>
         </div>
 
         <div className="space-y-2">
@@ -45,13 +45,13 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg overflow-hidden bg-[#f0f4ee] shadow-sm"
+              className="border border-[#e8e8e8] rounded-lg overflow-hidden bg-[#f0f4ee] shadow-sm"
             >
               <button 
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full flex items-center justify-between p-3 text-left hover:bg-section transition-colors"
               >
-                <span className="text-sm font-semibold text-[#333] dark:text-[#c4d0ca] pr-4">{faq.q}</span>
+                <span className="text-sm font-semibold text-[#333] pr-4">{faq.q}</span>
                 <span className={`text-primary text-xl transition-transform duration-300 ${openIndex === index ? 'rotate-45' : ''}`}>
                   +
                 </span>
@@ -64,7 +64,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="px-3 pb-3 text-[#666] dark:text-[#8a9a94] text-sm leading-relaxed border-t border-[#e8e8e8] dark:border-[#2a3530] pt-3">
+                    <div className="px-3 pb-3 text-[#666] text-sm leading-relaxed border-t border-[#e8e8e8] pt-3">
                       {faq.a}
                     </div>
                   </motion.div>

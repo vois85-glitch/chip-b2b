@@ -41,10 +41,10 @@ export default function BrandsMarquee() {
   return (
     <section className="py-6 md:py-8 bg-[#f0f4ee] overflow-hidden marquee-container-new">
       <div className="text-center mb-4">
-        <h2 className="text-lg md:text-xl font-bold text-[#121212] dark:text-white tracking-wide">
+        <h2 className="text-lg md:text-xl font-bold text-[#121212] tracking-wide">
           Официальные поставки от мировых производителей
         </h2>
-        <p className="text-[#757575] dark:text-[#7a8a84] text-xs mt-1">Более 50 брендов в каталоге</p>
+        <p className="text-[#757575] text-xs mt-1">Более 50 брендов в каталоге</p>
       </div>
 
       <div className="relative">

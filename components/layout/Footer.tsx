@@ -40,7 +40,7 @@ export default function Footer() {
   const [catalogOpen, setCatalogOpen] = useState(false);
 
   return (
-    <footer className="py-8 px-4 bg-section-accent dark:bg-[#0a0f0d] border-t border-[#bbd3ba] dark:border-[#1e2a25]">
+    <footer className="py-8 px-4 bg-section-accent border-t border-[#bbd3ba]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           {/* Колонка 1: Логотип */}
@@ -60,19 +60,19 @@ export default function Footer() {
                   <line x1="1" y1="14" x2="4" y2="14"></line>
                 </svg>
               </div>
-              <span className="text-xl font-bold tracking-tight text-[#121212] dark:text-white group-hover:text-primary transition-colors">
+              <span className="text-xl font-bold tracking-tight text-[#121212] group-hover:text-primary transition-colors">
                 Chip<span className="text-primary group-hover:text-primary-dark transition-colors">Net</span>
               </span>
             </Link>
-            <p className="text-sm text-[#666] dark:text-[#8a9a94] leading-relaxed mt-4 ml-1">
+            <p className="text-sm text-[#666] leading-relaxed mt-4 ml-1">
               Поставка оригинальных электронных компонентов и промышленного оборудования для ВПК и производства.
             </p>
           </div>
 
           {/* Колонка 2: Навигация */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#121212] dark:text-white">Навигация</h4>
-            <div className="flex flex-col gap-2 text-sm text-[#666] dark:text-[#8a9a94]">
+            <h4 className="font-semibold mb-4 text-[#121212]">Навигация</h4>
+            <div className="flex flex-col gap-2 text-sm text-[#666]">
               <a href="#search" className="hover:text-primary transition-colors">Поиск компонентов</a>
               <a href="#bom" className="hover:text-primary transition-colors">Загрузить BOM</a>
               <a href="#about" className="hover:text-primary transition-colors">О компании</a>
@@ -82,8 +82,8 @@ export default function Footer() {
 
           {/* Колонка 3: Контакты */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#121212] dark:text-white">Контакты</h4>
-            <div className="flex flex-col gap-2 text-sm text-[#666] dark:text-[#8a9a94]">
+            <h4 className="font-semibold mb-4 text-[#121212]">Контакты</h4>
+            <div className="flex flex-col gap-2 text-sm text-[#666]">
               <a href="tel:+79103219191" className="hover:text-primary transition-colors">+7 (910) 321-91-91</a>
               <a href="mailto:info@chip-net.ru" className="hover:text-primary transition-colors">info@chip-net.ru</a>
               <span>г. Белгород, ул. Шаландина, 4 к3 оф8</span>
@@ -96,18 +96,18 @@ export default function Footer() {
           {/* Кнопка-заголовок на мобильных, обычный заголовок на десктопе */}
           <button
             onClick={() => setCatalogOpen(!catalogOpen)}
-            className="md:hidden w-full flex items-center justify-between font-semibold mb-3 text-[#121212] dark:text-white cursor-pointer"
+            className="md:hidden w-full flex items-center justify-between font-semibold mb-3 text-[#121212] cursor-pointer"
           >
             <span>Каталог</span>
             <svg
-              className={`w-4 h-4 text-[#666] dark:text-[#8a9a94] transition-transform duration-200 ${catalogOpen ? "rotate-180" : ""}`}
+              className={`w-4 h-4 text-[#666] transition-transform duration-200 ${catalogOpen ? "rotate-180" : ""}`}
               fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
 
-          <h4 className="hidden md:block font-semibold mb-3 text-[#121212] dark:text-white">Каталог</h4>
+          <h4 className="hidden md:block font-semibold mb-3 text-[#121212]">Каталог</h4>
 
           {/* Список категорий — скрыт на мобилке пока не нажата кнопка */}
           <nav className={`flex flex-wrap gap-x-4 gap-y-1.5 ${catalogOpen ? "block" : "hidden"} md:flex`}>
@@ -115,7 +115,7 @@ export default function Footer() {
               <Link
                 key={cat.slug}
                 href={`/${cat.slug}`}
-                className="text-sm text-[#666] dark:text-[#8a9a94] hover:text-primary transition-colors"
+                className="text-sm text-[#666] hover:text-primary transition-colors"
               >
                 {cat.name}
               </Link>
@@ -124,12 +124,12 @@ export default function Footer() {
         </div>
 
         {/* Юридическая строка */}
-        <div className="border-t border-[#bbd3ba] dark:border-[#1e2a25] pt-6 text-xs text-[#757575] dark:text-[#6a7a74] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
+        <div className="border-t border-[#bbd3ba] pt-6 text-xs text-[#757575] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
           <div>
             © {new Date().getFullYear()} ООО «Деловой Партнёр». Все права защищены. ИНН 3123341983, ОГРН 1143123005838
           </div>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-[#333] dark:hover:text-white">Политика конфиденциальности</a>
+            <a href="#" className="hover:text-[#333]">Политика конфиденциальности</a>
           </div>
         </div>
       </div>

@@ -25,8 +25,8 @@ export default function HardCases() {
     <section className="py-6 px-4 bg-section relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212] dark:text-white">Решаем нестандартные задачи</h2>
-          <p className="text-[#666] dark:text-[#8a9a94] text-sm">Где другие отказывают — мы находим решение</p>
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Решаем нестандартные задачи</h2>
+          <p className="text-[#666] text-sm">Где другие отказывают — мы находим решение</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -37,23 +37,23 @@ export default function HardCases() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg p-4 flex flex-col shadow-sm hover:shadow-md transition-shadow"
+              className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg p-4 flex flex-col shadow-sm hover:shadow-md transition-shadow"
             >
               <span className="text-xs font-semibold text-primary bg-section-alt px-2 py-0.5 rounded-full self-start mb-3">
                 {c.tag}
               </span>
               <div className="flex-grow">
-                <h3 className="text-sm font-bold mb-1 text-[#333] dark:text-[#c4d0ca] flex items-start gap-1">
+                <h3 className="text-sm font-bold mb-1 text-[#333] flex items-start gap-1">
                   <span className="text-danger shrink-0">&#9888;</span> 
                   <span>Проблема:</span> 
                 </h3>
-                <p className="text-[#666] dark:text-[#8a9a94] text-xs mb-3 ml-5">{c.problem}</p>
+                <p className="text-[#666] text-xs mb-3 ml-5">{c.problem}</p>
                 
-                <h3 className="text-sm font-bold mb-1 text-[#333] dark:text-[#c4d0ca] flex items-start gap-1">
+                <h3 className="text-sm font-bold mb-1 text-[#333] flex items-start gap-1">
                   <span className="text-primary shrink-0">&#10003;</span> 
                   <span>Решение ChipNet:</span>
                 </h3>
-                <p className="text-[#666] dark:text-[#8a9a94] text-xs ml-5">{c.solution}</p>
+                <p className="text-[#666] text-xs ml-5">{c.solution}</p>
               </div>
             </motion.div>
           ))}
