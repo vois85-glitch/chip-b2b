@@ -29,7 +29,7 @@ export default function PopularCategories() {
             <Link
               key={cat.href}
               href={cat.href}
-              className="group block bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg p-3 hover:bg-section-alt hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md"
+              className="group block bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg p-3 hover:bg-section-alt hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <div className="text-2xl mb-1">{cat.icon}</div>
               <h3 className="text-sm font-bold text-[#121212] dark:text-white group-hover:text-primary transition-colors">{cat.title}</h3>

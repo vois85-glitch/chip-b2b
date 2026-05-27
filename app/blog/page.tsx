@@ -47,7 +47,7 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="block bg-gray-900/40 hover:bg-gray-800/50 border border-[#e8e8e8] dark:border-[#2a3530] hover:border-emerald-800/40 rounded-xl p-6 md:p-8 transition-all group"
+              className="block bg-[#e0e8de] hover:bg-[#dce6da] border border-[#e8e8e8] dark:border-[#2a3530] hover:border-emerald-800/40 rounded-xl p-6 md:p-8 transition-all group"
             >
               <div className="flex items-center gap-3 mb-3">
                 <span className="px-2 py-1 rounded-full bg-emerald-900/40 text-primary text-xs">

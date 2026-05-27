@@ -13,7 +13,7 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section className="py-12 px-4 bg-white relative overflow-hidden">
+    <section className="py-12 px-4 bg-[#f0f4ee] relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[#121212]">Сферы применения</h2>
@@ -28,7 +28,7 @@ export default function Industries() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="group flex gap-4 p-4 bg-white border border-[#e8e8e8] rounded-2xl hover:bg-section-alt hover:border-primary/30 transition-all duration-300 shadow-sm"
+              className="group flex gap-4 p-4 bg-[#f0f4ee] border border-[#e8e8e8] rounded-2xl hover:bg-section-alt hover:border-primary/30 transition-all duration-300 shadow-sm"
             >
               <div className="text-3xl">{ind.icon}</div>
               <div>

@@ -29,7 +29,7 @@ export default function BomUpload() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl p-4 md:p-6 shadow-lg"
+          className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl p-4 md:p-6 shadow-lg"
         >
           {state.message && (
             <motion.div 
@@ -50,7 +50,7 @@ export default function BomUpload() {
                 type="text" 
                 name="company_name"
                 required
-                className="w-full bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+                className="w-full bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="ООО Инжиниринг"
               />
             </div>
@@ -60,7 +60,7 @@ export default function BomUpload() {
                 type="text" 
                 name="inn"
                 required
-                className="w-full bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+                className="w-full bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="7712345678"
               />
             </div>
@@ -70,7 +70,7 @@ export default function BomUpload() {
                 type="email" 
                 name="email"
                 required
-                className="w-full bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+                className="w-full bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="info@company.ru"
               />
             </div>
@@ -79,7 +79,7 @@ export default function BomUpload() {
               <input 
                 type="tel" 
                 name="phone"
-                className="w-full bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+                className="w-full bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 placeholder="+7 (999) 123-45-67"
               />
             </div>
@@ -90,7 +90,7 @@ export default function BomUpload() {
             <textarea 
               name="message"
               rows={3}
-              className="w-full bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors resize-none"
+              className="w-full bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-3 py-2 text-sm text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors resize-none"
               placeholder="STM32F103C8T6 - 500 шт, LM7805CT - 200 шт..."
             />
           </div>

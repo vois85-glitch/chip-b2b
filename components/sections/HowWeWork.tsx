@@ -31,7 +31,7 @@ export default function HowWeWork() {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="relative text-center z-10"
             >
-              <div className="w-10 h-10 bg-white dark:bg-[#1a1f1c] border-2 border-primary/40 rounded-full flex items-center justify-center text-lg mx-auto mb-1 shadow-lg shadow-primary/5">
+              <div className="w-10 h-10 bg-[#f0f4ee] border-2 border-primary/40 rounded-full flex items-center justify-center text-lg mx-auto mb-1 shadow-lg shadow-primary/5">
                 {item.icon}
               </div>
               <div className="text-primary font-bold text-xs mb-0.5">Шаг {item.step}</div>

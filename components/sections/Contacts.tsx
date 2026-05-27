@@ -1,6 +1,6 @@
 export default function Contacts() {
   return (
-    <section id="contacts" className="py-6 px-4 bg-white dark:bg-[#0f1210]">
+    <section id="contacts" className="py-6 px-4 bg-[#f0f4ee]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212] dark:text-white">Контакты</h2>
@@ -42,7 +42,7 @@ export default function Contacts() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl overflow-hidden h-[200px] relative shadow-sm">
+          <div className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl overflow-hidden h-[200px] relative shadow-sm">
             <iframe 
               src="https://yandex.ru/map-widget/v1/?um=constructor%3A3e4f8e9dd1c4b1b1a4d0c7f8e9dd1c4b1b1a4d0c7f8e9dd1c4b1b1a4d0c7&source=constructor&z=16&text=Белгород%2C%20Шаландина%204%20к3" 
               width="100%" 

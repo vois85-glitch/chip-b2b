@@ -17,17 +17,17 @@ export default function PriceList() {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-left">
-            <div className="bg-white border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
+            <div className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
               <div className="text-3xl mb-3">📄</div>
               <h3 className="font-semibold text-lg mb-2 text-[#121212]">Загрузите BOM</h3>
               <p className="text-[#666] text-sm">Excel, CSV или PDF — примем в любом удобном для вас формате</p>
             </div>
-            <div className="bg-white border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
+            <div className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
               <div className="text-3xl mb-3">🔍</div>
               <h3 className="font-semibold text-lg mb-2 text-[#121212]">Мы ищем и проверяем</h3>
               <p className="text-[#666] text-sm">Подберем оригиналы или аналоги, проверим в лаборатории СВП</p>
             </div>
-            <div className="bg-white border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
+            <div className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-xl p-4 shadow-sm">
               <div className="text-3xl mb-3">💰</div>
               <h3 className="font-semibold text-lg mb-2 text-[#121212]">Получите КП</h3>
               <p className="text-[#666] text-sm">Коммерческое предложение с актуальными ценами и сроками поставки</p>

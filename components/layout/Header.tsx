@@ -62,8 +62,8 @@ export default function Header() {
         <div
           className={`transition-all duration-300 ${
             scrolled
-              ? "bg-white/95 backdrop-blur-xl dark:bg-[#0f1210]/95"
-              : "bg-white dark:bg-[#0f1210]"
+              ? "bg-[#f0f4ee]/95 backdrop-blur-xl"
+              : "bg-[#f0f4ee]"
           }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -98,7 +98,7 @@ export default function Header() {
             </Link>
 
             {/* Бейдж */}
-            <div className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1 bg-[#f5f5f5] dark:bg-[#1e2a25] rounded-full text-xs text-[#666] dark:text-[#8a9a94]">
+            <div className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1 bg-[#eaf0e8] dark:bg-[#1e2a25] rounded-full text-xs text-[#666] dark:text-[#8a9a94]">
               <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
@@ -138,7 +138,7 @@ export default function Header() {
               </button>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 rounded-lg hover:bg-[#f3f3f3] dark:hover:bg-[#1e2a25] transition-colors"
+                className="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 rounded-lg hover:bg-[#eaf0e8] dark:hover:bg-[#1e2a25] transition-colors"
                 aria-label="Меню"
               >
                 <span className={`block w-5 h-0.5 bg-[#333] dark:bg-[#c4d0ca] transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
@@ -193,7 +193,7 @@ export default function Header() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden bg-white dark:bg-[#0f1210] border-t border-[#e8e8e8] dark:border-[#2a3530]"
+              className="md:hidden bg-[#f0f4ee] border-t border-[#e8e8e8] dark:border-[#2a3530]"
             >
               <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
                 <div className="flex flex-col gap-2 pb-3 mb-3 border-b border-[#e8e8e8] dark:border-[#2a3530]">
@@ -222,7 +222,7 @@ export default function Header() {
                     <button
                       key={link.label}
                       onClick={() => scrollToSection(link.sectionId!)}
-                      className="w-full text-left px-4 py-3 rounded-lg text-[#333] dark:text-[#c4d0ca] hover:text-primary hover:bg-[#f3f3f3] dark:hover:bg-[#1e2a25] transition-colors text-sm font-medium"
+                      className="w-full text-left px-4 py-3 rounded-lg text-[#333] dark:text-[#c4d0ca] hover:text-primary hover:bg-[#eaf0e8] dark:hover:bg-[#1e2a25] transition-colors text-sm font-medium"
                     >
                       {link.label}
                     </button>
@@ -231,7 +231,7 @@ export default function Header() {
                       key={link.label}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="px-4 py-3 rounded-lg text-[#333] dark:text-[#c4d0ca] hover:text-primary hover:bg-[#f3f3f3] dark:hover:bg-[#1e2a25] transition-colors text-sm font-medium"
+                      className="px-4 py-3 rounded-lg text-[#333] dark:text-[#c4d0ca] hover:text-primary hover:bg-[#eaf0e8] dark:hover:bg-[#1e2a25] transition-colors text-sm font-medium"
                     >
                       {link.label}
                     </Link>

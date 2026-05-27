@@ -24,7 +24,7 @@ export default function ComponentSearch() {
   };
 
   return (
-    <section id="search" className="py-6 px-4 bg-white dark:bg-[#0f1210] relative overflow-hidden">
+    <section id="search" className="py-6 px-4 bg-[#f0f4ee] relative overflow-hidden">
       <div className="max-w-3xl mx-auto relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,7 @@ export default function ComponentSearch() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Например: STM32F103C8T6 или LM7805"
-              className="flex-grow bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-4 py-2.5 text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors text-base"
+              className="flex-grow bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg px-4 py-2.5 text-[#121212] dark:text-white placeholder-[#999] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors text-base"
             />
             <button 
               type="submit" 

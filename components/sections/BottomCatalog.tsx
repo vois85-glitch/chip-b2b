@@ -50,7 +50,7 @@ const analogGroups = [
 
 export default function BottomCatalog() {
   return (
-    <section className="py-8 md:py-12 px-4 bg-white border-t border-[#e8e8e8]">
+    <section className="py-8 md:py-12 px-4 bg-[#f0f4ee] border-t border-[#e8e8e8]">
       <div className="max-w-7xl mx-auto">
 
         {/* Аналоги санкционных компонентов */}

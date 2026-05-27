@@ -193,7 +193,7 @@ export default async function ComponentPage({ params }: Props) {
               }`}>
                 {component.status === 'EOL' ? 'Снят с производства (EOL)' : 'В производстве'}
               </div>
-              <div className="bg-white dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 mb-8">
+              <div className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 mb-8">
                 <h2 className="text-xl font-bold mb-4 text-primary">Технические данные</h2>
                 <div className="grid grid-cols-2 gap-4 text-[#333] dark:text-[#c4d0ca]">
                   <div><span className="text-[#757575] dark:text-[#7a8a84]">Бренд:</span> <strong>{component.brand}</strong></div>
@@ -202,7 +202,7 @@ export default async function ComponentPage({ params }: Props) {
                 </div>
               </div>
               {component.analogs && component.analogs.length > 0 && (
-                <div className="bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8">
+                <div className="bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8">
                   <h2 className="text-xl font-bold mb-4 text-[#121212] dark:text-white">Аналоги и замены для {component.sku}</h2>
                   <p className="text-[#666] dark:text-[#8a9a94] mb-4">
                     {component.status === 'EOL'
@@ -221,7 +221,7 @@ export default async function ComponentPage({ params }: Props) {
               )}
             </div>
             <div className="lg:col-span-1">
-              <div className="sticky top-24 bg-white dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8">
+              <div className="sticky top-24 bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8">
                 <h2 className="text-2xl font-bold mb-4">Запросить КП на {component.sku}</h2>
                 <p className="text-[#666] dark:text-[#8a9a94] mb-6">Укажите нужный объем. Мы проверим наличие и выставим коммерческое предложение.</p>
                 <a href="/#bom" className="block w-full text-center px-8 py-4 bg-primary hover:bg-primary-dark rounded-xl text-lg font-semibold transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 mb-4">

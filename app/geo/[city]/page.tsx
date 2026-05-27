@@ -115,7 +115,7 @@ export default async function GeoPage({ params }: Props) {
         {/* SEO text */}
         <section className="px-4 pb-12">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 md:p-8">
+            <div className="bg-[#e0e8de] rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 md:p-8">
               <p className="text-[#333] dark:text-[#c4d0ca] leading-relaxed text-base">
                 {geo.text}
               </p>
@@ -134,7 +134,7 @@ export default async function GeoPage({ params }: Props) {
                 <Link
                   key={cat.slug}
                   href={`/${cat.slug}`}
-                  className="bg-gray-900/40 hover:bg-gray-800/60 border border-[#e8e8e8] dark:border-[#2a3530] hover:border-[#cbcbcb] rounded-lg p-4 text-center transition-all"
+                  className="bg-[#e0e8de] hover:bg-[#dce6da] border border-[#e8e8e8] dark:border-[#2a3530] hover:border-[#cbcbcb] rounded-lg p-4 text-center transition-all"
                 >
                   <span className="text-[#333] dark:text-[#c4d0ca] text-sm font-medium">{cat.name}</span>
                 </Link>
@@ -148,15 +148,15 @@ export default async function GeoPage({ params }: Props) {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8">Почему выбирают ChipNet в {geo.name}</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6">
+              <div className="bg-[#e0e8de] rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6">
                 <div className="text-primary text-3xl font-bold mb-2">204+</div>
                 <div className="text-[#666] dark:text-[#8a9a94] text-sm">Позиций в каталоге</div>
               </div>
-              <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6">
+              <div className="bg-[#e0e8de] rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6">
                 <div className="text-primary text-3xl font-bold mb-2">СВП</div>
                 <div className="text-[#666] dark:text-[#8a9a94] text-sm">Проверка оригинальности</div>
               </div>
-              <div className="bg-gray-900/40 rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6">
+              <div className="bg-[#e0e8de] rounded-xl border border-[#e8e8e8] dark:border-[#2a3530] p-6">
                 <div className="text-primary text-3xl font-bold mb-2">1-4</div>
                 <div className="text-[#666] dark:text-[#8a9a94] text-sm">Дня доставка</div>
               </div>

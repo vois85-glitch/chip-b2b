@@ -30,7 +30,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-6 px-4 bg-white dark:bg-[#1a1f1c] dark:bg-[#0f1210]">
+    <section className="py-6 px-4 bg-[#f0f4ee] dark:bg-[#f0f4ee]">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212] dark:text-white">Частые вопросы</h2>
@@ -45,7 +45,7 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg overflow-hidden bg-white dark:bg-[#1a1f1c] shadow-sm"
+              className="border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg overflow-hidden bg-[#f0f4ee] shadow-sm"
             >
               <button 
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}

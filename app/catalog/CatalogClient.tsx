@@ -104,7 +104,7 @@ export default function CatalogClient({
   const filterSidebar = (
     <>
       {/* Categories */}
-      <div className="bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl p-4 mb-4">
+      <div className="bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl p-4 mb-4">
         <h3 className="text-sm font-bold text-[#333] dark:text-[#c4d0ca] dark:text-[#c4d0ca] mb-3 uppercase tracking-wider">Категории</h3>
         <div className="relative mb-3">
           <input
@@ -112,7 +112,7 @@ export default function CatalogClient({
             value={catSearch}
             onChange={(e) => setCatSearch(e.target.value)}
             placeholder="Найти категорию..."
-            className="w-full px-3 py-2 bg-white dark:bg-[#0f1210] dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-sm text-[#121212] dark:text-white dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] dark:placeholder-[#5a6a64] focus:outline-none focus:border-primary"
+            className="w-full px-3 py-2 bg-[#f0f4ee] dark:bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-sm text-[#121212] dark:text-white dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] dark:placeholder-[#5a6a64] focus:outline-none focus:border-primary"
           />
           {catSearch && (
             <button onClick={() => setCatSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#757575] dark:text-[#7a8a84] dark:text-[#7a8a84] hover:text-[#333] dark:text-[#c4d0ca] dark:text-[#c4d0ca] text-xs">✕</button>
@@ -126,7 +126,7 @@ export default function CatalogClient({
               className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex justify-between items-center ${
                 currentCategory === cat
                   ? 'bg-section-alt dark:bg-[#1e2a25] dark:bg-[#1e2a25] text-primary font-semibold'
-                  : 'text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:bg-[#f3f3f3] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] dark:hover:bg-[#253530] dark:bg-[#1a1f1c]'
+                  : 'text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:bg-[#eaf0e8] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] dark:hover:bg-[#253530] dark:bg-[#1a1f1c]'
               }`}
             >
               <span className="truncate">{cat}</span>
@@ -139,7 +139,7 @@ export default function CatalogClient({
       </div>
 
       {/* Brands */}
-      <div className="bg-[#fafafa] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl p-4">
+      <div className="bg-[#eaf0e8] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl p-4">
         <h3 className="text-sm font-bold text-[#333] dark:text-[#c4d0ca] dark:text-[#c4d0ca] mb-3 uppercase tracking-wider">Бренды</h3>
         <div className="relative mb-3">
           <input
@@ -147,7 +147,7 @@ export default function CatalogClient({
             value={brandSearch}
             onChange={(e) => setBrandSearch(e.target.value)}
             placeholder="Найти бренд..."
-            className="w-full px-3 py-2 bg-white dark:bg-[#0f1210] dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-sm text-[#121212] dark:text-white dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] dark:placeholder-[#5a6a64] focus:outline-none focus:border-primary"
+            className="w-full px-3 py-2 bg-[#f0f4ee] dark:bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-sm text-[#121212] dark:text-white dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] dark:placeholder-[#5a6a64] focus:outline-none focus:border-primary"
           />
           {brandSearch && (
             <button onClick={() => setBrandSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#757575] dark:text-[#7a8a84] dark:text-[#7a8a84] hover:text-[#333] dark:text-[#c4d0ca] dark:text-[#c4d0ca] text-xs">✕</button>
@@ -161,7 +161,7 @@ export default function CatalogClient({
               className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex justify-between items-center ${
                 currentBrand === br
                   ? 'bg-section-alt dark:bg-[#1e2a25] dark:bg-[#1e2a25] text-primary font-semibold'
-                  : 'text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:bg-[#f3f3f3] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] dark:hover:bg-[#253530] dark:bg-[#1a1f1c]'
+                  : 'text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:bg-[#eaf0e8] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] dark:hover:bg-[#253530] dark:bg-[#1a1f1c]'
               }`}
             >
               <span className="truncate">{br}</span>
@@ -187,7 +187,7 @@ export default function CatalogClient({
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Поиск по артикулу, названию или бренду..."
-                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 bg-white dark:bg-[#0f1210] dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl text-[#121212] dark:text-white dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] dark:placeholder-[#5a6a64] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all text-sm sm:text-base"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 bg-[#f0f4ee] dark:bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl text-[#121212] dark:text-white dark:text-white placeholder-[#999] dark:placeholder-[#5a6a64] dark:placeholder-[#5a6a64] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all text-sm sm:text-base"
               />
               {searchInput && (
                 <button
@@ -211,7 +211,7 @@ export default function CatalogClient({
               className={`relative px-3 sm:px-4 py-3 sm:py-3.5 border rounded-xl font-semibold transition-colors text-sm sm:text-base ${
                 showFilters
                   ? 'border-emerald-500/50 bg-emerald-900/20 text-primary'
-                  : 'border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] bg-white dark:bg-[#0f1210] dark:bg-[#0f1210] text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white'
+                  : 'border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] bg-[#f0f4ee] dark:bg-[#f0f4ee] text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white'
               }`}
             >
               <span className="hidden sm:inline">Фильтры</span>
@@ -277,7 +277,7 @@ export default function CatalogClient({
                   <Link
                     key={comp.sku}
                     href={`/component/${encodeURIComponent(comp.sku)}`}
-                    className="group block bg-gray-900/40 border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl p-4 hover:bg-gray-900/70 hover:border-emerald-800/50 transition-all duration-200"
+                    className="group block bg-[#e0e8de] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-xl p-4 hover:bg-[#d5e0d3] hover:border-emerald-800/50 transition-all duration-200"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <span className="font-mono font-bold text-primary group-hover:text-emerald-300 text-sm leading-tight break-all">
@@ -295,10 +295,10 @@ export default function CatalogClient({
                       {comp.name}
                     </p>
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 bg-gray-800/80 rounded text-[10px] text-[#757575] dark:text-[#7a8a84] dark:text-[#7a8a84]">
+                      <span className="px-2 py-0.5 bg-[#d5e0d3] rounded text-[10px] text-[#757575] dark:text-[#7a8a84] dark:text-[#7a8a84]">
                         {comp.brand}
                       </span>
-                      <span className="px-2 py-0.5 bg-gray-800/80 rounded text-[10px] text-[#757575] dark:text-[#7a8a84] dark:text-[#7a8a84]">
+                      <span className="px-2 py-0.5 bg-[#d5e0d3] rounded text-[10px] text-[#757575] dark:text-[#7a8a84] dark:text-[#7a8a84]">
                         {comp.category}
                       </span>
                     </div>
@@ -325,7 +325,7 @@ export default function CatalogClient({
                 {currentPage > 1 && (
                   <Link
                     href={`/catalog?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), page: String(currentPage - 1) }).toString()}`}
-                    className="px-4 py-2 bg-white dark:bg-[#0f1210] dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:border-emerald-600/50 transition-colors"
+                    className="px-4 py-2 bg-[#f0f4ee] dark:bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:border-emerald-600/50 transition-colors"
                   >
                     ← Назад
                   </Link>
@@ -344,7 +344,7 @@ export default function CatalogClient({
                     className={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-colors ${
                       pageNum === currentPage
                         ? 'bg-primary text-[#121212] dark:text-white dark:text-white'
-                        : 'bg-white dark:bg-[#0f1210] dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:border-emerald-600/50'
+                        : 'bg-[#f0f4ee] dark:bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:border-emerald-600/50'
                     }`}
                   >
                     {pageNum}
@@ -353,7 +353,7 @@ export default function CatalogClient({
                 {currentPage < totalPages && (
                   <Link
                     href={`/catalog?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), page: String(currentPage + 1) }).toString()}`}
-                    className="px-4 py-2 bg-white dark:bg-[#0f1210] dark:bg-[#0f1210] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:border-emerald-600/50 transition-colors"
+                    className="px-4 py-2 bg-[#f0f4ee] dark:bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] dark:border-[#2a3530] rounded-lg text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white hover:border-emerald-600/50 transition-colors"
                   >
                     Далее →
                   </Link>
@@ -379,7 +379,7 @@ export default function CatalogClient({
               <h2 className="text-lg font-bold text-[#121212] dark:text-white dark:text-white">Фильтры</h2>
               <button
                 onClick={() => setShowFilters(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#f3f3f3] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#eaf0e8] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] text-[#666] dark:text-[#8a9a94] dark:text-[#8a9a94] hover:text-[#121212] dark:text-white dark:text-white transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

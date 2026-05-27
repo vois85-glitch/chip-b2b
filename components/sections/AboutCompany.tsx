@@ -51,7 +51,7 @@ export default function AboutCompany() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -71,7 +71,7 @@ export default function AboutCompany() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -106,7 +106,7 @@ export default function AboutCompany() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="flex items-center gap-4 bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl p-5 shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
+                className="flex items-center gap-4 bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-xl p-5 shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-xl shrink-0">
                   {adv.icon}

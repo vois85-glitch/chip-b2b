@@ -37,7 +37,7 @@ export default function HardCases() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="bg-white dark:bg-[#1a1f1c] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg p-4 flex flex-col shadow-sm hover:shadow-md transition-shadow"
+              className="bg-[#f0f4ee] border border-[#e8e8e8] dark:border-[#2a3530] rounded-lg p-4 flex flex-col shadow-sm hover:shadow-md transition-shadow"
             >
               <span className="text-xs font-semibold text-primary bg-section-alt px-2 py-0.5 rounded-full self-start mb-3">
                 {c.tag}

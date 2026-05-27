@@ -11,7 +11,7 @@ const steps = [
 
 export default function QualityControl() {
   return (
-    <section className="py-6 px-4 bg-white">
+    <section className="py-6 px-4 bg-[#f0f4ee]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Собственная лаборатория СВП</h2>
@@ -28,7 +28,7 @@ export default function QualityControl() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white border border-[#e8e8e8] rounded-lg p-3 relative overflow-hidden group shadow-sm hover:shadow-md transition-shadow"
+              className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg p-3 relative overflow-hidden group shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="text-5xl font-bold text-primary/10 absolute top-1 right-2 group-hover:text-primary/20 transition-colors">
                 {item.step}

@@ -244,7 +244,7 @@ export default function ImportKomponentovPage() {
               {importSteps.map((item) => (
                 <div
                   key={item.step}
-                  className="relative bg-white dark:bg-[#0f1210] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 hover:border-primary/30 hover:shadow-lg transition-all group"
+                  className="relative bg-[#f0f4ee] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 hover:border-primary/30 hover:shadow-lg transition-all group"
                 >
                   <span className="text-5xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors absolute top-4 right-4">
                     {item.step}
@@ -268,7 +268,7 @@ export default function ImportKomponentovPage() {
               {importCategories.map((cat) => (
                 <div
                   key={cat.title}
-                  className="bg-white dark:bg-[#0f1210] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 hover:border-primary/30 hover:shadow-lg transition-all"
+                  className="bg-[#f0f4ee] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] p-6 hover:border-primary/30 hover:shadow-lg transition-all"
                 >
                   <h3 className="text-lg font-semibold mb-2 text-[#121212] dark:text-white">{cat.title}</h3>
                   <p className="text-primary text-sm font-medium mb-3">{cat.items}</p>
@@ -308,9 +308,9 @@ export default function ImportKomponentovPage() {
               {faqItems.map((item, index) => (
                 <details
                   key={index}
-                  className="group bg-white dark:bg-[#0f1210] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] overflow-hidden"
+                  className="group bg-[#f0f4ee] rounded-2xl border border-[#e8e8e8] dark:border-[#2a3530] overflow-hidden"
                 >
-                  <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-[#fafafa] transition-colors">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-[#eaf0e8] transition-colors">
                     <span className="font-semibold text-[#121212] dark:text-white pr-4">{item.question}</span>
                     <svg
                       className="w-5 h-5 text-[#757575] dark:text-[#7a8a84] group-open:rotate-180 transition-transform shrink-0"

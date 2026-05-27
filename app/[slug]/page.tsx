@@ -170,7 +170,7 @@ export default async function SlugPage({ params }: Props) {
               <div className="overflow-x-auto rounded-xl border border-[#e8e8e8] dark:border-[#2a3530]">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-[#fafafa] border-b border-[#e8e8e8] dark:border-[#2a3530]">
+                    <tr className="bg-[#eaf0e8] border-b border-[#e8e8e8] dark:border-[#2a3530]">
                       <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">SKU</th>
                       <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Наименование</th>
                       <th className="text-left py-4 px-4 text-[#666] dark:text-[#8a9a94] font-medium">Бренд</th>
@@ -180,7 +180,7 @@ export default async function SlugPage({ params }: Props) {
                   </thead>
                   <tbody>
                     {components.map((comp) => (
-                      <tr key={comp.sku} className="border-b border-[#e8e8e8] dark:border-[#2a3530]/50 hover:bg-[#f3f3f3] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] transition-colors">
+                      <tr key={comp.sku} className="border-b border-[#e8e8e8] dark:border-[#2a3530]/50 hover:bg-[#eaf0e8] dark:hover:bg-[#253530] dark:bg-[#1a1f1c] transition-colors">
                         <td className="py-3 px-4">
                           <Link
                             href={`/component/${comp.sku}`}
