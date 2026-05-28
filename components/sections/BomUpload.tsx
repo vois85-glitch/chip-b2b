@@ -17,19 +17,29 @@ export default function BomUpload() {
  };
 
  return (
- <section id="bom" className="py-6 px-4 bg-section-alt relative overflow-hidden">
+ <section id="bom" className="py-16 px-4 bg-section-alt relative overflow-hidden">
  <div className="max-w-4xl mx-auto relative z-10">
- <div className="text-center mb-6">
- <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Запрос коммерческого предложения</h2>
- <p className="text-[#555] text-sm">Загрузите BOM-лист или опишите необходимые компоненты</p>
- </div>
+ <motion.div
+ initial={{ opacity: 0, y: 30 }}
+ whileInView={{ opacity: 1, y: 0 }}
+ viewport={{ once: true }}
+ transition={{ duration: 0.6 }}
+ className="text-center mb-8"
+ >
+ <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#121212]">
+ BOM-комплектация для производств и инженерных проектов
+ </h2>
+ <p className="text-[#555] text-base max-w-3xl mx-auto leading-relaxed">
+ Отправьте спецификацию компонентов, и команда Chip-Net подберёт оптимальные решения по срокам, стоимости и доступности. Работаем с промышленной электроникой, embedded-системами, телеком-оборудованием и контрактными производствами.
+ </p>
+ </motion.div>
 
  <motion.form 
  action={formAction}
  initial={{ opacity: 0, y: 30 }}
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
- className="bg-[#f0f4ee] border border-[#e8e8e8] rounded-xl p-4 md:p-6 shadow-lg"
+ className="bg-white border border-[#e8e8e8] rounded-2xl p-5 md:p-8 shadow-lg"
  >
  {state.message && (
  <motion.div 
@@ -115,11 +125,11 @@ export default function BomUpload() {
  <button 
  type="submit" 
  disabled={isPending}
- className={`w-full py-2.5 rounded-lg text-sm font-semibold transition-all shadow-lg duration-300 text-white ${
+ className={`w-full py-3 rounded-xl text-sm font-semibold transition-all shadow-lg duration-300 text-white ${
  isPending ? 'bg-primary/60 cursor-wait' : 'bg-primary hover:bg-primary-dark shadow-primary/25 hover:shadow-primary/40'
  }`}
  >
- {isPending ? 'Отправка...' : 'Получить предложение'}
+ {isPending ? 'Отправка...' : 'Загрузить BOM'}
  </button>
  </motion.form>
  </div>

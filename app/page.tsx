@@ -1,14 +1,13 @@
 import Hero from '@/components/sections/Hero';
 import BrandsMarquee from '@/components/sections/BrandsMarquee';
-import ComponentSearch from '@/components/sections/ComponentSearch';
-import PopularCategories from '@/components/sections/PopularCategories';
 import AboutCompany from '@/components/sections/AboutCompany';
-import HardCases from '@/components/sections/HardCases';
-import LogisticsDetails from '@/components/sections/LogisticsDetails';
+import Advantages from '@/components/sections/Advantages';
 import BomUpload from '@/components/sections/BomUpload';
-import HowWeWork from '@/components/sections/HowWeWork';
+import RfqSection from '@/components/sections/RfqSection';
+import PopularCategories from '@/components/sections/PopularCategories';
+import BrandsShowcase from '@/components/sections/BrandsShowcase';
 import FAQ from '@/components/sections/FAQ';
-import Contacts from '@/components/sections/Contacts';
+import CtaBlock from '@/components/sections/CtaBlock';
 
 const faqLd = {
  '@context': 'https://schema.org',
@@ -16,42 +15,42 @@ const faqLd = {
  mainEntity: [
  {
  '@type': 'Question',
- name: 'Как вы гарантируете оригинальность компонентов?',
+ name: 'Как вы проверяете оригинальность компонентов?',
  acceptedAnswer: {
  '@type': 'Answer',
- text: 'Работаем только с авторизованными дистрибьюторами и заводами. Все партии проходят входной контроль в лаборатории СВП (рентген, декапсуляция, электрическое тестирование).',
+ text: 'Мы работаем с проверенными поставщиками и используем процедуры supplier verification и контроля происхождения продукции. Каждый компонент проходит входной контроль для подтверждения подлинности и соответствия спецификации.',
  },
  },
  {
  '@type': 'Question',
- name: 'Работаете ли вы с физическими лицами?',
+ name: 'Можно ли подобрать аналог unavailable компонента?',
  acceptedAnswer: {
  '@type': 'Answer',
- text: 'Нет, мы специализируемся на B2B-рынке. Работаем с юрлицами (ООО, АО) и ИП по договору поставки с закрывающими документами.',
+ text: 'Да. Мы помогаем находить совместимые replacement-решения для unavailable и obsolete компонентов. Наши инженеры подбирают аналоги с учётом электрических параметров, типа корпуса и условий применения.',
  },
  },
  {
  '@type': 'Question',
- name: 'Какие условия оплаты?',
+ name: 'Работаете ли вы с BOM-комплектацией?',
  acceptedAnswer: {
  '@type': 'Answer',
- text: 'Для постоянных клиентов — постоплата до 30 дней. Для новых — предоплата 50% или 100% в зависимости от суммы и редкости компонентов.',
+ text: 'Да. Мы закрываем спецификации для контрактных производств, OEM и инженерных проектов. От единичных позиций до комплексных BOM для серийного производства.',
  },
  },
  {
  '@type': 'Question',
- name: 'За сколько времени вы даете КП?',
+ name: 'Откуда осуществляется поставка?',
  acceptedAnswer: {
  '@type': 'Answer',
- text: 'Стандартный прайс — 1-2 часа. Заявки на редкие или санкционные компоненты — до 24 часов.',
+ text: 'Основные направления поставок — Европа и Азия. Мы работаем с авторизованными дистрибьюторами и заводами-изготовителями из Китая, Тайваня, Южной Кореи, Германии и других стран.',
  },
  },
  {
  '@type': 'Question',
- name: 'Что если компонент попадет под санкции после оплаты?',
+ name: 'Какие сроки поставки?',
  acceptedAnswer: {
  '@type': 'Answer',
- text: 'Возвращаем средства в полном объеме за 3 рабочих дня, либо бесплатно подбираем функциональный аналог.',
+ text: 'Средний срок поставки начинается от 6 дней и зависит от категории компонентов и доступности. Для срочных заказов возможна приоритетная обработка и ускоренная авиадоставка.',
  },
  },
  ],
@@ -66,15 +65,14 @@ export default function Home() {
  />
  <Hero />
  <BrandsMarquee />
- <ComponentSearch />
- <PopularCategories />
  <AboutCompany />
- <HardCases />
- <LogisticsDetails />
+ <Advantages />
  <BomUpload />
- <HowWeWork />
+ <RfqSection />
+ <PopularCategories />
+ <BrandsShowcase />
  <FAQ />
- <Contacts />
+ <CtaBlock />
  </main>
  );
 }
