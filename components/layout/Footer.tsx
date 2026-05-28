@@ -152,7 +152,7 @@ export default function Footer() {
         {/* Юридическая строка */}
         <div className="border-t border-[#bbd3ba] pt-6 text-xs text-[#666] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
           <div>
-            &copy; {new Date().getFullYear()} ООО &laquo;Деловой Партнёр&raquo;. Все права защищены. Поставка электронных компонентов для промышленности и ВПК.
+            &copy; {new Date().getFullYear()}&nbsp;ООО &laquo;Деловой Партнёр&raquo;. Все права защищены. Поставка электронных компонентов для промышленности и ВПК.
           </div>
           <div className="flex gap-4">
             <a href="#" className="hover:text-[#333]">Политика конфиденциальности</a>
