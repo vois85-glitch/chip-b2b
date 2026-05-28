@@ -42,11 +42,19 @@ const serviceLinks = [
   { name: "Снятые с производства (EOL)", href: "/obsolete" },
   { name: "Даташиты компонентов", href: "/datasheets" },
   { name: "BOM-комплектация", href: "/bom" },
+  { name: "Запрос КП", href: "/rfq" },
+  { name: "Срочная поставка", href: "/urgent-sourcing" },
+  { name: "Труднодоступные компоненты", href: "/hard-to-find" },
   { name: "Импортозамещение", href: "/importozameshchenie" },
-  { name: "Проверка компонентов", href: "/proverka-komponentov" },
   { name: "Отраслевые решения", href: "/industries" },
   { name: "Доставка и оплата", href: "/delivery" },
   { name: "База знаний", href: "/knowledge-base" },
+];
+
+const trustLinks = [
+  { name: "Защита от контрафакта", href: "/anti-counterfeit" },
+  { name: "Контроль качества (СВП)", href: "/quality-assurance" },
+  { name: "Экспертиза поставок", href: "/sourcing-expertise" },
 ];
 
 export default function Footer() {
@@ -55,7 +63,7 @@ export default function Footer() {
   return (
     <footer className="py-8 px-4 bg-section-accent border-t border-[#bbd3ba]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-5 mb-8">
           {/* Колонка 1: Логотип */}
           <div>
             <Link href="/" className="flex items-center gap-3 group w-fit">
@@ -100,6 +108,18 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-[#121212]">Услуги</h4>
             <div className="flex flex-col gap-2 text-sm text-[#555]">
               {serviceLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Колонка 3.5: Доверие */}
+          <div>
+            <h4 className="font-semibold mb-4 text-[#121212]">Доверие и качество</h4>
+            <div className="flex flex-col gap-2 text-sm text-[#555]">
+              {trustLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
                   {link.name}
                 </Link>

@@ -71,6 +71,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/obsolete', priority: 0.8, changefreq: 'weekly' },
     { path: '/datasheets', priority: 0.8, changefreq: 'weekly' },
     { path: '/bom', priority: 0.8, changefreq: 'monthly' },
+    { path: '/rfq', priority: 0.8, changefreq: 'monthly' },
+    { path: '/urgent-sourcing', priority: 0.8, changefreq: 'monthly' },
+    { path: '/hard-to-find', priority: 0.8, changefreq: 'monthly' },
+    { path: '/anti-counterfeit', priority: 0.7, changefreq: 'monthly' },
+    { path: '/quality-assurance', priority: 0.7, changefreq: 'monthly' },
+    { path: '/sourcing-expertise', priority: 0.7, changefreq: 'monthly' },
     { path: '/industries', priority: 0.7, changefreq: 'monthly' },
     { path: '/delivery', priority: 0.7, changefreq: 'monthly' },
     { path: '/knowledge-base', priority: 0.7, changefreq: 'weekly' },
@@ -149,6 +155,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     });
   }
+
+  // 8. Страницы отраслей
+  const industrySlugs = [
+    'oboronnij-kompleks', 'promyshlennaya-avtomatika', 'telekommunikatsii',
+    'energetika', 'meditsina', 'avtomobilestroenie', 'aerokosmicheskaya-otrasl',
+    'potrebitelskaya-otrasl'
+  ];
+  for (const slug of industrySlugs) {
+    entries.push({
+      url: `${BASE_URL}/industries/${slug}`,
+      lastModified: '2026-05-28',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    });
+  }
+
+  // 9. Страницы сравнения компонентов
+  try {
+    const { comparisonGroups } = await import('@/lib/semantic-data');
+    for (const group of comparisonGroups) {
+      entries.push({
+        url: `${BASE_URL}/compare/${group.slug}`,
+        lastModified: '2026-05-28',
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      });
+    }
+  } catch {}
 
   return entries;
 }
