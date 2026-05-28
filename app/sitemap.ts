@@ -72,14 +72,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/datasheets', priority: 0.8, changefreq: 'weekly' },
     { path: '/bom', priority: 0.8, changefreq: 'monthly' },
     { path: '/industries', priority: 0.7, changefreq: 'monthly' },
+    { path: '/delivery', priority: 0.7, changefreq: 'monthly' },
     { path: '/knowledge-base', priority: 0.7, changefreq: 'weekly' },
     { path: '/blog', priority: 0.7, changefreq: 'weekly' },
-    { path: '/importozameshchenie', priority: 0.8, changefreq: 'weekly' },
-    { path: '/podbor-analogov', priority: 0.8, changefreq: 'weekly' },
-    { path: '/proverka-komponentov', priority: 0.7, changefreq: 'monthly' },
-    { path: '/komplektaciya-proizvodstv', priority: 0.7, changefreq: 'monthly' },
-    { path: '/elektronnye-komponenty', priority: 0.7, changefreq: 'monthly' },
-    { path: '/igbt', priority: 0.7, changefreq: 'weekly' },
   ];
 
   for (const hub of hubPages) {

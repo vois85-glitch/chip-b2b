@@ -45,6 +45,7 @@ const serviceLinks = [
   { name: "Импортозамещение", href: "/importozameshchenie" },
   { name: "Проверка компонентов", href: "/proverka-komponentov" },
   { name: "Отраслевые решения", href: "/industries" },
+  { name: "Доставка и оплата", href: "/delivery" },
   { name: "База знаний", href: "/knowledge-base" },
 ];
 
@@ -113,7 +114,7 @@ export default function Footer() {
               <a href="tel:+79103219191" className="hover:text-primary transition-colors">+7 (910) 321-91-91</a>
               <a href="mailto:info@chip-net.ru" className="hover:text-primary transition-colors">info@chip-net.ru</a>
               <span>г. Белгород, ул. Шаландина, 4 к3 оф8</span>
-              <span className="text-xs text-[#555] mt-2">ИНН 3123341983, ОГРН 1143123005838</span>
+              <span className="text-xs text-[#666] mt-2">ИНН 3123341983, ОГРН 1143123005838</span>
             </div>
           </div>
         </div>
@@ -149,7 +150,7 @@ export default function Footer() {
         </div>
 
         {/* Юридическая строка */}
-        <div className="border-t border-[#bbd3ba] pt-6 text-xs text-[#555] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
+        <div className="border-t border-[#bbd3ba] pt-6 text-xs text-[#666] text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
           <div>
             &copy; {new Date().getFullYear()} ООО &laquo;Деловой Партнёр&raquo;. Все права защищены. Поставка электронных компонентов для промышленности и ВПК.
           </div>
