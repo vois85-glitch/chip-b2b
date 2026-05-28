@@ -3,8 +3,6 @@ import BrandsMarquee from '@/components/sections/BrandsMarquee';
 import ComponentSearch from '@/components/sections/ComponentSearch';
 import PopularCategories from '@/components/sections/PopularCategories';
 import AboutCompany from '@/components/sections/AboutCompany';
-import HardCases from '@/components/sections/HardCases';
-import LogisticsDetails from '@/components/sections/LogisticsDetails';
 import BomUpload from '@/components/sections/BomUpload';
 import HowWeWork from '@/components/sections/HowWeWork';
 import FAQ from '@/components/sections/FAQ';
@@ -69,8 +67,6 @@ export default function Home() {
       <ComponentSearch />
       <PopularCategories />
       <AboutCompany />
-      <HardCases />
-      <LogisticsDetails />
       <BomUpload />
       <HowWeWork />
       <FAQ />
