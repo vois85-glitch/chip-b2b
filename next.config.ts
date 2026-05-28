@@ -227,11 +227,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/hard-to-find",
-        destination: "/elektronnye-komponenty",
-        permanent: true,
-      },
-      {
         source: "/obsolete-components",
         destination: "/obsolete",
         permanent: true,
