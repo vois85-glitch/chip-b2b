@@ -149,6 +149,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: `${BASE_URL}/knowledge-base/${slug}`,
     },
+    robots: { index: true, follow: true },
     openGraph: {
       title,
       description,

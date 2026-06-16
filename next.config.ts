@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  compress: true,
   async redirects() {
     return [
       // non-www → www
@@ -203,12 +204,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/stm32-analogs",
-        destination: "/podbor-analogov",
+        destination: "/analogs",
         permanent: true,
       },
       {
         source: "/stm32-zamena",
-        destination: "/podbor-analogov",
+        destination: "/analogs",
         permanent: true,
       },
       {
@@ -224,6 +225,11 @@ const nextConfig: NextConfig = {
       {
         source: "/sanctioned-components",
         destination: "/importozameshchenie",
+        permanent: true,
+      },
+      {
+        source: "/hard-to-find",
+        destination: "/elektronnye-komponenty",
         permanent: true,
       },
       {
@@ -243,53 +249,222 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/analog-replacement",
-        destination: "/podbor-analogov",
+        destination: "/analogs",
         permanent: true,
       },
       {
         source: "/cross-reference",
-        destination: "/podbor-analogov",
+        destination: "/analogs",
         permanent: true,
       },
-      // Brand alternate slugs
+      // /podbor-analogov → /analogs (устранение цепочки редиректов)
+      {
+        source: "/podbor-analogov",
+        destination: "/analogs",
+        permanent: true,
+      },
+      // === Brand redirects: /brand/* → короткие SEO-URL ===
+      // Бренды с seoPages — редирект на короткий URL
+      {
+        source: "/brand/intel-altera",
+        destination: "/altera",
+        permanent: true,
+      },
+      {
+        source: "/brand/xilinx",
+        destination: "/xilinx",
+        permanent: true,
+      },
+      {
+        source: "/brand/nxp",
+        destination: "/nxp",
+        permanent: true,
+      },
+      {
+        source: "/brand/infineon",
+        destination: "/infineon",
+        permanent: true,
+      },
+      {
+        source: "/brand/stmicroelectronics",
+        destination: "/stmicroelectronics",
+        permanent: true,
+      },
+      {
+        source: "/brand/texas-instruments",
+        destination: "/texas-instruments",
+        permanent: true,
+      },
+      {
+        source: "/brand/analog-devices",
+        destination: "/analog-devices",
+        permanent: true,
+      },
+      {
+        source: "/brand/microchip",
+        destination: "/microchip",
+        permanent: true,
+      },
+      {
+        source: "/brand/renesas",
+        destination: "/renesas",
+        permanent: true,
+      },
+      {
+        source: "/brand/onsemi",
+        destination: "/onsemi",
+        permanent: true,
+      },
+      {
+        source: "/brand/lattice",
+        destination: "/lattice",
+        permanent: true,
+      },
+      {
+        source: "/brand/murata",
+        destination: "/murata",
+        permanent: true,
+      },
+      {
+        source: "/brand/tdk",
+        destination: "/tdk",
+        permanent: true,
+      },
+      {
+        source: "/brand/vishay",
+        destination: "/vishay",
+        permanent: true,
+      },
+      {
+        source: "/brand/micron",
+        destination: "/micron",
+        permanent: true,
+      },
+      {
+        source: "/brand/gigadevice",
+        destination: "/gigadevice",
+        permanent: true,
+      },
+      {
+        source: "/brand/wurth-elektronik",
+        destination: "/wurth-elektronik",
+        permanent: true,
+      },
+      {
+        source: "/brand/diodes-inc",
+        destination: "/diodes-inc",
+        permanent: true,
+      },
+      {
+        source: "/brand/fujitsu",
+        destination: "/fujitsu",
+        permanent: true,
+      },
+      {
+        source: "/brand/nordic",
+        destination: "/nordic",
+        permanent: true,
+      },
+      // Brand alternate slugs → короткие SEO-URL (без цепочки редиректов)
       {
         source: "/brand/stm",
-        destination: "/brand/stmicroelectronics",
+        destination: "/stmicroelectronics",
         permanent: true,
       },
       {
         source: "/brand/ti",
-        destination: "/brand/texas-instruments",
+        destination: "/texas-instruments",
         permanent: true,
       },
       {
         source: "/brand/adi",
-        destination: "/brand/analog-devices",
+        destination: "/analog-devices",
         permanent: true,
       },
       {
         source: "/brand/microchip-technology",
-        destination: "/brand/microchip",
+        destination: "/microchip",
         permanent: true,
       },
       {
         source: "/brand/on-semiconductor",
-        destination: "/brand/onsemi",
+        destination: "/onsemi",
         permanent: true,
       },
       {
         source: "/brand/wurth",
-        destination: "/brand/wurth-elektronik",
+        destination: "/wurth-elektronik",
         permanent: true,
       },
       {
         source: "/brand/diodes",
-        destination: "/brand/diodes-inc",
+        destination: "/diodes-inc",
+        permanent: true,
+      },
+      // Бренды без seoPages с 404 → индекс производителей
+      {
+        source: "/brand/molex",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/rohm",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/avx",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/cypress",
+        destination: "/brands",
         permanent: true,
       },
       {
         source: "/brand/aimtec",
-        destination: "/brand/aimtec",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/espressif",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/gowin",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/monolithic-power",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/ixys",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/u-blox",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/qualcomm",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/realtek",
+        destination: "/brands",
+        permanent: true,
+      },
+      {
+        source: "/brand/panasonic",
+        destination: "/brands",
         permanent: true,
       },
       // /import-komponentov page exists as a separate file → keep it
@@ -317,6 +492,10 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
         ],
       },
       {
@@ -325,6 +504,28 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/(.*).woff2",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+        ],
+      },
+      {
+        source: "/(.*).(jpg|jpeg|png|gif|ico|svg|webp)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=2592000",
           },
         ],
       },

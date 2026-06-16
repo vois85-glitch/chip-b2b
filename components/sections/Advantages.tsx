@@ -15,7 +15,7 @@ export default function Advantages() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2 text-[#121212]">Почему выбирают нас</h2>
-          <p className="text-[#555] text-sm">Работаем с оборонными, промышленными и инженерными компаниями</p>
+          <p className="text-[#666] text-sm">Работаем с оборонными, промышленными и инженерными компаниями</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -30,7 +30,7 @@ export default function Advantages() {
             >
               <div className="text-2xl mb-1">{adv.icon}</div>
               <h3 className="text-base font-bold mb-1 text-[#121212]">{adv.title}</h3>
-              <p className="text-[#555] text-xs leading-relaxed">{adv.desc}</p>
+              <p className="text-[#666] text-xs leading-relaxed">{adv.desc}</p>
             </motion.div>
           ))}
         </div>

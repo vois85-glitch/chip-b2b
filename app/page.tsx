@@ -1,7 +1,6 @@
 import Hero from '@/components/sections/Hero';
 import BrandsMarquee from '@/components/sections/BrandsMarquee';
 import ComponentSearch from '@/components/sections/ComponentSearch';
-import PopularCategories from '@/components/sections/PopularCategories';
 import AboutCompany from '@/components/sections/AboutCompany';
 import BomUpload from '@/components/sections/BomUpload';
 import HowWeWork from '@/components/sections/HowWeWork';
@@ -65,7 +64,6 @@ export default function Home() {
       <Hero />
       <BrandsMarquee />
       <ComponentSearch />
-      <PopularCategories />
       <AboutCompany />
       <BomUpload />
       <HowWeWork />

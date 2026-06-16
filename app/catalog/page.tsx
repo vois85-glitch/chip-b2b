@@ -1,59 +1,47 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 import CatalogClient from './CatalogClient';
 
 const BASE_URL = 'https://www.chip-net.ru';
 
+// ISR: revalidate every hour for fresh data + proper Cache-Control headers
+// SEO: This page does NOT access searchParams, which prevents
+// Next.js from forcing dynamic rendering (no-cache, no-store).
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Каталог электронных компонентов — ChipNet | Микросхемы, транзисторы, ПЛИС, разъёмы',
+  title: 'Каталог электронных компонентов — Микросхемы, транзисторы, ПЛИС, разъёмы',
   description: 'Каталог электронных компонентов: микросхемы, микроконтроллеры, ПЛИС, транзисторы, диоды, конденсаторы, резисторы, разъёмы. Более 2600 наименований от 70+ производителей. Проверка в лаборатории СВП.',
   alternates: { canonical: `${BASE_URL}/catalog` },
   openGraph: {
-    title: 'Каталог электронных компонентов — ChipNet',
+    title: 'Каталог электронных компонентов',
     description: 'Более 2600 наименований электронных компонентов от 70+ производителей.',
     url: `${BASE_URL}/catalog`,
     type: 'website',
     locale: 'ru_RU',
     siteName: 'ChipNet',
+    images: [{ url: '/og-image.png', width: 1344, height: 768, alt: 'Каталог электронных компонентов ChipNet' }],
   },
 };
 
-const ITEMS_PER_PAGE = 48;
+function CatalogFallback() {
+  return (
+    <div className="px-4 pb-20">
+      <div className="max-w-7xl mx-auto text-center py-20">
+        <div className="text-4xl mb-4">&#9203;</div>
+        <p className="text-[#757575]">Загрузка каталога...</p>
+      </div>
+    </div>
+  );
+}
 
-export default async function CatalogPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const params = await searchParams;
-  const page = Math.max(1, parseInt(String(params.page || '1')));
-  const category = String(params.category || '');
-  const brand = String(params.brand || '');
-  const search = String(params.search || '');
-
-  let query = supabase.from('components').select('*', { count: 'exact' });
-
-  if (category) {
-    query = query.eq('category', category);
-  }
-  if (brand) {
-    query = query.eq('brand', brand);
-  }
-  if (search) {
-    query = query.or(`sku.ilike.%${search}%,name.ilike.%${search}%,brand.ilike.%${search}%`);
-  }
-
-  const from = (page - 1) * ITEMS_PER_PAGE;
-  const to = from + ITEMS_PER_PAGE - 1;
-
-  const { data: components, count } = await query
-    .order('id', { ascending: true })
-    .range(from, to);
-
-  const totalPages = Math.ceil((count || 0) / ITEMS_PER_PAGE);
+export default async function CatalogPage() {
+  const { data: components, count } = await supabase
+    .from('components')
+    .select('*', { count: 'exact' })
+    .order('id', { ascending: true });
 
   const { data: catData } = await supabase.from('components').select('category');
   const categoryCounts: Record<string, number> = {};
@@ -74,7 +62,6 @@ export default async function CatalogPage({
   const sortedCategories = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]);
   const sortedBrands = Object.entries(brandCounts).sort((a, b) => b[1] - a[1]);
 
-  // JSON-LD для каталога
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -138,18 +125,14 @@ export default async function CatalogPage({
         </div>
       </section>
 
-      <CatalogClient
-        components={components || []}
-        currentPage={page}
-        totalPages={totalPages}
-        totalItems={count || 0}
-        currentCategory={category}
-        currentBrand={brand}
-        currentSearch={search}
-        categories={sortedCategories}
-        brands={sortedBrands}
-      />
+      <Suspense fallback={<CatalogFallback />}>
+        <CatalogClient
+          allComponents={components || []}
+          categories={sortedCategories}
+          brands={sortedBrands}
+          totalItems={count || 0}
+        />
+      </Suspense>
     </>
   );
 }
-

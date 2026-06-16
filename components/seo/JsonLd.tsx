@@ -1,6 +1,20 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 const BASE_URL = 'https://www.chip-net.ru';
 
+/**
+ * Organization and WebSite schema markup.
+ * ONLY rendered on homepage to avoid duplicate structured data across all pages.
+ * Search engines penalize repeated identical schemas - they should appear once.
+ */
 export default function JsonLd() {
+  const pathname = usePathname();
+
+  // Only render Organization/WebSite schemas on homepage
+  if (pathname !== "/") return null;
+
   const organizationLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -9,7 +23,7 @@ export default function JsonLd() {
     url: BASE_URL,
     logo: `${BASE_URL}/logo.png`,
     image: `${BASE_URL}/og-image.png`,
-    description: 'Поставка оригинальных электронных компонентов для промышленности и ВПК. Импортозамещение, подбор аналогов, проверка в лаборатории СВП.',
+    description: 'Поставка оригинальных электронных компонентов для промышленности. Импортозамещение, подбор аналогов, проверка в лаборатории СВП.',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'ул. Шаландина, дом 4, корпус 3, офис 8',
@@ -25,7 +39,7 @@ export default function JsonLd() {
     },
     telephone: '+7-910-321-91-91',
     email: 'info@chip-net.ru',
-    priceRange: '20421',
+    priceRange: '$$',
     foundingDate: '2018',
     taxID: '3123341983',
     openingHoursSpecification: {
@@ -59,6 +73,13 @@ export default function JsonLd() {
         { '@type': 'Offer', itemOffered: { '@type': 'Category', name: 'Источники питания' } },
       ],
     },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+7-910-321-91-91',
+      contactType: 'sales',
+      availableLanguage: ['Russian'],
+      areaServed: 'RU',
+    },
   };
 
   const websiteLd = {
@@ -78,20 +99,6 @@ export default function JsonLd() {
     },
   };
 
-  // BreadcrumbList for homepage
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Главная',
-        item: BASE_URL,
-      },
-    ],
-  };
-
   return (
     <>
       <script
@@ -101,10 +108,6 @@ export default function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
     </>
   );

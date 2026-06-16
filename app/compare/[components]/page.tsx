@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
+import Link from 'next/link'
+import { cleanComponentText } from '@/lib/clean-text';
 import { findAnalogs, findComparisons, comparisonGroups, findCluster, componentClusters } from '@/lib/semantic-data';
 import { supabase } from '@/lib/supabase';
 
@@ -46,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: url },
+    robots: { index: false, follow: true },
     openGraph: {
       title,
       description,
@@ -359,7 +361,7 @@ export default async function ComparePage({ params }: Props) {
                       {comparison.title}
                     </h3>
                     <p className="text-[#666] text-sm leading-relaxed line-clamp-2">
-                      {comparison.description}
+                      {cleanComponentText(comparison.description)}
                     </p>
                   </Link>
                 ))}

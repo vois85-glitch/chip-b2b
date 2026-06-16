@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useTransition, useEffect } from 'react';
+import { useState, useTransition, useEffect, useMemo } from 'react';
 
 type Component = {
   sku: string;
@@ -15,33 +15,54 @@ type Component = {
 };
 
 export default function CatalogClient({
-  components,
-  currentPage,
-  totalPages,
-  totalItems,
-  currentCategory,
-  currentBrand,
-  currentSearch,
+  allComponents,
   categories,
   brands,
+  totalItems,
 }: {
-  components: Component[];
-  currentPage: number;
-  totalPages: number;
-  totalItems: number;
-  currentCategory: string;
-  currentBrand: string;
-  currentSearch: string;
+  allComponents: Component[];
   categories: [string, number][];
   brands: [string, number][];
+  totalItems: number;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
-  const [searchInput, setSearchInput] = useState(currentSearch);
   const [showFilters, setShowFilters] = useState(false);
   const [catSearch, setCatSearch] = useState('');
   const [brandSearch, setBrandSearch] = useState('');
+
+  // Read initial state from URL search params (for sharing/bookmarking)
+  const currentCategory = searchParams.get('category') || '';
+  const currentBrand = searchParams.get('brand') || '';
+  const currentSearch = searchParams.get('search') || '';
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+
+  const [searchInput, setSearchInput] = useState(currentSearch);
+
+  // Client-side filtering of all components
+  const ITEMS_PER_PAGE = 48;
+
+  const filteredComponents = useMemo(() => {
+    return allComponents.filter(comp => {
+      if (currentCategory && comp.category !== currentCategory) return false;
+      if (currentBrand && comp.brand !== currentBrand) return false;
+      if (currentSearch) {
+        const term = currentSearch.toLowerCase();
+        return comp.sku?.toLowerCase().includes(term) ||
+               comp.name?.toLowerCase().includes(term) ||
+               comp.brand?.toLowerCase().includes(term);
+      }
+      return true;
+    });
+  }, [allComponents, currentCategory, currentBrand, currentSearch]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredComponents.length / ITEMS_PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedComponents = filteredComponents.slice(
+    (safePage - 1) * ITEMS_PER_PAGE,
+    safePage * ITEMS_PER_PAGE
+  );
 
   // Close drawer on Escape
   useEffect(() => {
@@ -115,7 +136,7 @@ export default function CatalogClient({
             className="w-full px-3 py-2 bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary"
           />
           {catSearch && (
-            <button onClick={() => setCatSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#757575] hover:text-[#333] text-xs">✕</button>
+            <button onClick={() => setCatSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#757575] hover:text-[#333] text-xs">&#10005;</button>
           )}
         </div>
         <div className="space-y-0.5 max-h-72 overflow-y-auto scrollbar-thin">
@@ -150,7 +171,7 @@ export default function CatalogClient({
             className="w-full px-3 py-2 bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg text-sm text-[#121212] placeholder-[#999] focus:outline-none focus:border-primary"
           />
           {brandSearch && (
-            <button onClick={() => setBrandSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#757575] hover:text-[#333] text-xs">✕</button>
+            <button onClick={() => setBrandSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#757575] hover:text-[#333] text-xs">&#10005;</button>
           )}
         </div>
         <div className="space-y-0.5 max-h-72 overflow-y-auto scrollbar-thin">
@@ -195,7 +216,7 @@ export default function CatalogClient({
                   onClick={() => { setSearchInput(''); updateParams('search', ''); }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[#757575] hover:text-[#333]"
                 >
-                  ✕
+                  &#10005;
                 </button>
               )}
             </div>
@@ -234,19 +255,19 @@ export default function CatalogClient({
             {currentCategory && (
               <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-900/30 border border-emerald-800/50 rounded-lg text-primary text-sm">
                 {currentCategory}
-                <button onClick={() => updateParams('category', '')} className="hover:text-[#121212] ml-1">✕</button>
+                <button onClick={() => updateParams('category', '')} className="hover:text-[#121212] ml-1">&#10005;</button>
               </span>
             )}
             {currentBrand && (
               <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-cyan-900/30 border border-cyan-800/50 rounded-lg text-primary text-sm">
                 {currentBrand}
-                <button onClick={() => updateParams('brand', '')} className="hover:text-[#121212] ml-1">✕</button>
+                <button onClick={() => updateParams('brand', '')} className="hover:text-[#121212] ml-1">&#10005;</button>
               </span>
             )}
             {currentSearch && (
               <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-section-alt border border-purple-800/50 rounded-lg text-primary text-sm">
                 &laquo;{currentSearch}&raquo;
-                <button onClick={() => { setSearchInput(''); updateParams('search', ''); }} className="hover:text-[#121212] ml-1">✕</button>
+                <button onClick={() => { setSearchInput(''); updateParams('search', ''); }} className="hover:text-[#121212] ml-1">&#10005;</button>
               </span>
             )}
             <button onClick={clearFilters} className="text-[#757575] hover:text-[#121212] text-sm underline ml-2">
@@ -256,7 +277,7 @@ export default function CatalogClient({
         )}
 
         <div className="flex gap-6">
-          {/* Desktop sidebar — visible on lg+ when showFilters is true */}
+          {/* Desktop sidebar */}
           {showFilters && (
             <aside className="w-64 flex-shrink-0 hidden lg:block">
               {filterSidebar}
@@ -267,13 +288,13 @@ export default function CatalogClient({
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-4">
               <p className="text-[#757575] text-sm">
-                {isPending ? 'Загрузка...' : `Показано ${components.length} из ${totalItems.toLocaleString()} компонентов`}
+                {isPending ? 'Загрузка...' : `Показано ${paginatedComponents.length} из ${filteredComponents.length.toLocaleString()} компонентов`}
               </p>
             </div>
 
-            {components.length > 0 ? (
+            {paginatedComponents.length > 0 ? (
               <div className={`grid gap-3 ${showFilters ? 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
-                {components.map((comp) => (
+                {paginatedComponents.map((comp) => (
                   <Link
                     key={comp.sku}
                     href={`/component/${encodeURIComponent(comp.sku)}`}
@@ -307,7 +328,7 @@ export default function CatalogClient({
               </div>
             ) : (
               <div className="text-center py-20">
-                <div className="text-5xl mb-4">🔍</div>
+                <div className="text-5xl mb-4">&#128269;</div>
                 <h3 className="text-xl font-bold text-[#333] mb-2">Компоненты не найдены</h3>
                 <p className="text-[#757575] mb-6">Попробуйте изменить параметры поиска или фильтры</p>
                 <button
@@ -322,27 +343,27 @@ export default function CatalogClient({
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-2 mt-8">
-                {currentPage > 1 && (
+                {safePage > 1 && (
                   <Link
-                    href={`/catalog?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), page: String(currentPage - 1) }).toString()}`}
+                    href={`/catalog?${new URLSearchParams({...Object.fromEntries(searchParams.entries()), page: String(safePage - 1) }).toString()}`}
                     className="px-4 py-2 bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg text-[#666] hover:text-[#121212] hover:border-emerald-600/50 transition-colors"
                   >
-                    ← Назад
+                    &#8592; Назад
                   </Link>
                 )}
                 {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
                   let pageNum: number;
                   if (totalPages <= 7) { pageNum = i + 1; }
-                  else if (currentPage <= 4) { pageNum = i + 1; }
-                  else if (currentPage >= totalPages - 3) { pageNum = totalPages - 6 + i; }
-                  else { pageNum = currentPage - 3 + i; }
+                  else if (safePage <= 4) { pageNum = i + 1; }
+                  else if (safePage >= totalPages - 3) { pageNum = totalPages - 6 + i; }
+                  else { pageNum = safePage - 3 + i; }
                   return pageNum;
                 }).map((pageNum) => (
                   <Link
                     key={pageNum}
-                    href={`/catalog?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), page: String(pageNum) }).toString()}`}
+                    href={`/catalog?${new URLSearchParams({...Object.fromEntries(searchParams.entries()), page: String(pageNum) }).toString()}`}
                     className={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-colors ${
-                      pageNum === currentPage
+                      pageNum === safePage
                         ? 'bg-primary text-[#121212]'
                         : 'bg-[#f0f4ee] border border-[#e8e8e8] text-[#666] hover:text-[#121212] hover:border-emerald-600/50'
                     }`}
@@ -350,12 +371,12 @@ export default function CatalogClient({
                     {pageNum}
                   </Link>
                 ))}
-                {currentPage < totalPages && (
+                {safePage < totalPages && (
                   <Link
-                    href={`/catalog?${new URLSearchParams({ ...Object.fromEntries(searchParams.entries()), page: String(currentPage + 1) }).toString()}`}
+                    href={`/catalog?${new URLSearchParams({...Object.fromEntries(searchParams.entries()), page: String(safePage + 1) }).toString()}`}
                     className="px-4 py-2 bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg text-[#666] hover:text-[#121212] hover:border-emerald-600/50 transition-colors"
                   >
-                    Далее →
+                    Далее &#8594;
                   </Link>
                 )}
               </div>
@@ -367,14 +388,11 @@ export default function CatalogClient({
       {/* Mobile / Tablet Filter Drawer */}
       {showFilters && (
         <div className="fixed inset-0 z-[60] lg:hidden">
-          {/* Overlay */}
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setShowFilters(false)}
           />
-          {/* Drawer panel */}
           <div className="absolute left-0 top-0 bottom-0 w-[85vw] max-w-sm bg-[#0a0d0c] border-r border-[#e8e8e8] flex flex-col overflow-hidden">
-            {/* Drawer header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[#e8e8e8]">
               <h2 className="text-lg font-bold text-[#121212]">Фильтры</h2>
               <button
@@ -386,13 +404,9 @@ export default function CatalogClient({
                 </svg>
               </button>
             </div>
-
-            {/* Drawer body — scrollable */}
             <div className="flex-1 overflow-y-auto px-4 py-4">
               {filterSidebar}
             </div>
-
-            {/* Drawer footer */}
             <div className="px-5 py-4 border-t border-[#e8e8e8] flex gap-3">
               {hasFilters && (
                 <button

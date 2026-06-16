@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${BASE_URL}/rfq`,
   },
+  robots: { index: true, follow: true },
   openGraph: {
     title: 'Запрос коммерческого предложения на электронные компоненты | ChipNet',
     description: 'Запросите КП на электронные компоненты. Обработка за 2 часа, проверка наличия, подбор аналогов, поставка EOL-компонентов и объёмное ценообразование.',
