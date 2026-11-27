@@ -1,0 +1,571 @@
+'use client';
+
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import CategoryIcon from '@/components/ui/CategoryIcon';
+import ComponentImage from '@/components/ui/ComponentImage';
+import CategoryImage from '@/components/ui/CategoryImage';
+import AddToCartButton from '@/components/cart/AddToCartButton';
+import { groupCategories, buildCatalogBreadcrumb, CATEGORY_GROUPS, SUBCATEGORIES } from '@/lib/catalog-taxonomy';
+import { useState, useTransition, useEffect, useMemo } from 'react';
+
+type Component = {
+  sku: string;
+  name: string;
+  brand: string;
+  category: string;
+  description: string;
+  status: string;
+  analogs: string[];
+};
+
+// Inline SVG-иконки для разделов таксономии (как в layout.tsx)
+function CategorySectionIcon({ name, className }: { name: string; className?: string }) {
+  const paths: Record<string, React.ReactNode> = {
+    chip: (
+      <>
+        <rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor" fillOpacity="0.15" />
+        <rect x="8" y="8" width="8" height="8" rx="0.5" fill="currentColor" />
+        <path d="M9 4v2M12 4v2M15 4v2M9 18v2M12 18v2M15 18v2M4 9h2M4 12h2M4 15h2M18 9h2M18 12h2M18 15h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </>
+    ),
+    capacitor: (
+      <>
+        <path d="M12 4v6M12 14v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M6 10h12M6 14h12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      </>
+    ),
+    lightning: (
+      <>
+        <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      </>
+    ),
+    sensor: (
+      <>
+        <circle cx="12" cy="12" r="3" fill="currentColor" />
+        <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.5" />
+        <circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.25" />
+      </>
+    ),
+    connector: (
+      <>
+        <rect x="3" y="8" width="18" height="8" rx="1" fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M7 12h2M11 12h2M15 12h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </>
+    ),
+  };
+  return (
+    <svg viewBox="0 0 24 24" className={className || 'w-5 h-5'} fill="none">
+      {paths[name] || paths.chip}
+    </svg>
+  );
+}
+
+export default function CatalogClient({
+  allComponents,
+  categories,
+  brands,
+  totalItems,
+}: {
+  allComponents: Component[];
+  categories: [string, number][];
+  brands: [string, number][];
+  totalItems: number;
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
+  // Mobile drawer — для категорий/брендов на маленьких экранах
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  // Активная вкладка раздела каталога (для фильтрации видимых групп)
+  const [activeSection, setActiveSection] = useState<string>('all');
+  // Управление collapsed-секциями в grouped-view
+  const [collapsedSections, setCollapsedSections] = useState<Set<string>>(new Set());
+
+  // Read state from URL search params
+  const currentCategory = searchParams.get('category') || '';
+  const currentBrand = searchParams.get('brand') || '';
+  const currentSearch = searchParams.get('search') || '';
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+
+  const [searchInput, setSearchInput] = useState(currentSearch);
+
+  const ITEMS_PER_PAGE = 48;
+  const ITEMS_PER_CATEGORY_PREVIEW = 4;  // оптимизировано для мобильной загрузки
+
+  const filteredComponents = useMemo(() => {
+    return allComponents.filter(comp => {
+      if (currentCategory && comp.category !== currentCategory) return false;
+      if (currentBrand && comp.brand !== currentBrand) return false;
+      if (currentSearch) {
+        const term = currentSearch.toLowerCase();
+        return comp.sku?.toLowerCase().includes(term) ||
+               comp.name?.toLowerCase().includes(term) ||
+               comp.brand?.toLowerCase().includes(term);
+      }
+      return true;
+    });
+  }, [allComponents, currentCategory, currentBrand, currentSearch]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredComponents.length / ITEMS_PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedComponents = filteredComponents.slice(
+    (safePage - 1) * ITEMS_PER_PAGE,
+    safePage * ITEMS_PER_PAGE
+  );
+
+  // Grouped-by-category preview (только когда нет активных фильтров)
+  const hasFilters = !!(currentCategory || currentBrand || currentSearch);
+  const groupedByCategory = useMemo(() => {
+    if (hasFilters) return [];
+    const groups: { category: string; count: number; items: Component[] }[] = [];
+    for (const [cat, cnt] of categories) {
+      const items = allComponents
+        .filter(c => c.category === cat)
+        .slice(0, ITEMS_PER_CATEGORY_PREVIEW);
+      if (items.length > 0) {
+        groups.push({ category: cat, count: cnt, items });
+      }
+    }
+    return groups;
+  }, [allComponents, categories, hasFilters]);
+
+  // Дополнительно: сгруппировать категории по разделам таксономии
+  const groupedByTaxonomy = useMemo(() => {
+    if (hasFilters || groupedByCategory.length === 0) return [];
+    // Мапа категорий для быстрого поиска
+    const catMap = new Map(groupedByCategory.map(g => [g.category, g]));
+    const result: { group: typeof CATEGORY_GROUPS[0] | null; sections: typeof groupedByCategory }[] = [];
+    for (const grp of CATEGORY_GROUPS) {
+      const sections: typeof groupedByCategory = [];
+      for (const catName of grp.categories) {
+        const g = catMap.get(catName);
+        if (g) sections.push(g);
+      }
+      if (sections.length > 0) {
+        result.push({ group: grp, sections });
+      }
+    }
+    // "Прочие компоненты"
+    const otherG = catMap.get('Прочие компоненты');
+    if (otherG) {
+      result.push({ group: null, sections: [otherG] });
+    }
+    return result;
+  }, [groupedByCategory, hasFilters]);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowMobileFilters(false);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
+  useEffect(() => {
+    if (showMobileFilters) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [showMobileFilters]);
+
+  const updateParams = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+    if (key !== 'page') params.delete('page');
+    startTransition(() => {
+      router.push(`/catalog?${params.toString()}`);
+    });
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateParams('search', searchInput);
+  };
+
+  const clearFilters = () => {
+    setSearchInput('');
+    startTransition(() => {
+      router.push('/catalog');
+    });
+  };
+
+  const activeFilterCount = (currentCategory ? 1 : 0) + (currentBrand ? 1 : 0) + (currentSearch ? 1 : 0);
+
+  // Toggle collapsed section (для быстрого скрытия группы в каталоге)
+  const toggleCollapsed = (sectionId: string) => {
+    setCollapsedSections(prev => {
+      const next = new Set(prev);
+      if (next.has(sectionId)) {
+        next.delete(sectionId);
+      } else {
+        next.add(sectionId);
+      }
+      return next;
+    });
+  };
+
+  // Фильтрованные по активной вкладке разделы (для catalog overview)
+  const visibleTaxonomySections = useMemo(() => {
+    if (activeSection === 'all') return groupedByTaxonomy;
+    return groupedByTaxonomy.filter(t => (t.group?.id || 'other') === activeSection);
+  }, [groupedByTaxonomy, activeSection]);
+
+  // Общее число категорий
+  const totalCategories = categories.length;
+  const totalBrands = brands.length;
+
+  // Sidebar content (для мобильного drawer)
+  const mobileSidebar = (
+    <>
+      <div className="bg-[#eaf0e8] border border-[#e8e8e8] rounded-xl p-4 mb-4">
+        <h3 className="text-sm font-bold text-[#333] mb-3 uppercase tracking-wider">Категории</h3>
+        <div className="space-y-0.5 max-h-72 overflow-y-auto scrollbar-thin">
+          {categories.map(([cat, cnt]) => (
+            <button
+              key={cat}
+              onClick={() => { updateParams('category', currentCategory === cat ? '' : cat); setShowMobileFilters(false); }}
+              className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex justify-between items-center ${
+                currentCategory === cat
+                  ? 'bg-section-alt text-primary font-semibold'
+                  : 'text-[#666] hover:text-[#121212] hover:bg-[#eaf0e8]'
+              }`}
+            >
+              <span className="truncate">{cat}</span>
+              <span className="text-xs text-[#898989] ml-2 flex-shrink-0">{cnt}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="bg-[#eaf0e8] border border-[#e8e8e8] rounded-xl p-4">
+        <h3 className="text-sm font-bold text-[#333] mb-3 uppercase tracking-wider">Бренды</h3>
+        <div className="space-y-0.5 max-h-72 overflow-y-auto scrollbar-thin">
+          {brands.map(([br, cnt]) => (
+            <button
+              key={br}
+              onClick={() => { updateParams('brand', currentBrand === br ? '' : br); setShowMobileFilters(false); }}
+              className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex justify-between items-center ${
+                currentBrand === br
+                  ? 'bg-section-alt text-primary font-semibold'
+                  : 'text-[#666] hover:text-[#121212] hover:bg-[#eaf0e8]'
+              }`}
+            >
+              <span className="truncate">{br}</span>
+              <span className="text-xs text-[#898989] ml-2 flex-shrink-0">{cnt}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+
+  // Карточка компонента — без бейджа "В пр." (только EOL)
+  const ComponentCard = ({ comp }: { comp: Component }) => (
+    <div
+      key={comp.sku}
+      className="group relative bg-white border border-[#e8e8e8] rounded-xl p-4 hover:border-primary/40 hover:shadow-md transition-all duration-200 overflow-hidden"
+    >
+      {/* Color bar слева — по категории */}
+      <div className={`absolute left-0 top-0 bottom-0 w-1 ${
+        comp.status === 'EOL' ? 'bg-red-400' : 'bg-primary/40 group-hover:bg-primary'
+      }`} />
+      <Link prefetch={false}
+        href={`/component/${encodeURIComponent(comp.sku)}`}
+        className="block"
+      >
+        <div className="flex gap-3 pl-1">
+          {/* SVG-иллюстрация компонента по типу корпуса */}
+          <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden border border-[#e8e8e8] bg-[#f8faf7] group-hover:border-primary/30 transition-colors">
+            <ComponentImage
+              sku={comp.sku}
+              name={comp.name}
+              category={comp.category}
+              size={64}
+              className="w-full h-full"
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between mb-1 gap-2">
+              <span className="font-mono font-bold text-[#121212] group-hover:text-primary text-sm leading-tight break-all">
+                {comp.sku}
+              </span>
+              {comp.status === 'EOL' && (
+                <span className="flex-shrink-0 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-red-100 text-red-700 uppercase tracking-wide">
+                  EOL
+                </span>
+              )}
+            </div>
+            <p className="text-[#666] text-xs leading-relaxed mb-2 line-clamp-2">
+              {comp.name}
+            </p>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="px-2 py-0.5 bg-[#eaf0e8] rounded text-[10px] text-[#02a391] font-medium">
+                {comp.brand}
+              </span>
+              <span className="px-2 py-0.5 bg-[#f0f4ee] rounded text-[10px] text-[#757575] truncate max-w-[120px]">
+                {comp.category}
+              </span>
+            </div>
+          </div>
+        </div>
+      </Link>
+      {/* Кнопка добавления в корзину */}
+      <div className="mt-3 pt-3 border-t border-[#f0f4ee]">
+        <AddToCartButton
+          sku={comp.sku}
+          name={comp.name}
+          brand={comp.brand}
+          category={comp.category}
+          size="sm"
+          variant="outline"
+          className="w-full"
+        />
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      {/* Breadcrumb навигация — единственная (динамическая, с учётом фильтров) */}
+      <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-xs sm:text-sm text-[#757575] overflow-x-auto whitespace-nowrap scrollbar-thin pb-1">
+        {buildCatalogBreadcrumb({
+          category: currentCategory,
+          brand: currentBrand,
+          search: currentSearch,
+        }).map((crumb, idx, arr) => (
+          <span key={idx} className="flex items-center gap-1.5 shrink-0">
+            {crumb.href ? (
+              <Link prefetch={false}
+                href={crumb.href}
+                className={`hover:text-primary transition-colors ${idx === arr.length - 1 ? 'text-[#121212] font-medium pointer-events-none' : ''}`}
+              >
+                {crumb.label}
+              </Link>
+            ) : (
+              <span className={idx === arr.length - 1 ? 'text-primary font-medium truncate max-w-[200px]' : ''}>
+                {crumb.label}
+              </span>
+            )}
+            {idx < arr.length - 1 && (
+              <span className="text-[#cbcbcb]">/</span>
+            )}
+          </span>
+        ))}
+      </nav>
+
+      {/* Mobile filters button (поиск уже в Header — TopSearchBar) */}
+      <div className="mb-4 md:hidden">
+        <button
+          type="button"
+          onClick={() => setShowMobileFilters(true)}
+          className="relative px-4 py-2.5 border rounded-xl font-semibold transition-colors text-sm border-[#e8e8e8] bg-white text-[#666] hover:text-[#121212] shadow-sm inline-flex items-center gap-2"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          Фильтры
+          {activeFilterCount > 0 && (
+            <span className="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-emerald-500 text-[#121212] text-[10px] font-bold rounded-full">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {/* Active filters */}
+      {hasFilters && (
+        <div className="flex flex-wrap items-center gap-2 mb-4">
+          <span className="text-[#757575] text-sm">Фильтры:</span>
+          {currentCategory && (
+            <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-900/30 border border-emerald-800/50 rounded-lg text-primary text-sm">
+              {currentCategory}
+              <button onClick={() => updateParams('category', '')} className="hover:text-[#121212] ml-1">&#10005;</button>
+            </span>
+          )}
+          {currentBrand && (
+            <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-cyan-900/30 border border-cyan-800/50 rounded-lg text-primary text-sm">
+              {currentBrand}
+              <button onClick={() => updateParams('brand', '')} className="hover:text-[#121212] ml-1">&#10005;</button>
+            </span>
+          )}
+          {currentSearch && (
+            <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-section-alt border border-purple-800/50 rounded-lg text-primary text-sm">
+              &laquo;{currentSearch}&raquo;
+              <button onClick={() => { setSearchInput(''); updateParams('search', ''); }} className="hover:text-[#121212] ml-1">&#10005;</button>
+            </span>
+          )}
+          <button onClick={clearFilters} className="text-[#757575] hover:text-[#121212] text-sm underline ml-2">
+            Сбросить все
+          </button>
+        </div>
+      )}
+
+      {/* Main content */}
+      {!hasFilters ? (
+        <>
+          {/* Режим 1: плоская 3-колоночная сетка категорий с подкатегориями (как на chipget.ru) */}
+          <div className="mb-6">
+            <p className="text-[#757575] text-sm">
+              Выберите категорию, чтобы просмотреть компоненты
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-1">
+            {categories.map(([catName, count]) => {
+              const subs = SUBCATEGORIES[catName] || [];
+              return (
+                <div key={catName} className="mb-6">
+                  {/* Родительская категория — зелёный фон с картинкой */}
+                  <button
+                    onClick={() => updateParams('category', catName)}
+                    className="flex items-center gap-3 w-full text-left px-4 py-3 mb-2 bg-[#eaf0e8] hover:bg-[#d5e0d3] rounded-lg text-[#121212] font-bold text-base transition-colors"
+                  >
+                    <CategoryImage category={catName} className="shrink-0" />
+                    <span>{catName}</span>
+                  </button>
+
+                  {/* Подкатегории — простые ссылки со стрелкой */}
+                  {subs.length > 0 && (
+                    <ul className="space-y-1 pl-1">
+                      {subs.map(sub => (
+                        <li key={sub}>
+                          <button
+                            onClick={() => updateParams('category', catName)}
+                            className="group flex items-center justify-between w-full py-1.5 px-2 text-left text-[#333] hover:text-primary text-sm transition-colors"
+                          >
+                            <span>{sub}</span>
+                            <svg className="w-4 h-4 text-[#9a9a9a] group-hover:text-primary shrink-0 ml-2 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Режим 2: отфильтрованный список с пагинацией */}
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[#757575] text-sm">
+              {isPending ? 'Загрузка...' : `Показано ${paginatedComponents.length} из ${filteredComponents.length.toLocaleString()} компонентов`}
+            </p>
+          </div>
+
+          {paginatedComponents.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {paginatedComponents.map((comp) => <ComponentCard key={comp.sku} comp={comp} />)}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <div className="text-5xl mb-4">&#128269;</div>
+              <h3 className="text-xl font-bold text-[#333] mb-2">Компоненты не найдены</h3>
+              <p className="text-[#757575] mb-6">Попробуйте изменить параметры поиска или фильтры</p>
+              <button
+                onClick={clearFilters}
+                className="px-6 py-2.5 bg-primary hover:bg-primary-dark rounded-lg font-semibold text-[#121212] transition-colors"
+              >
+                Сбросить фильтры
+              </button>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-8">
+              {safePage > 1 && (
+                <Link prefetch={false}
+                  href={`/catalog?${new URLSearchParams({...Object.fromEntries(searchParams.entries()), page: String(safePage - 1) }).toString()}`}
+                  className="px-4 py-2 bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg text-[#666] hover:text-[#121212] hover:border-emerald-600/50 transition-colors"
+                >
+                  &#8592; Назад
+                </Link>
+              )}
+              {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
+                let pageNum: number;
+                if (totalPages <= 7) { pageNum = i + 1; }
+                else if (safePage <= 4) { pageNum = i + 1; }
+                else if (safePage >= totalPages - 3) { pageNum = totalPages - 6 + i; }
+                else { pageNum = safePage - 3 + i; }
+                return pageNum;
+              }).map((pageNum) => (
+                <Link
+                  key={pageNum}
+                  href={`/catalog?${new URLSearchParams({...Object.fromEntries(searchParams.entries()), page: String(pageNum) }).toString()}`}
+                  className={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-colors ${
+                    pageNum === safePage
+                      ? 'bg-primary text-[#121212]'
+                      : 'bg-[#f0f4ee] border border-[#e8e8e8] text-[#666] hover:text-[#121212] hover:border-emerald-600/50'
+                  }`}
+                >
+                  {pageNum}
+                </Link>
+              ))}
+              {safePage < totalPages && (
+                <Link prefetch={false}
+                  href={`/catalog?${new URLSearchParams({...Object.fromEntries(searchParams.entries()), page: String(safePage + 1) }).toString()}`}
+                  className="px-4 py-2 bg-[#f0f4ee] border border-[#e8e8e8] rounded-lg text-[#666] hover:text-[#121212] hover:border-emerald-600/50 transition-colors"
+                >
+                  Далее &#8594;
+                </Link>
+              )}
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Mobile Filter Drawer */}
+      {showMobileFilters && (
+        <div className="fixed inset-0 z-[60] md:hidden">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowMobileFilters(false)}
+          />
+          <div className="absolute left-0 top-0 bottom-0 w-[85vw] max-w-sm bg-white border-r border-[#e8e8e8] flex flex-col overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-[#e8e8e8]">
+              <h2 className="text-lg font-bold text-[#121212]">Фильтры</h2>
+              <button
+                onClick={() => setShowMobileFilters(false)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#eaf0e8] text-[#666] hover:text-[#121212] transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto px-4 py-4">
+              {mobileSidebar}
+            </div>
+            <div className="px-5 py-4 border-t border-[#e8e8e8] flex gap-3">
+              {hasFilters && (
+                <button
+                  onClick={clearFilters}
+                  className="flex-1 py-3 border border-[#e8e8e8] rounded-xl text-[#666] hover:text-[#121212] hover:border-gray-600 transition-colors text-sm font-semibold"
+                >
+                  Сбросить ({activeFilterCount})
+                </button>
+              )}
+              <button
+                onClick={() => setShowMobileFilters(false)}
+                className="flex-1 py-3 bg-primary hover:bg-primary-dark rounded-xl text-[#121212] text-sm font-semibold transition-colors"
+              >
+                Показать результаты
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="resbody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d2b1f"/>
+      <stop offset="50%" stop-color="#2e1f15"/>
+      <stop offset="100%" stop-color="#1a1108"/>
+    </linearGradient>
+    <linearGradient id="resterm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c0c0c0"/>
+      <stop offset="50%" stop-color="#999"/>
+      <stop offset="100%" stop-color="#666"/>
+    </linearGradient>
+    <filter id="ressh" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="4"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.2"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="100" cy="155" rx="55" ry="6" fill="#000" opacity="0.08"/>
+  <!-- Left terminal (silver) -->
+  <path d="M 45 75 L 70 75 L 75 80 L 75 120 L 70 125 L 45 125 Z" fill="url(#resterm)" stroke="#777" stroke-width="0.3"/>
+  <!-- Right terminal -->
+  <path d="M 155 75 L 130 75 L 125 80 L 125 120 L 130 125 L 155 125 Z" fill="url(#resterm)" stroke="#777" stroke-width="0.3"/>
+  <!-- Body (ceramic, dark) -->
+  <path d="M 70 72 L 130 72 L 138 80 L 138 120 L 130 128 L 70 128 L 62 120 L 62 80 Z" fill="url(#resbody)" stroke="#1a1108" stroke-width="0.8"/>
+  <!-- Top face -->
+  <path d="M 70 72 L 130 72 L 138 80 L 62 80 Z" fill="#3d2b1f"/>
+  <!-- Resistance value bands (brown-black-red-gold) -->
+  <rect x="82" y="72" width="6" height="56" fill="#8B4513" opacity="0.8"/>
+  <rect x="92" y="72" width="6" height="56" fill="#111" opacity="0.8"/>
+  <rect x="102" y="72" width="6" height="56" fill="#c62828" opacity="0.8"/>
+  <rect x="118" y="72" width="4" height="56" fill="#FFD700" opacity="0.7"/>
+  <!-- Highlights -->
+  <path d="M 64 79 L 71 73 L 129 73 L 136 79 Z" fill="#fff" opacity="0.08"/>
+  <rect x="63" y="80" width="2" height="38" fill="#fff" opacity="0.05"/>
+</svg>

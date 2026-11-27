@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f4f8f2;
+  --color-foreground: #121212;
+  --color-card: #f0f4ee;
+  --color-primary: #059669;
+  --color-primary-dark: #047857;
+  --color-primary-light: #10b981;
+  --color-section: #eaf0e8;
+  --color-section-alt: #dee9e1;
+  --color-section-accent: #cfded4;
+  --color-section-green: #bbd3ba;
+  --color-border: #d4ddd2;
+  --color-border-dark: #bcc8ba;
+  --color-muted: #666666;
+  --color-danger: #ff3a3a;
+  --color-dark: #303033;
+  --color-font-sans: 'Inter', sans-serif;
+  /* Лайтбокс изображения компонента (/component/[sku]) */
+  --animate-lightbox-fade: lightbox-fade 0.2s ease-out;
+  --animate-lightbox-zoom: lightbox-zoom 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightbox-zoom {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 195px;
+}
+
+/* 3-рядная шапка: ~174px desktop, ~174px mobile.
+   scroll-margin-top даёт зазор 21px на десктопе, 41px на мобильных. */
+[id] {
+  scroll-margin-top: 195px;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 215px;
+  }
+  [id] {
+    scroll-margin-top: 215px;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #eaf0e8; }
+::-webkit-scrollbar-thumb { background: #bcc8ba; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #9aaa98; }
+
+.brand-logo-item {
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.brand-logo-item:hover {
+  transform: scale(1.05);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

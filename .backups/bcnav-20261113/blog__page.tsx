@@ -1,0 +1,120 @@
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { blogPosts } from '@/lib/blog-data';
+
+import BreadcrumbNav from '@/components/ui/BreadcrumbNav';
+const BASE_URL = 'https://www.chip-net.ru';
+export const revalidate = 86400;
+
+export const metadata: Metadata = {
+  title: 'Блог | Экспертиза в электронике',
+  description: 'Статьи о проверке оригинальности микросхем, импортозамещении и логистике электронных компонентов.',
+  alternates: {
+    canonical: `${BASE_URL}/blog`,
+  },
+  openGraph: {
+    title: 'Блог компании',
+    description: 'Экспертиза в поставках электронных компонентов и импортозамещении.',
+    url: `${BASE_URL}/blog`,
+    type: 'website',
+    locale: 'ru_RU',
+    siteName: 'ChipNet',
+  },
+};
+
+export default function BlogPage() {
+  // JSON-LD: Blog + ItemList of posts
+  const blogLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Блог ChipNet',
+    url: `${BASE_URL}/blog`,
+    description: 'Экспертиза в поставках электронных компонентов, импортозамещении и проверке оригинальности.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'ChipNet',
+      url: BASE_URL,
+    },
+  };
+
+  const itemListLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Статьи блога ChipNet',
+    itemListOrder: 'https://schema.org/ItemListOrderDescending',
+    numberOfItems: blogPosts.length,
+    itemListElement: blogPosts.map((post, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: post.title,
+      url: `${BASE_URL}/blog/${post.slug}`,
+      datePublished: post.date,
+    })),
+  };
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Главная', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Блог', item: `${BASE_URL}/blog` },
+    ],
+  };
+
+  return (
+    <main className="min-h-screen bg-background text-[#121212]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+
+      <section className="pt-[180px] pb-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <BreadcrumbNav
+        className="mb-6"
+        items=[{"        { name: 'Главная', href: '/' },\n        { name: 'Блог' }"}]
+      />
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+            Блог ChipNet
+          </h1>
+          <p className="text-lg text-[#666] max-w-2xl mb-12">
+            Делимся экспертизой в поставках электронных компонентов, импортозамещении и проверке оригинальности.
+          </p>
+        </div>
+      </section>
+
+      <section className="px-4 pb-20">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {blogPosts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="block bg-[#e0e8de] hover:bg-[#dce6da] border border-[#e8e8e8] hover:border-emerald-800/40 rounded-xl p-6 md:p-8 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="px-2 py-1 rounded-full bg-emerald-900/40 text-primary text-xs">
+                  {post.category}
+                </span>
+                <span className="text-[#898989] text-xs">{post.date}</span>
+              </div>
+              <h2 className="text-xl font-semibold group-hover:text-primary transition-colors mb-2">
+                {post.title}
+              </h2>
+              <p className="text-[#666] text-sm line-clamp-2">
+                {post.description}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}

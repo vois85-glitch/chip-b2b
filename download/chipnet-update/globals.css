@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #fafafa;
+  --color-foreground: #121212;
+  --color-card: #ffffff;
+  --color-primary: #02a391;
+  --color-primary-dark: #028a7a;
+  --color-primary-light: #03b8a4;
+  --color-section: #f3f3f3;
+  --color-section-alt: #dee9e1;
+  --color-section-accent: #cfded4;
+  --color-section-green: #bbd3ba;
+  --color-border: #e8e8e8;
+  --color-border-dark: #cbcbcb;
+  --color-muted: #757575;
+  --color-dark: #303033;
+  --color-danger: #ff3a3a;
+  --font-sans: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f3f3f3; }
+::-webkit-scrollbar-thumb { background: #cbcbcb; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #999; }
+
+/* === Карусель брендов — чистые логотипы без карточек === */
+@keyframes brands-marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-brands-marquee {
+  animation: brands-marquee 35s linear infinite;
+}
+
+.marquee-container-new:hover .animate-brands-marquee {
+  animation-play-state: paused;
+}
+
+.brand-logo-item {
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.brand-logo-item:hover {
+  transform: scale(1.05);
+}

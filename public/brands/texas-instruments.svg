@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 70" width="360" height="70">
+  <path d="M2 6 L18 6 L18 62 L2 62 L10 34 Z" fill="#CC0000"/>
+  <text x="24" y="32" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="18" fill="#1A1A2E">Texas</text>
+  <text x="24" y="56" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="18" fill="#1A1A2E">Instruments</text>
+</svg>

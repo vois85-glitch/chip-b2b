@@ -1,0 +1,22 @@
+/* === Карусель брендов — без карточек, чистые логотипы === */
+@keyframes brands-marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-brands-marquee {
+  animation: brands-marquee 35s linear infinite;
+}
+
+.marquee-container-new:hover .animate-brands-marquee {
+  animation-play-state: paused;
+}
+
+.brand-logo-item {
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.brand-logo-item:hover {
+  transform: scale(1.05);
+}

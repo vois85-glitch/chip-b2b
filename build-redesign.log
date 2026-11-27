@@ -1,0 +1,123 @@
+
+> chip-b2b@0.1.0 build
+> next build
+
+⚠ `eslint` configuration in next.config.ts is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+⚠ Invalid next.config.ts options detected: 
+⚠     Unrecognized key(s) in object: 'eslint'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+Warning: Custom Cache-Control headers detected for the following routes:
+  - /_next/static/(.*)
+
+Setting a custom Cache-Control header can break Next.js development behavior.
+▲ Next.js 16.2.6 (Turbopack)
+- Environments: .env.local, .env
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 30.7s
+  Skipping validation of types
+  Finished TypeScript config validation in 24ms ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/702) ...
+  Generating static pages using 1 worker (175/702) 
+  Generating static pages using 1 worker (350/702) 
+  Generating static pages using 1 worker (526/702) 
+✓ Generating static pages using 1 worker (702/702) in 84s
+  Finalizing page optimization ...
+
+Route (app)                                                    Revalidate  Expire
+┌ ƒ /
+├ ○ /_not-found
+├ ● /[slug]                                                            1h      1y
+│ ├ /arm-kontrollery                                                   1h      1y
+│ ├ /fpga                                                              1h      1y
+│ ├ /tranzistory                                                       1h      1y
+│ └ [+129 more paths]
+├ ƒ /admin/demand
+├ ● /analog/[original]                                                 1h      1y
+│ ├ /analog/stm32f103-gd32f103                                         1h      1y
+│ ├ /analog/stm32f407-gd32f407                                         1h      1y
+│ ├ /analog/spartan-6-gowin                                            1h      1y
+│ └ [+13 more paths]
+├ ○ /analog/IRFZ44N                                                    1h      1y
+├ ○ /analog/NE5532P                                                    1h      1y
+├ ○ /analog/UC3842                                                     1h      1y
+├ ○ /analogs                                                           1h      1y
+├ ○ /anti-counterfeit                                                  1h      1y
+├ ƒ /api/callback
+├ ƒ /api/cart-submit
+├ ƒ /api/search
+├ ƒ /api/specs/[sku]
+├ ○ /blog                                                              1d      1y
+├ ● /blog/[slug]                                                       1d      1y
+│ ├ /blog/kak-proverit-originalnost-mikroshemy                         1d      1y
+│ ├ /blog/analogi-stm32-gd32-hk32-ch32                                 1d      1y
+│ ├ /blog/vybor-fpga-dlya-promyshlennosti                              1d      1y
+│ └ [+24 more paths]
+├ ○ /bom                                                               1h      1y
+├ ƒ /brand/[slug]
+├ ○ /brands                                                            1h      1y
+├ ○ /cart
+├ ƒ /catalog
+├ ● /catalog/[parentSlug]                                              1h      1y
+│ ├ /catalog/active                                                    1h      1y
+│ ├ /catalog/passive                                                   1h      1y
+│ ├ /catalog/power                                                     1h      1y
+│ └ [+3 more paths]
+├ ƒ /catalog/[parentSlug]/[childSlug]
+├ ● /catalog/page/[page]                                               1h      1y
+│ ├ /catalog/page/1                                                    1h      1y
+│ ├ /catalog/page/2                                                    1h      1y
+│ ├ /catalog/page/3                                                    1h      1y
+│ └ [+197 more paths]
+├ ● /compare/[components]                                              1h      1y
+│ ├ /compare/STM32F103C8T6,GD32F103C8T6                                1h      1y
+│ ├ /compare/STM32F407VGT6,GD32F407VGT6                                1h      1y
+│ ├ /compare/STM32F103C8T6,HK32F103C8T6                                1h      1y
+│ └ [+22 more paths]
+├ ● /component/[...sku]
+├ ● /datasheet/[...sku]
+├ ○ /datasheets                                                        1h      1y
+├ ○ /delivery
+├ ○ /fpga-hub                                                          1h      1y
+├ ƒ /geo/[city]
+├ ○ /hard-to-find                                                      1h      1y
+├ ○ /import-komponentov
+├ ○ /industries                                                        1h      1y
+├ ● /industries/[slug]                                                 1h      1y
+│ ├ /industries/oboronnij-kompleks                                     1h      1y
+│ ├ /industries/promyshlennaya-avtomatika                              1h      1y
+│ ├ /industries/telekommunikatsii                                      1h      1y
+│ └ [+5 more paths]
+├ ○ /knowledge-base                                                    1h      1y
+├ ● /knowledge-base/[slug]                                             1d      1y
+│ ├ /knowledge-base/proverka-originalnosti-mikroshem                   1d      1y
+│ ├ /knowledge-base/podbor-analogov-sanktsionnykh-komponentov          1d      1y
+│ ├ /knowledge-base/importozameshchenie-stm32                          1d      1y
+│ └ [+3 more paths]
+├ ○ /obsolete                                                          1h      1y
+├ ○ /quality-assurance                                                 1h      1y
+├ ○ /rfq                                                               1h      1y
+├ ○ /robots.txt
+├ ƒ /sitemap-analogs.xml
+├ ○ /sitemap-products-1.xml                                            1d      1y
+├ ○ /sitemap-products-2.xml                                            1d      1y
+├ ○ /sitemap-products-3.xml                                            1d      1y
+├ ○ /sitemap-recent.xml                                                1d      1y
+├ ○ /sitemap-static.xml                                                1h      1y
+├ ƒ /sitemap.xml
+├ ○ /sourcing-expertise                                                1h      1y
+├ ○ /stm32                                                             1h      1y
+├ ○ /ti                                                                1h      1y
+├ ○ /urgent-sourcing                                                   1h      1y
+├ ○ /xilinx                                                            1h      1y
+└ ƒ /yml/catalog.xml
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

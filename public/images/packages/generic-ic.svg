@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="generic" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#37474f"/>
+      <stop offset="50%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#1a2329"/>
+    </linearGradient>
+    <linearGradient id="genpin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#888"/>
+    </linearGradient>
+    <filter id="gensh" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="2" dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.2"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="100" cy="170" rx="60" ry="7" fill="#000" opacity="0.1"/>
+  <!-- Generic IC body (QFP-style with pins on all 4 sides) -->
+  <!-- Top pins -->
+  <g fill="url(#genpin)">
+    <rect x="65" y="45" width="4" height="15" rx="0.5"/>
+    <rect x="75" y="45" width="4" height="15" rx="0.5"/>
+    <rect x="85" y="45" width="4" height="15" rx="0.5"/>
+    <rect x="95" y="45" width="4" height="15" rx="0.5"/>
+    <rect x="105" y="45" width="4" height="15" rx="0.5"/>
+    <rect x="115" y="45" width="4" height="15" rx="0.5"/>
+    <rect x="125" y="45" width="4" height="15" rx="0.5"/>
+    <rect x="135" y="45" width="4" height="15" rx="0.5"/>
+  </g>
+  <!-- Bottom pins -->
+  <g fill="url(#genpin)">
+    <rect x="65" y="140" width="4" height="15" rx="0.5"/>
+    <rect x="75" y="140" width="4" height="15" rx="0.5"/>
+    <rect x="85" y="140" width="4" height="15" rx="0.5"/>
+    <rect x="95" y="140" width="4" height="15" rx="0.5"/>
+    <rect x="105" y="140" width="4" height="15" rx="0.5"/>
+    <rect x="115" y="140" width="4" height="15" rx="0.5"/>
+    <rect x="125" y="140" width="4" height="15" rx="0.5"/>
+    <rect x="135" y="140" width="4" height="15" rx="0.5"/>
+  </g>
+  <!-- Left pins -->
+  <g fill="url(#genpin)">
+    <rect x="40" y="65" width="15" height="4" rx="0.5"/>
+    <rect x="40" y="75" width="15" height="4" rx="0.5"/>
+    <rect x="40" y="85" width="15" height="4" rx="0.5"/>
+    <rect x="40" y="95" width="15" height="4" rx="0.5"/>
+    <rect x="40" y="105" width="15" height="4" rx="0.5"/>
+    <rect x="40" y="115" width="15" height="4" rx="0.5"/>
+    <rect x="40" y="125" width="15" height="4" rx="0.5"/>
+  </g>
+  <!-- Right pins -->
+  <g fill="url(#genpin)">
+    <rect x="145" y="65" width="15" height="4" rx="0.5"/>
+    <rect x="145" y="75" width="15" height="4" rx="0.5"/>
+    <rect x="145" y="85" width="15" height="4" rx="0.5"/>
+    <rect x="145" y="95" width="15" height="4" rx="0.5"/>
+    <rect x="145" y="105" width="15" height="4" rx="0.5"/>
+    <rect x="145" y="115" width="15" height="4" rx="0.5"/>
+    <rect x="145" y="125" width="15" height="4" rx="0.5"/>
+  </g>
+  <!-- Body -->
+  <path d="M 60 60 L 140 60 L 148 68 L 148 132 L 140 140 L 60 140 L 52 132 L 52 68 Z" fill="url(#generic)" stroke="#0d1419" stroke-width="0.8"/>
+  <!-- Top face -->
+  <path d="M 60 60 L 140 60 L 148 68 L 52 68 Z" fill="#37474f"/>
+  <!-- Pin 1 marker -->
+  <circle cx="65" cy="73" r="2" fill="#666"/>
+  <!-- Highlight -->
+  <path d="M 54 69 L 61 62 L 139 62 L 146 69 Z" fill="#fff" opacity="0.08"/>
+  <rect x="53" y="69" width="2" height="60" fill="#fff" opacity="0.04"/>
+  <text x="100" y="105" font-family="monospace" font-size="10" fill="#78909c" text-anchor="middle" opacity="0.4">IC</text>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 70" width="260" height="70">
+  <path d="M6 18 C6 18, 22 4, 32 18 C32 18, 22 34, 6 18 Z" fill="#CC0000"/>
+  <path d="M6 48 C6 48, 22 34, 32 48 C32 48, 22 64, 6 48 Z" fill="#CC0000" opacity="0.6"/>
+  <text x="40" y="46" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="28" fill="#1A1A2E">Microchip</text>
+</svg>

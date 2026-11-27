@@ -1,0 +1,80 @@
+User-Agent: Yandex
+Allow: /
+Allow: /catalog?*page=
+Allow: /catalog/page/
+Allow: /datasheet/
+Allow: /geo/
+Allow: /component/
+Allow: /blog/
+Allow: /analog/
+Allow: /knowledge-base/
+Allow: /industries/
+Allow: /brands/
+Allow: /brand/
+Allow: /seo/catalog/
+Allow: /mikroshemy/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /compare/
+Disallow: /cart
+Disallow: /checkout
+# SEO (2026-11-23): служебные параметры поиска/сортировки закрыты от обхода.
+# Фильтры (?category=, ?brand=) и пагинация (?page=) НЕ закрыты в robots.txt —
+# их закрывает мета-тег noindex,follow на самих страницах, чтобы бот продолжал
+# переходить по ссылкам на карточки товаров.
+Disallow: /*?search=
+Disallow: /*?q=
+Disallow: /*?sort=
+Disallow: /catalog?*capacity=
+Disallow: /*?utm_
+Disallow: /*?yclid=
+Disallow: /*?gclid=
+Crawl-delay: 1
+
+User-Agent: Googlebot
+Allow: /
+# ?page= остаётся обходимым: мета noindex,follow обязан быть доступен боту
+Allow: /catalog?*page=
+Allow: /catalog/page/
+Allow: /component/
+Allow: /analog/
+Allow: /blog/
+Allow: /brands/
+Allow: /delivery
+Allow: /kontakty
+Allow: /o-kompanii
+Disallow: /api/
+Disallow: /_next/
+Disallow: /compare/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /*?search=
+Disallow: /*?q=
+Disallow: /*?sort=
+Disallow: /*?utm_
+Disallow: /*?yclid=
+Disallow: /*?gclid=
+
+User-Agent: *
+Allow: /
+Allow: /component/
+Allow: /analog/
+Allow: /blog/
+Allow: /brands/
+Allow: /catalog/
+Allow: /delivery
+Allow: /kontakty
+Disallow: /api/
+Disallow: /_next/
+Disallow: /compare/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /*?search=
+Disallow: /*?q=
+Disallow: /*?sort=
+Disallow: /*?utm_
+Disallow: /*?yclid=
+Disallow: /*?gclid=
+
+Sitemap: https://www.chip-net.ru/sitemap.xml
+Host: https://www.chip-net.ru

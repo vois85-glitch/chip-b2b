@@ -1,0 +1,6 @@
+# Disavow file for chip-net.ru
+# Создано 25.06.2026
+# Спам-домены, найденные в выгрузке Яндекс.Вебмастера
+
+domain:91huachi.net
+domain:mmship.net

@@ -1,0 +1,341 @@
+// app/catalog/page/[page]/page.tsx
+// Server Component — paginated catalog for SEO crawlers.
+// Components are grouped by category on each page.
+// All pagination links use standard <a href> for crawlability.
+
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { supabaseAdmin } from '@/lib/supabase-admin';
+import { classifyComponents } from '@/lib/classify-component';
+import { robotsForSearchParams, SearchParamsRecord } from '@/lib/seo/filter-params';
+
+const BASE_URL = 'https://www.chip-net.ru';
+const PAGE_SIZE = 100;
+const MAX_PAGES = 200; // safety cap
+
+export const revalidate = 3600;
+// SEO (2026-11-23): убран force-static — он игнорировал query-параметры и не
+// позволял отдать noindex для URL вида /catalog/page/7?brand=... Теперь запросы
+// с параметрами фильтрации/поиска рендерятся динамически с robots: noindex, follow,
+// а чистые URL /catalog/page/N продолжают обслуживаться из ISR-кэша.
+
+type Props = {
+  params: Promise<{ page: string }>;
+  searchParams: Promise<SearchParamsRecord>;
+};
+
+export async function generateStaticParams() {
+  const { count } = await supabaseAdmin
+    .from('components')
+    .select('*', { count: 'exact', head: true });
+
+  const total = count || 0;
+  const pages = Math.min(Math.ceil(total / PAGE_SIZE), MAX_PAGES);
+
+  return Array.from({ length: pages }, (_, i) => ({
+    page: String(i + 1),
+  }));
+}
+
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { page } = await params;
+  const sp = await searchParams;
+  const pageNum = parseInt(page, 10);
+  const title = `Каталог компонентов — страница ${pageNum}`;
+  const description = `Страница ${pageNum} каталога электронных компонентов ChipNet. Компоненты сгруппированы по категориям: микросхемы, транзисторы, ПЛИС, разъёмы от 70+ производителей.`;
+  // ФИКС 2026-10-19: для page=1 canonical = /catalog (избегаем дубликата)
+  // Google видел /catalog/page/1 и /catalog как копии — теперь canonical совпадает
+  // SEO (2026-11-23): canonical всегда чистый, без query-параметров;
+  // URL с параметрами фильтрации (?brand=, ?search=...) → noindex, follow
+  const canonical = pageNum === 1 ? `${BASE_URL}/catalog` : `${BASE_URL}/catalog/page/${pageNum}`;
+  const alternates: any = { canonical };
+  if (pageNum > 1) {
+    alternates.prev = `${BASE_URL}/catalog/page/${pageNum - 1}`;
+  }
+  if (pageNum < MAX_PAGES) {
+    alternates.next = `${BASE_URL}/catalog/page/${pageNum + 1}`;
+  }
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: 'website',
+      locale: 'ru_RU',
+      siteName: 'ChipNet',
+    },
+    robots: robotsForSearchParams(sp),
+  };
+}
+
+export default async function CatalogPagedPage({ params }: Props) {
+  const { page } = await params;
+  const pageNum = Math.max(1, Math.min(parseInt(page, 10) || 1, MAX_PAGES));
+  const offset = (pageNum - 1) * PAGE_SIZE;
+
+  // Параллельно: компоненты на текущей странице + общее количество
+  const [itemsResp, countResp] = await Promise.all([
+    supabaseAdmin
+      .from('components')
+      .select('sku, name, brand, category, status')
+      .order('id', { ascending: true })
+      .range(offset, offset + PAGE_SIZE - 1),
+    supabaseAdmin
+      .from('components')
+      .select('*', { count: 'exact', head: true }),
+  ]);
+
+  // Классифицируем компоненты (для пустых категорий и "Прочие компоненты")
+  const items = itemsResp.data ? classifyComponents(itemsResp.data as any[]) : [];
+  const total = countResp.count || 0;
+  const totalPages = Math.min(Math.max(1, Math.ceil(total / PAGE_SIZE)), MAX_PAGES);
+
+  // Сгруппировать компоненты по категориям
+  // Сохраняем порядок категорий по первому появлению (по id компонента)
+  const groupedMap = new Map<string, typeof items>();
+  const categoryCounts: Record<string, number> = {};
+
+  // Сначала получим полные счётчики по каждой категории (для отображения "N позиций")
+  // Делаем отдельный запрос — быстрее чем перебирать все компоненты
+  const { data: allCats } = await supabaseAdmin
+    .from('components')
+    .select('category, name, sku');
+  if (allCats) {
+    const classifiedAllCats = classifyComponents(allCats as any[]);
+    for (const row of classifiedAllCats) {
+      if (row.category) {
+        categoryCounts[row.category] = (categoryCounts[row.category] || 0) + 1;
+      }
+    }
+  }
+
+  // Группируем компоненты текущей страницы по category
+  for (const c of items) {
+    const cat = c.category || 'Прочие компоненты';
+    if (!groupedMap.has(cat)) {
+      groupedMap.set(cat, []);
+    }
+    groupedMap.get(cat)!.push(c);
+  }
+
+  // Сортируем категории: по убыванию количества компонентов на текущей странице
+  // (так пользователь видит самые «плотные» категории первыми)
+  const grouped = Array.from(groupedMap.entries()).sort((a, b) => b[1].length - a[1].length);
+
+  // Пагинация — sliding window of 7 around current page
+  const windowSize = 7;
+  let startPage = Math.max(1, pageNum - Math.floor(windowSize / 2));
+  let endPage = Math.min(totalPages, startPage + windowSize - 1);
+  if (endPage - startPage + 1 < windowSize) {
+    startPage = Math.max(1, endPage - windowSize + 1);
+  }
+  const pageNumbers: number[] = [];
+  for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Главная', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Каталог', item: `${BASE_URL}/catalog` },
+      { '@type': 'ListItem', position: 3, name: `Страница ${pageNum}`, item: `${BASE_URL}/catalog/page/${pageNum}` },
+    ],
+  };
+
+  const prevUrl = pageNum > 1 ? `${BASE_URL}/catalog/page/${pageNum - 1}` : null;
+  const nextUrl = pageNum < totalPages ? `${BASE_URL}/catalog/page/${pageNum + 1}` : null;
+
+  return (
+    <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      {prevUrl && <link rel="prev" href={prevUrl} />}
+      {nextUrl && <link rel="next" href={nextUrl} />}
+
+      <section className="pt-[190px] md:pt-[200px] pb-6 px-4">
+        <div className="max-w-7xl mx-auto">
+          <nav className="text-sm text-[#757575] mb-3 flex items-center gap-2">
+            <Link prefetch={false} href="/" className="hover:text-primary transition-colors">Главная</Link>
+            <span className="text-[#cbcbcb]">/</span>
+            <Link prefetch={false} href="/catalog" className="hover:text-primary transition-colors">Каталог</Link>
+            <span className="text-[#cbcbcb]">/</span>
+            <span className="text-[#333]">Страница {pageNum}</span>
+          </nav>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-primary">
+            Каталог электронных компонентов
+          </h1>
+          <p className="text-[#666] text-base">
+            Страница {pageNum} из {totalPages}. Всего {total.toLocaleString()} наименований.{' '}
+            <Link prefetch={false} href="/catalog" className="text-[#059669] hover:underline">
+              ← Вернуться к фильтру каталога
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="px-4 pb-6" aria-label="Компоненты по категориям">
+        <div className="max-w-7xl mx-auto">
+          {grouped.length > 0 ? (
+            <>
+              <p className="text-sm text-[#757575] mb-6">
+                На странице {pageNum} показано {items.length} компонентов, распределённых по {grouped.length} категориям.
+              </p>
+              <div className="space-y-8">
+                {grouped.map(([category, comps]) => {
+                  const totalCount = categoryCounts[category] || comps.length;
+                  return (
+                    <div key={category}>
+                      <div className="flex items-end justify-between mb-3 flex-wrap gap-2">
+                        <div>
+                          <h2 className="text-xl font-bold text-primary">
+                            {category}
+                          </h2>
+                          <p className="text-xs text-[#757575]">
+                            {totalCount.toLocaleString()} {totalCount === 1 ? 'позиция' : totalCount < 5 ? 'позиции' : 'позиций'} в каталоге
+                            {comps.length < totalCount && (
+                              <span className="text-[#9a9a9a]"> · на этой странице: {comps.length}</span>
+                            )}
+                          </p>
+                        </div>
+                        <Link prefetch={false}
+                          href={`/catalog?category=${encodeURIComponent(category)}`}
+                          className="text-sm text-[#059669] hover:underline whitespace-nowrap font-medium"
+                        >
+                          Все в категории →
+                        </Link>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                        {comps.map((c) => (
+                          <Link
+                            key={c.sku}
+                            href={`/component/${encodeURIComponent(c.sku)}`}
+                            className="block bg-white border border-[#e8e8e8] rounded-lg p-4 hover:border-[#059669]/40 hover:shadow-md transition-all group"
+                          >
+                            <div className="flex items-start justify-between mb-1">
+                              <div className="font-mono text-sm font-bold text-[#121212] group-hover:text-[#059669] transition-colors truncate flex-1">
+                                {c.sku}
+                              </div>
+                              {c.status !== 'В производстве' && (
+                                <span className="flex-shrink-0 ml-2 inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 bg-red-50 text-red-700 border border-red-200 rounded">
+                                  <span className="w-1 h-1 bg-red-500 rounded-full" />
+                                  EOL
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-xs text-[#757575] mt-1 truncate">{c.brand}</div>
+                            <div className="text-[11px] text-[#9a9a9a] mt-0.5 truncate">{c.category}</div>
+                            {c.name && (
+                              <div className="text-[11px] text-[#666] mt-1 line-clamp-2">{c.name}</div>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-20">
+              <div className="text-5xl mb-4">&#128269;</div>
+              <h3 className="text-xl font-bold text-[#333] mb-2">На этой странице нет компонентов</h3>
+              <p className="text-[#757575] mb-6">Перейдите к первой странице каталога</p>
+              <Link prefetch={false}
+                href="/catalog/page/1"
+                className="px-6 py-2.5 bg-primary hover:bg-primary-dark rounded-lg font-semibold text-[#121212] transition-colors"
+              >
+                К первой странице →
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Pagination block — all crawlable <a href> */}
+      <nav
+        className="px-4 pb-16"
+        aria-label="Пагинация каталога"
+        data-section="catalog-pagination"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+          {pageNum > 1 ? (
+            <Link prefetch={false}
+              href={`/catalog/page/${pageNum - 1}`}
+              className="px-3 py-2 text-sm border border-[#e8e8e8] rounded-md hover:border-[#059669] hover:text-[#059669] transition-colors"
+              rel="prev"
+            >
+              ← Назад
+            </Link>
+          ) : (
+            <span className="px-3 py-2 text-sm border border-[#eee] rounded-md text-[#ccc] cursor-not-allowed">
+              ← Назад
+            </span>
+          )}
+
+          {startPage > 1 && (
+            <>
+              <Link prefetch={false}
+                href="/catalog/page/1"
+                className="px-3 py-2 text-sm border border-[#e8e8e8] rounded-md hover:border-[#059669] hover:text-[#059669] transition-colors"
+              >
+                1
+              </Link>
+              {startPage > 2 && <span className="px-2 text-[#999]">…</span>}
+            </>
+          )}
+
+          {pageNumbers.map((n) => (
+            <Link
+              key={n}
+              href={`/catalog/page/${n}`}
+              className={`px-3 py-2 text-sm border rounded-md transition-colors ${
+                n === pageNum
+                  ? 'bg-[#059669] text-white border-[#059669]'
+                  : 'border-[#e8e8e8] hover:border-[#059669] hover:text-[#059669]'
+              }`}
+              aria-current={n === pageNum ? 'page' : undefined}
+            >
+              {n}
+            </Link>
+          ))}
+
+          {endPage < totalPages && (
+            <>
+              {endPage < totalPages - 1 && <span className="px-2 text-[#999]">…</span>}
+              <Link prefetch={false}
+                href={`/catalog/page/${totalPages}`}
+                className="px-3 py-2 text-sm border border-[#e8e8e8] rounded-md hover:border-[#059669] hover:text-[#059669] transition-colors"
+              >
+                {totalPages}
+              </Link>
+            </>
+          )}
+
+          {pageNum < totalPages ? (
+            <Link prefetch={false}
+              href={`/catalog/page/${pageNum + 1}`}
+              className="px-3 py-2 text-sm border border-[#e8e8e8] rounded-md hover:border-[#059669] hover:text-[#059669] transition-colors"
+              rel="next"
+            >
+              Вперёд →
+            </Link>
+          ) : (
+            <span className="px-3 py-2 text-sm border border-[#eee] rounded-md text-[#ccc] cursor-not-allowed">
+              Вперёд →
+            </span>
+          )}
+        </div>
+
+        <p className="text-center text-xs text-[#9a9a9a] mt-4">
+          Страница {pageNum} из {totalPages} · Показано {items.length} компонентов из {total.toLocaleString()}
+        </p>
+      </nav>
+    </main>
+  );
+}
+

@@ -1,0 +1,238 @@
+import { Metadata } from 'next';
+import { Suspense } from 'react';
+import { supabase } from '@/lib/supabase';
+import Link from 'next/link';
+import CatalogClient from './CatalogClient';
+import { itemListSchema } from '@/lib/seo/item-list-schema';
+import { classifyComponents } from '@/lib/classify-component';
+
+const BASE_URL = 'https://www.chip-net.ru';
+
+export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Каталог электронных компонентов — Микросхемы, транзисторы, ПЛИС, разъёмы',
+  description: 'Каталог электронных компонентов: микросхемы, микроконтроллеры, ПЛИС, транзисторы, диоды, конденсаторы, резисторы, разъёмы. Более 50 000 наименований от 60+ производителей. Проверка в лаборатории СВП.',
+  alternates: { canonical: `${BASE_URL}/catalog` },
+  openGraph: {
+    title: 'Каталог электронных компонентов',
+    description: 'Более 50 000 наименований электронных компонентов от 60+ производителей.',
+    url: `${BASE_URL}/catalog`,
+    type: 'website',
+    locale: 'ru_RU',
+    siteName: 'ChipNet',
+    images: [{ url: '/og-image.png', width: 1344, height: 768, alt: 'Каталог электронных компонентов ChipNet' }],
+  },
+};
+
+function CatalogFallback() {
+  return (
+    <div className="text-center py-20">
+      <div className="text-4xl mb-4">&#9203;</div>
+      <p className="text-[#757575]">Загрузка каталога...</p>
+    </div>
+  );
+}
+
+type PageProps = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export default async function CatalogPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const currentCategory = typeof params.category === 'string' ? params.category : '';
+  const currentBrand = typeof params.brand === 'string' ? params.brand : '';
+  const currentSearch = typeof params.search === 'string' ? params.search : '';
+  const pageStr = typeof params.page === 'string' ? params.page : '1';
+  const currentPage = Math.max(1, parseInt(pageStr, 10) || 1);
+
+  // Если фильтров нет — грузим увеличенный пул (600), чтобы CatalogClient
+  // мог собрать grouped preview (по 4 элемента на каждую из 30+ категорий).
+  // Если фильтры есть — обычная пагинация по 48.
+  const hasFilters = !!(currentCategory || currentBrand || currentSearch);
+  // Оптимизация мобильной версии: раньше было 600 — это давало 880КБ HTML
+      // и зависание на мобильных. 300 компонентов достаточно для preview
+      
+      const PAGE_SIZE = hasFilters ? 48 : 48;
+  const effectivePage = hasFilters ? currentPage : 1;
+  const offset = (effectivePage - 1) * PAGE_SIZE;
+
+  // Шаг 1. Найти category_id по имени (или slug)
+  let categoryId: string | null = null;
+  if (currentCategory) {
+    const { data: catRow } = await supabase
+      .from('categories')
+      .select('id, name, slug')
+      .eq('name', currentCategory)
+      .limit(1);
+    if (catRow && catRow[0]) {
+      categoryId = catRow[0].id;
+    } else {
+      const { data: catBySlug } = await supabase
+        .from('categories')
+        .select('id, name, slug')
+        .eq('slug', currentCategory)
+        .limit(1);
+      if (catBySlug && catBySlug[0]) {
+        categoryId = catBySlug[0].id;
+      }
+    }
+  }
+
+  // Шаг 2. Найти brand_id по имени (или slug)
+  let brandId: string | null = null;
+  if (currentBrand) {
+    const { data: brandRow } = await supabase
+      .from('brands')
+      .select('id, name, slug')
+      .eq('name', currentBrand)
+      .limit(1);
+    if (brandRow && brandRow[0]) {
+      brandId = brandRow[0].id;
+    } else {
+      const { data: brandBySlug } = await supabase
+        .from('brands')
+        .select('id, name, slug')
+        .eq('slug', currentBrand)
+        .limit(1);
+      if (brandBySlug && brandBySlug[0]) {
+        brandId = brandBySlug[0].id;
+      }
+    }
+  }
+
+  // Шаг 3. Основной запрос с серверной фильтрацией
+  // ✅ Оптимизация: для preview выбираем только нужные поля.
+  // Раньше select('*') тянул attributes (JSONB 1-2КБ/компонент) + description + analogs.
+  // Это давало 880КБ HTML на главной /catalog и зависание на мобильных.
+  // Теперь: только поля, нужные для карточки компонента в preview.
+  const selectFields = hasFilters
+    ? '*'  // с фильтрами — нужны все поля для страницы категории
+    : 'id, sku, name, brand, category, status';  // без фильтров — только для preview
+
+  let query = supabase
+    .from('components')
+    .select(selectFields, { count: 'exact' });
+
+  if (categoryId) {
+    query = query.eq('category_id', categoryId);
+  } else if (currentCategory) {
+    query = query.eq('category', currentCategory);
+  }
+
+  if (brandId) {
+    query = query.eq('brand_id', brandId);
+  } else if (currentBrand) {
+    query = query.eq('brand', currentBrand);
+  }
+
+  if (currentSearch) {
+    query = query.or(`sku.ilike.%${currentSearch}%,name.ilike.%${currentSearch}%`);
+  }
+
+  const { data: rawComponents, count } = await query
+    .order('id', { ascending: true })
+    .range(offset, offset + PAGE_SIZE - 1);
+
+  const components = rawComponents ? classifyComponents(rawComponents as any[]) : [];
+
+  // Шаг 4. Счётчики для sidebar
+  let categoryCounts: Record<string, number> = {};
+  let brandCounts: Record<string, number> = {};
+
+  if (currentBrand && brandId) {
+    const { data: catsInBrand } = await supabase
+      .from('components')
+      .select('category')
+      .eq('brand_id', brandId);
+    if (catsInBrand) {
+      for (const c of catsInBrand) {
+        if (c.category) categoryCounts[c.category] = (categoryCounts[c.category] || 0) + 1;
+      }
+    }
+  } else {
+    // ✅ RPC: get_category_counts() — 1 запрос вместо загрузки 50K строк
+    const { data: catCountsData } = await supabase.rpc('get_category_counts');
+    if (catCountsData && typeof catCountsData === 'object') {
+      categoryCounts = catCountsData as Record<string, number>;
+    }
+  }
+
+  if (currentCategory && categoryId) {
+    // ✅ RPC: get_brand_counts_by_category() — 1 запрос вместо full-scan
+    const { data: brandsInCatData } = await supabase.rpc('get_brand_counts_by_category', { cat_uuid: categoryId });
+    if (brandsInCatData && typeof brandsInCatData === 'object') {
+      brandCounts = brandsInCatData as Record<string, number>;
+    }
+  } else {
+    // ✅ RPC: get_brand_counts() — 1 запрос вместо загрузки 50K строк
+    const { data: brandCountsData } = await supabase.rpc('get_brand_counts');
+    if (brandCountsData && typeof brandCountsData === 'object') {
+      brandCounts = brandCountsData as Record<string, number>;
+    }
+  }
+
+  const sortedCategories = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]);
+  const sortedBrands = Object.entries(brandCounts).sort((a, b) => b[1] - a[1]);
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Главная', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Каталог', item: `${BASE_URL}/catalog` },
+    ],
+  };
+
+  const itemListLd = components.length > 0 ? itemListSchema(
+    components.slice(0, 20).map((c: any) => ({
+      sku: c.sku,
+      name: c.name,
+      brand: c.brand,
+      category: c.category,
+      description: c.description,
+      status: c.status,
+    })),
+    currentCategory || currentBrand
+      ? `Компоненты${currentCategory ? `: ${currentCategory}` : ''}${currentBrand ? ` — ${currentBrand}` : ''}`
+      : 'Каталог электронных компонентов',
+    `${BASE_URL}/catalog`,
+    count || 0
+  ) : null;
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      {itemListLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+        />
+      )}
+      <section className="pb-6">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-primary">
+          {currentCategory || currentBrand
+            ? `${currentCategory || ''}${currentCategory && currentBrand ? ' — ' : ''}${currentBrand || ''}`
+            : 'Каталог электронных компонентов'}
+        </h1>
+        <p className="text-[#666] text-lg">
+          {count ? `${count.toLocaleString()} наименований` : 'Загрузка...'}
+          {currentSearch && ` по запросу «${currentSearch}»`}
+        </p>
+      </section>
+
+      <Suspense fallback={<CatalogFallback />}>
+        <CatalogClient
+          allComponents={components}
+          categories={sortedCategories}
+          brands={sortedBrands}
+          totalItems={count || 0}
+        />
+      </Suspense>
+    </>
+  );
+}

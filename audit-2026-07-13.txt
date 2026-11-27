@@ -1,0 +1,69 @@
+=== ChipNet SEO Audit — 2026-07-13 06:00:01 UTC ===
+
+### 1. HTTP statuses of 3 new articles
+  200 https://www.chip-net.ru/blog/analogi-mikrokontrollera-stm32f103c8t6
+  200 https://www.chip-net.ru/blog/sravnenie-gowein-gw2a-i-xilinx-artix-7
+  200 https://www.chip-net.ru/blog/analogi-i-zamena-24-bitnogo-atsp-ad7190
+
+### 2. /brand/* status (should be 404 or 301)
+  308 https://www.chip-net.ru/brand/stm32
+  308 https://www.chip-net.ru/brand/xilinx
+  308 https://www.chip-net.ru/brand/ti
+  308 https://www.chip-net.ru/brand/analog-devices
+  308 https://www.chip-net.ru/brand/microchip
+  308 https://www.chip-net.ru/brand/gowin
+
+### 3. sitemap.xml — new articles
+  /blog/analogi-mikrokontrollera-stm32f103c8t6: 0 occurrences in sitemap.xml
+  /blog/sravnenie-gowein-gw2a-i-xilinx-artix-7: 0 occurrences in sitemap.xml
+  /blog/analogi-i-zamena-24-bitnogo-atsp-ad7190: 0 occurrences in sitemap.xml
+
+### 4. robots.txt
+Allow: /
+Allow: /catalog?*page=
+Allow: /catalog/page/
+Allow: /datasheet/
+Allow: /geo/
+Allow: /component/
+Allow: /blog/
+Allow: /analog/
+Allow: /knowledge-base/
+Disallow: /brand/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /compare/
+Disallow: /catalog?*sort=
+Disallow: /catalog?*capacity=
+Disallow: /catalog?*resistance=
+Disallow: /catalog?*voltage=
+Disallow: /catalog?*price=
+Disallow: /catalog?*in_stock=
+Disallow: /*?utm_
+
+### 5. Total URL count in sitemap.xml
+5
+
+### 6. Nginx access log — YandexBot visits to new articles (last 3 days)
+  YandexBot visits to /blog/analogi-mikrokontrollera-stm32f103c8t6: 0
+  YandexBot visits to /blog/sravnenie-gowein-gw2a-i-xilinx-artix-7: 0
+  YandexBot visits to /blog/analogi-i-zamena-24-bitnogo-atsp-ad7190: 0
+
+### 7. Nginx access log — Googlebot visits to new articles
+  Googlebot visits to /blog/analogi-mikrokontrollera-stm32f103c8t6: 0
+  Googlebot visits to /blog/sravnenie-gowein-gw2a-i-xilinx-artix-7: 0
+  Googlebot visits to /blog/analogi-i-zamena-24-bitnogo-atsp-ad7190: 0
+
+### 8. Nginx access log — 404 errors on /brand/* (last 3 days)
+
+### 9. PM2 status
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 0  │ chip-net-blue    │ default     │ N/A     │ fork    │ 151784   │ 2D     │ 80   │ online    │ 0%       │ 40.8mb   │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+
+### 10. Disk space
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda2        40G   15G   23G  40% /
+
+=== Audit complete ===
