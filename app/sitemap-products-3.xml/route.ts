@@ -73,7 +73,7 @@ async function getProductsForPart(part: number): Promise<string[]> {
   return allRows.slice(offset, offset + PART_SIZE).map((r) => r.sku);
 }
 
-export async function GET() {
+async function GET_IMPL() {
   const skus = await getProductsForPart(3);
   const now = new Date().toISOString().split('T')[0];
 
@@ -90,4 +90,22 @@ export async function GET() {
       'Cache-Control': 'public, max-age=3600, s-maxage=3600',
     },
   });
+}
+
+
+// VERCEL FIX (2026-11-27): обёртка — сборка без БД не падает, отдаём пустой sitemap
+export async function GET() {
+  try {
+    return await GET_IMPL();
+  } catch (e) {
+    console.error('[sitemap] GET error:', e);
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>`;
+    return new NextResponse(xml, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=60, s-maxage=60',
+      },
+    });
+  }
 }

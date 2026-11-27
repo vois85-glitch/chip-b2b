@@ -53,7 +53,7 @@ const EXCLUDED_REDIRECT_PATHS = new Set([
 ]);
 
 
-export async function GET() {
+async function GET_IMPL() {
   const urls: Array<{ loc: string; lastmod: string; changefreq: string; priority: string }> = [];
   const now = new Date().toISOString().split('T')[0];
 
@@ -382,4 +382,22 @@ ${dedupedUrls.map(u => `  <url>
       'Cache-Control': 'public, max-age=3600, s-maxage=3600',
     },
   });
+}
+
+
+// VERCEL FIX (2026-11-27): обёртка — сборка без БД не падает, отдаём пустой sitemap
+export async function GET() {
+  try {
+    return await GET_IMPL();
+  } catch (e) {
+    console.error('[sitemap] GET error:', e);
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>`;
+    return new NextResponse(xml, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=60, s-maxage=60',
+      },
+    });
+  }
 }

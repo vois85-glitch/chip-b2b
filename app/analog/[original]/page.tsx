@@ -157,6 +157,9 @@ async function loadAnalogPageData(slugRaw: string): Promise<AnalogPageData | nul
   const slug = slugRaw.trim();
   if (!SKU_RE.test(slug)) return null;
 
+  // VERCEL FIX (2026-11-27): try/catch — билд/пререндер без БД не падает,
+  // страница отдаёт кураторский контент из analogMappings
+  try {
   // 1. Точное совпадение артикула (без учёта регистра)
   const { data: exactRows } = await supabase
     .from('components')
@@ -218,6 +221,10 @@ async function loadAnalogPageData(slugRaw: string): Promise<AnalogPageData | nul
   }
 
   return null;
+  } catch (e) {
+    console.error('[analog] loadAnalogPageData error:', e);
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -284,12 +291,17 @@ export default async function AnalogPage({ params }: Props) {
     const url = `${BASE_URL}/analog/${original}`;
 
     let components: Component[] = [];
-    const { data } = await supabase
-      .from('components')
-      .select('*')
-      .or(`sku.ilike.%${original.split('-')[0]}%,name.ilike.%${original.split('-')[0]}%`)
-      .limit(20);
-    if (data) components = data as Component[];
+    // VERCEL FIX (2026-11-27): try/catch — пререндер без БД не падает
+    try {
+      const { data } = await supabase
+        .from('components')
+        .select('*')
+        .or(`sku.ilike.%${original.split('-')[0]}%,name.ilike.%${original.split('-')[0]}%`)
+        .limit(20);
+      if (data) components = data as Component[];
+    } catch (e) {
+      console.error(`[analog/${original}] DB fetch error:`, e);
+    }
 
     const breadcrumbLd = {
       '@context': 'https://schema.org',
