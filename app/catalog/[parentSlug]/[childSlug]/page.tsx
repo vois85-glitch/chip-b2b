@@ -47,18 +47,25 @@ type Props = {
 export async function generateStaticParams() {
   // SEO FIX (2026-11-13): прегенерируем пути для всех категорий (кроме 'kategorii')
   // в формате /catalog/kategorii/<slug> — это канонический URL для категорий.
-  const { data: categories } = await supabase
-    .from('categories')
-    .select('slug')
-    .neq('slug', 'kategorii')
-    .eq('is_active', true);
+  // VERCEL FIX (2026-11-27): try/catch — сборка на Vercel без DATABASE_URL
+  // (БД ещё не подключена) не должна падать; страницы сгенерируются по запросу.
+  try {
+    const { data: categories } = await supabase
+      .from('categories')
+      .select('slug')
+      .neq('slug', 'kategorii')
+      .eq('is_active', true);
 
-  if (!categories) return [];
+    if (!categories) return [];
 
-  return categories.map(c => ({
-    parentSlug: 'kategorii',
-    childSlug: c.slug,
-  }));
+    return categories.map(c => ({
+      parentSlug: 'kategorii',
+      childSlug: c.slug,
+    }));
+  } catch (e) {
+    console.error('[catalog/child] generateStaticParams error:', e);
+    return [];
+  }
 }
 
 // ───────────────────────────────────────────────────────────────────────────

@@ -22,13 +22,19 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const { data: groups } = await supabase
-    .from('categories')
-    .select('slug')
-    .eq('level', 1)
-    .eq('is_active', true);
+  // VERCEL FIX (2026-11-27): try/catch — сборка без БД не падает (см. childSlug)
+  try {
+    const { data: groups } = await supabase
+      .from('categories')
+      .select('slug')
+      .eq('level', 1)
+      .eq('is_active', true);
 
-  return (groups || []).map(g => ({ parentSlug: g.slug }));
+    return (groups || []).map(g => ({ parentSlug: g.slug }));
+  } catch (e) {
+    console.error('[catalog/parent] generateStaticParams error:', e);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {

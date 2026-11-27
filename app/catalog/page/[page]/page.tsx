@@ -25,16 +25,22 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const { count } = await supabaseAdmin
-    .from('components')
-    .select('*', { count: 'exact', head: true });
+  // VERCEL FIX (2026-11-27): try/catch — сборка без БД не падает (см. childSlug)
+  try {
+    const { count } = await supabaseAdmin
+      .from('components')
+      .select('*', { count: 'exact', head: true });
 
-  const total = count || 0;
-  const pages = Math.min(Math.ceil(total / PAGE_SIZE), MAX_PAGES);
+    const total = count || 0;
+    const pages = Math.min(Math.ceil(total / PAGE_SIZE), MAX_PAGES);
 
-  return Array.from({ length: pages }, (_, i) => ({
-    page: String(i + 1),
-  }));
+    return Array.from({ length: pages }, (_, i) => ({
+      page: String(i + 1),
+    }));
+  } catch (e) {
+    console.error('[catalog/page] generateStaticParams error:', e);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
