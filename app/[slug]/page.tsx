@@ -172,6 +172,8 @@ export default async function SlugPage({ params }: Props) {
  // Fetch components from DB based on category or brand
  let components: Component[] = [];
  if (seo.dbFilter) {
+ // VERCEL FIX (2026-11-27): try/catch — пререндер SEO-страниц без БД не падает
+ try {
  let query = supabase.from('components').select('*').limit(50);
  if (seo.dbFilter.category) {
  query = query.eq('category', seo.dbFilter.category);
@@ -182,6 +184,9 @@ export default async function SlugPage({ params }: Props) {
  const { data } = await query;
  if (data) {
  components = data as Component[];
+ }
+ } catch (e) {
+ console.error(`[slug/${slug}] DB fetch error:`, e);
  }
  }
 
